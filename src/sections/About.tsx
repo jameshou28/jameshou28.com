@@ -29,7 +29,7 @@ export default function About() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
         {/* Left Side: Photo Placeholder */}
-        <div className="w-full aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] overflow-hidden relative flex items-center justify-center">
+        <div className="w-full max-w-sm aspect-[3.5/4] rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] overflow-hidden relative flex items-center justify-center mx-auto">
           <p className="text-[var(--text-secondary)] text-sm font-medium">
             [ James Hou ]
           </p>
@@ -39,7 +39,7 @@ export default function About() {
         {/* Right Side: Skills */}
         <div className="h-full flex flex-col justify-center">
           <h3 className="text-sm uppercase tracking-wider text-[var(--text-secondary)] font-semibold mb-8 border-b border-[var(--border)] pb-4">
-            Technical Arsenal
+            Technical Skills
           </h3>
           <div className="space-y-6">
             {SKILLS.map((skill, index) => (
@@ -78,21 +78,21 @@ export default function About() {
       {/* Portfolio Navigation */}
       <div className="w-full mt-24 grid grid-cols-1 md:grid-cols-2 gap-8">
         <Link 
-          href="/engineering"
+          href="/programming"
           className="group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-12 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
         >
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-4">Hardware & CAD</h3>
-          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)] text-[var(--text-primary)]">Engineering Portfolio &rarr;</h2>
+          <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-4">Software & Web</h3>
+          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)] text-[var(--text-primary)]">Programming Portfolio &rarr;</h2>
         </Link>
         
         <Link 
-          href="/programming"
+          href="/engineering"
           className="group relative overflow-hidden rounded-3xl bg-[var(--text-primary)] border border-[var(--text-primary)] p-12 text-center hover:bg-transparent transition-all duration-300 cursor-pointer"
         >
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <h3 className="text-sm uppercase tracking-wider text-[var(--bg-subtle)] group-hover:text-[var(--accent)] font-semibold mb-4 transition-colors">Software & Web</h3>
-          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)] text-[var(--bg-primary)] group-hover:text-[var(--text-primary)] transition-colors">Programming Portfolio &rarr;</h2>
+          <h3 className="text-sm uppercase tracking-wider text-[var(--bg-subtle)] group-hover:text-[var(--accent)] font-semibold mb-4 transition-colors">Hardware & CAD</h3>
+          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)] text-[var(--bg-primary)] group-hover:text-[var(--text-primary)] transition-colors">Engineering Portfolio &rarr;</h2>
         </Link>
       </div>
     </section>

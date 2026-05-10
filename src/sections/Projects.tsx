@@ -27,8 +27,8 @@ const PROJECTS = [
   },
   {
     title: "QPIN",
-    problem: "People with mobility or accessibility needs struggle to perform simple hardware interactions. Traditional wearables are bulky or unintuitive.",
-    solution: "A compact, wearable device that maps intuitive gestures to complex commands, bringing seamless interaction to users through custom hardware and firmware. Co-Founder & CTO. Used Fusion 360 to design case for QPin, a wearable digital pin for advocacy and self-expression. Programmed software used on microcontrollers (ESP32).",
+    problem: "",
+    solution: "Co-Founder & CTO. Used Fusion 360 to design case for QPin, a wearable digital pin for advocacy and self-expression. Programmed software used on microcontrollers (ESP32).",
     modelPath: "/models/qpin.glb",
     modelRotation: [-Math.PI/4, Math.PI, Math.PI] as [number, number, number],
     techStack: ["C++", "CAD", "PCB Design", "Embedded Systems", "ESP32"],
@@ -37,10 +37,26 @@ const PROJECTS = [
   },
   {
     title: "WebAble",
-    problem: "The web remains inaccessible for many users, and developers lack easy drop-in tools to verify and enforce accessibility standards.",
-    solution: "Built WebAble to bridge the gap, providing a robust suite of accessibility web tools designed for seamless developer integration.",
-    techStack: ["React", "Next.js", "Accessibility", "TypeScript"],
+    problem: "",
+    solution: "Chrome extension that uses DOM manipulation to allow users to better navigate any website.",
+    techStack: ["HTML", "CSS", "JavaScript", "Chrome Extension API", "Git"],
     placeholderType: "accessibility" as const,
+    category: "programming",
+  },
+  {
+    title: "QPin Connect",
+    problem: "",
+    solution: "Built companion iOS app for QPIN, a wearable digital pin for advocacy and self-expression.",
+    techStack: ["Swift", "BLE"],
+    placeholderType: "abstract" as const,
+    category: "programming",
+  },
+  {
+    title: "QPin Website",
+    problem: "",
+    solution: "Built website for QPin, a wearable digital pin for advocacy and self-expression.",
+    techStack: ["HTML", "CSS", "JS", "Flask", "ThreeJS"],
+    placeholderType: "abstract" as const,
     category: "programming",
   }
 ];
