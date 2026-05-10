@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 const GitHubCalendar = dynamic(() => import('react-github-calendar').then((mod) => mod.GitHubCalendar), {
   ssr: false,
@@ -57,9 +58,6 @@ export default function About() {
 
       {/* Bottom: GitHub Graph */}
       <div className="w-full">
-        <h3 className="text-sm uppercase tracking-wider text-[var(--text-secondary)] font-semibold mb-8 border-b border-[var(--border)] pb-4 text-center">
-          Open Source & Commits
-        </h3>
         <div className="p-8 bg-[var(--bg-subtle)] rounded-2xl border border-[var(--border)] flex justify-center overflow-x-auto overflow-y-hidden">
           <div className="min-w-[700px] flex justify-center">
             <GitHubCalendar 
@@ -75,6 +73,27 @@ export default function About() {
             />
           </div>
         </div>
+      </div>
+
+      {/* Portfolio Navigation */}
+      <div className="w-full mt-24 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Link 
+          href="/engineering"
+          className="group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-12 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
+        >
+          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-4">Hardware & CAD</h3>
+          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)] text-[var(--text-primary)]">Engineering Portfolio &rarr;</h2>
+        </Link>
+        
+        <Link 
+          href="/programming"
+          className="group relative overflow-hidden rounded-3xl bg-[var(--text-primary)] border border-[var(--text-primary)] p-12 text-center hover:bg-transparent transition-all duration-300 cursor-pointer"
+        >
+          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <h3 className="text-sm uppercase tracking-wider text-[var(--bg-subtle)] group-hover:text-[var(--accent)] font-semibold mb-4 transition-colors">Software & Web</h3>
+          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)] text-[var(--bg-primary)] group-hover:text-[var(--text-primary)] transition-colors">Programming Portfolio &rarr;</h2>
+        </Link>
       </div>
     </section>
   );
