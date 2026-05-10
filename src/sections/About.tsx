@@ -31,9 +31,9 @@ export default function About() {
         {/* Left Side: Photo Placeholder */}
         <div className="w-full aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] overflow-hidden relative flex items-center justify-center">
           <p className="text-[var(--text-secondary)] text-sm font-medium">
-            [ Upload profile photo to /public/profile.jpg ]
+            [ James Hou ]
           </p>
-          {/* <img src="/profile.jpg" alt="James Hou" className="absolute inset-0 w-full h-full object-cover" /> */}
+          {<img src="/images/profile.jpg" alt="James Hou" className="absolute inset-0 w-full h-full object-cover" />}
         </div>
 
         {/* Right Side: Skills */}

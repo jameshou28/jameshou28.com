@@ -3,21 +3,36 @@ import Link from "next/link";
 
 const PROJECTS = [
   {
-    title: "QPIN",
-    problem: "People with mobility or accessibility needs struggle to perform simple hardware interactions. Traditional wearables are bulky or unintuitive.",
-    solution: "A compact, wearable device that maps intuitive gestures to complex commands, bringing seamless interaction to users through custom hardware and firmware.",
-    modelPath: "/models/qpin.glb",
-    modelRotation: [-Math.PI/4, Math.PI, Math.PI] as [number, number, number],
-    techStack: ["C++", "CAD", "PCB Design", "Embedded Systems"],
+    title: "VEX Robotics (4610Z)",
+    problem: "",
+    solution: "Designed, programmed, and built robots for the VEX Robotics Competition. Led team to awards including:",
+    modelPath: "/models/qpin2.glb",
+
+    reversed: true,
+    awards: [
+      "2026 World Championship Innovate Award",
+      "2026 Ranked 18th out of 6,800+ teams in Skills Challenge",
+      "2026 NJ State Championship Excellence Award, State Finalist",
+      "2025 World Championship Semifinalist",
+      "2025 LAUNCH Signature Event (international) Design Award",
+      "2024 World Championship Innovate Award",
+      "2024 NJ State Championship State Champion, Design Award"
+    ],
+    additionalNote: {
+      text: "Interviews viewed 80k+ times across all platforms",
+      link: "https://www.youtube.com/watch?v=6TlJ-XfXd6U"
+    },
     category: "engineering",
+    techStack: ["Fusion360", "Onshape", "C++", "Git"]
   },
   {
-    title: "VEX Robotics (4610Z)",
-    problem: "Competition robotics requires high precision, rapid iteration, and flawless execution under strict constraints.",
-    solution: "Engineered a custom competition robot with advanced kinematics and control systems, leading the 4610Z team through rigorous iterative design.",
-    modelPath: "/models/qpin2.glb",
-    techStack: ["Robotics", "Kinematics", "C++", "VEX V5"],
-    reversed: true,
+    title: "QPIN",
+    problem: "People with mobility or accessibility needs struggle to perform simple hardware interactions. Traditional wearables are bulky or unintuitive.",
+    solution: "A compact, wearable device that maps intuitive gestures to complex commands, bringing seamless interaction to users through custom hardware and firmware. Co-Founder & CTO. Used Fusion 360 to design case for QPin, a wearable digital pin for advocacy and self-expression. Programmed software used on microcontrollers (ESP32).",
+    modelPath: "/models/qpin.glb",
+    modelRotation: [-Math.PI/4, Math.PI, Math.PI] as [number, number, number],
+    techStack: ["C++", "CAD", "PCB Design", "Embedded Systems", "ESP32"],
+    awards: ["Most Outstanding Company Award at Leangap Startup Incubator & Pitch Competition 2025"],
     category: "engineering",
   },
   {
@@ -34,8 +49,8 @@ export default function Projects({ category }: { category: "engineering" | "prog
   const filteredProjects = PROJECTS.filter(p => p.category === category);
   
   const title = category === "engineering" 
-    ? "Hardware & CAD" 
-    : "Software & Web";
+    ? "Engineering" 
+    : "Programming";
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 py-24 bg-[var(--bg-primary)]">

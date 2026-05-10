@@ -14,6 +14,11 @@ interface ProjectItemProps {
   modelRotation?: [number, number, number];
   placeholderType?: "abstract" | "accessibility";
   techStack: string[];
+  awards?: string[];
+  additionalNote?: {
+    text: string;
+    link: string;
+  };
   reversed?: boolean;
 }
 
@@ -25,6 +30,8 @@ export default function ProjectItem({
   modelRotation = [0, 0, 0],
   placeholderType = "abstract",
   techStack,
+  awards,
+  additionalNote,
   reversed = false,
 }: ProjectItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,16 +67,45 @@ export default function ProjectItem({
         {/* Text Side */}
         <div className={`flex flex-col space-y-6 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
           <h2 className="text-4xl lg:text-5xl font-bold font-[family-name:var(--font-display)]">{title}</h2>
-          
-          <div>
-            <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">The Problem</h3>
-            <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{problem}</p>
-          </div>
+
+          {problem && (
+            <div>
+              <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">The Problem</h3>
+              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{problem}</p>
+            </div>
+          )}
 
           <div>
-            <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">The Solution</h3>
+            <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">{problem ? "The Solution" : "Description"}</h3>
             <p className="text-[var(--text-primary)] text-lg leading-relaxed">{solution}</p>
           </div>
+
+          {awards && awards.length > 0 && (
+            <div className="pt-4">
+              <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-3">Awards & Achievements</h3>
+              <ul className="space-y-2">
+                {awards.map((award, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-sm text-[var(--text-primary)]">
+                    <span className="text-[var(--accent)] mt-1">•</span>
+                    <span>{award}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {additionalNote && (
+            <div className="pt-2">
+              <a
+                href={additionalNote.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+              >
+                {additionalNote.text} →
+              </a>
+            </div>
+          )}
 
           <div className="flex flex-wrap gap-2 pt-4">
             {techStack.map((tech) => (
@@ -81,10 +117,10 @@ export default function ProjectItem({
         </div>
       </div>
 
-      <ProjectCard 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        project={{ title, problem, solution, techStack }} 
+      <ProjectCard
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        project={{ title, problem, solution, techStack, awards, additionalNote }}
       />
     </>
   );

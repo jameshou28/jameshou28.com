@@ -10,6 +10,11 @@ interface ProjectCardProps {
     problem: string;
     solution: string;
     techStack: string[];
+    awards?: string[];
+    additionalNote?: {
+      text: string;
+      link: string;
+    };
   };
 }
 
@@ -51,18 +56,46 @@ export default function ProjectCard({ isOpen, onClose, project }: ProjectCardPro
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <div>
-              <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">The Problem</h3>
-              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{project.problem}</p>
-            </div>
+            {project.problem && (
+              <div>
+                <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">The Problem</h3>
+                <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{project.problem}</p>
+              </div>
+            )}
 
             <div>
-              <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">The Solution</h3>
+              <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">{project.problem ? "The Solution" : "Description"}</h3>
               <p className="text-[var(--text-primary)] text-lg leading-relaxed">{project.solution}</p>
             </div>
           </div>
           
           <div>
+            {project.awards && project.awards.length > 0 && (
+              <div className="p-6 bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border)] mb-8">
+                <h3 className="font-semibold text-[var(--accent)] mb-3">Awards & Achievements</h3>
+                <ul className="space-y-2">
+                  {project.awards.map((award, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm text-[var(--text-primary)]">
+                      <span className="text-[var(--accent)] mt-1">•</span>
+                      <span>{award}</span>
+                    </li>
+                  ))}
+                </ul>
+                {project.additionalNote && (
+                  <div className="mt-4 pt-4 border-t border-[var(--border)]">
+                    <a
+                      href={project.additionalNote.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+                    >
+                      {project.additionalNote.text} →
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+
             <h3 className="text-sm uppercase tracking-wider text-[var(--text-primary)] font-semibold mb-4">Tech Stack</h3>
             <div className="flex flex-wrap gap-2 mb-8">
               {project.techStack.map((tech) => (
