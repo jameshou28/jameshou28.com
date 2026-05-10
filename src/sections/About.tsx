@@ -17,7 +17,7 @@ const SKILLS = [
 
 export default function About() {
   return (
-    <section className="w-full max-w-6xl mx-auto px-6 py-32 bg-[var(--bg-primary)]">
+    <section id="about" className="w-full max-w-6xl mx-auto px-6 py-32 bg-[var(--bg-primary)]">
       <div className="text-center space-y-8 mb-24 max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
           I build at the intersection of <span className="text-[var(--accent)] font-bold">hardware</span> and <span className="text-[var(--accent)] font-bold">software</span>.
