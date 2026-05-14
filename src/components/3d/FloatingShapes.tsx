@@ -116,12 +116,11 @@ export default function FloatingShapes() {
       const el = document.getElementById(shape.id);
       if (!el) return;
 
-      // Entrance: fade + scale in
+      // Entrance: fade in only (no scale to avoid conflict with parallax transforms)
       gsap.fromTo(el,
-        { opacity: 0, scale: 0.5 },
+        { opacity: 0 },
         { 
           opacity: 1, 
-          scale: 1, 
           duration: 1.5, 
           ease: "power3.out",
           delay: Math.random() * 0.6,
