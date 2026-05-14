@@ -1,9 +1,27 @@
+"use client";
+
 import Scene from "@/components/3d/Scene";
 import ModelViewer from "@/components/3d/ModelViewer";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    gsap.from(".hero-text", {
+      y: 40,
+      opacity: 0,
+      duration: 1.5,
+      stagger: 0.2,
+      ease: "power3.out",
+      delay: 0.5
+    });
+  }, { scope: containerRef });
+
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[var(--bg-primary)]">
+    <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-[var(--bg-primary)]">
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
         <Scene enableControls={false}>
@@ -14,6 +32,7 @@ export default function Hero() {
             rotation={[-Math.PI/4, Math.PI, Math.PI]}
             enableParallax={true}
             autoRotate={true}
+            animateIn={true}
           />
         </Scene>
       </div>
@@ -21,16 +40,18 @@ export default function Hero() {
       {/* HTML Overlay */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
         <div className="text-center px-4 text-[var(--text-primary)]">
-          <h1 className="text-6xl md:text-8xl font-bold font-[family-name:var(--font-display)] tracking-tighter mb-6">
+          <h1 className="hero-text text-6xl md:text-8xl font-bold font-[family-name:var(--font-display)] tracking-tighter mb-6 opacity-100">
             James Hou
           </h1>
-          <p className="text-xl md:text-2xl font-[family-name:var(--font-body)] opacity-90 max-w-2xl mx-auto font-light">
+          <p className="hero-text text-xl md:text-2xl font-[family-name:var(--font-body)] opacity-90 max-w-2xl mx-auto font-light">
             From CAD to code — engineering what matters.
           </p>
           
-          <button className="mt-12 px-8 py-4 rounded-full border border-[var(--text-primary)] bg-[var(--text-primary)] text-[var(--bg-primary)] backdrop-blur-md font-medium hover:bg-transparent hover:text-[var(--text-primary)] transition-all pointer-events-auto">
-            See what I've built &rarr;
-          </button>
+          <div className="hero-text">
+            <button className="mt-12 px-8 py-4 rounded-full border border-[var(--text-primary)] bg-[var(--text-primary)] text-[var(--bg-primary)] backdrop-blur-md font-medium hover:bg-transparent hover:text-[var(--text-primary)] transition-all pointer-events-auto">
+              See what I've built &rarr;
+            </button>
+          </div>
         </div>
       </div>
     </section>

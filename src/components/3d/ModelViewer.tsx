@@ -4,6 +4,8 @@ import { useGLTF } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 interface ModelViewerProps {
   modelPath: string;
@@ -12,6 +14,7 @@ interface ModelViewerProps {
   rotation?: [number, number, number];
   autoRotate?: boolean;
   enableParallax?: boolean;
+  animateIn?: boolean;
 }
 
 export default function ModelViewer({
@@ -21,12 +24,30 @@ export default function ModelViewer({
   rotation = [0, 0, 0],
   autoRotate = false,
   enableParallax = false,
+  animateIn = false,
 }: ModelViewerProps) {
   const { scene } = useGLTF(modelPath);
   const groupRef = useRef<THREE.Group>(null);
   
   // Store initial rotation to rotate relative to it
   const initialRotation = useRef(new THREE.Euler(...rotation));
+
+  useGSAP(() => {
+    if (animateIn && groupRef.current) {
+      // Set initial scale to 0
+      groupRef.current.scale.set(0, 0, 0);
+      
+      // Animate to target scale
+      gsap.to(groupRef.current.scale, {
+        x: scale,
+        y: scale,
+        z: scale,
+        duration: 2.5,
+        ease: "expo.out",
+        delay: 0.2
+      });
+    }
+  }, [animateIn, scale]);
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;

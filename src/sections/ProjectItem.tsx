@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Scene from "@/components/3d/Scene";
 import ModelViewer from "@/components/3d/ModelViewer";
 import PlaceholderGeometry from "@/components/3d/PlaceholderGeometry";
 import ProjectCard from "@/components/ui/ProjectCard";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ProjectItemProps {
   title: string;
@@ -35,13 +40,43 @@ export default function ProjectItem({
   reversed = false,
 }: ProjectItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Model container animation
+    gsap.from(".project-model", {
+      scale: 0.95,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        once: true,
+      }
+    });
+
+    // Text stagger
+    gsap.from(".project-text", {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        once: true,
+      }
+    });
+  }, { scope: containerRef });
 
   return (
-    <>
+    <div ref={containerRef}>
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-24`}>
         {/* 3D Model Side */}
         <div 
-          className={`h-[50vh] lg:h-[70vh] rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative cursor-pointer group ${reversed ? "lg:order-2" : "lg:order-1"}`}
+          className={`project-model h-[50vh] lg:h-[70vh] rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative cursor-pointer group ${reversed ? "lg:order-2" : "lg:order-1"}`}
           onClick={() => setIsModalOpen(true)}
         >
           <Scene enableControls={false}>
@@ -52,6 +87,7 @@ export default function ProjectItem({
                 rotation={modelRotation}
                 autoRotate={true}
                 enableParallax={true}
+                animateIn={true}
               />
             ) : (
               <PlaceholderGeometry type={placeholderType} />
@@ -66,22 +102,22 @@ export default function ProjectItem({
 
         {/* Text Side */}
         <div className={`flex flex-col space-y-6 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
-          <h2 className="text-4xl lg:text-5xl font-bold font-[family-name:var(--font-display)]">{title}</h2>
+          <h2 className="project-text text-4xl lg:text-5xl font-bold font-[family-name:var(--font-display)]">{title}</h2>
 
           {problem && (
-            <div>
+            <div className="project-text">
               <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">The Problem</h3>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{problem}</p>
             </div>
           )}
 
-          <div>
+          <div className="project-text">
             <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">{problem ? "The Solution" : "Description"}</h3>
             <p className="text-[var(--text-primary)] text-lg leading-relaxed">{solution}</p>
           </div>
 
           {awards && awards.length > 0 && (
-            <div className="pt-4">
+            <div className="project-text pt-4">
               <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-3">Awards & Achievements</h3>
               <ul className="space-y-2">
                 {awards.map((award, idx) => (
@@ -95,7 +131,7 @@ export default function ProjectItem({
           )}
 
           {additionalNote && (
-            <div className="pt-2">
+            <div className="project-text pt-2">
               <a
                 href={additionalNote.link}
                 target="_blank"
@@ -107,7 +143,7 @@ export default function ProjectItem({
             </div>
           )}
 
-          <div className="flex flex-wrap gap-2 pt-4">
+          <div className="project-text flex flex-wrap gap-2 pt-4">
             {techStack.map((tech) => (
               <span key={tech} className="px-3 py-1 rounded-full border border-[var(--border)] text-sm text-[var(--text-secondary)]">
                 {tech}
@@ -122,6 +158,6 @@ export default function ProjectItem({
         onClose={() => setIsModalOpen(false)}
         project={{ title, problem, solution, techStack, awards, additionalNote }}
       />
-    </>
+    </div>
   );
 }
