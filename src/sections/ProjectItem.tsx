@@ -140,7 +140,7 @@ export default function ProjectItem({
               <img
                 src={imagePath}
                 alt={title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain p-4"
               />
             ) : (
               /* Placeholder for projects without images yet */
