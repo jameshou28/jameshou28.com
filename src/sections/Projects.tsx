@@ -7,7 +7,6 @@ const PROJECTS = [
     problem: "",
     solution: "Designed, programmed, and built robots for the VEX Robotics Competition. Led team to awards including:",
     modelPath: "/models/qpin2.glb",
-
     reversed: true,
     awards: [
       "2026 World Championship Innovate Award",
@@ -22,8 +21,9 @@ const PROJECTS = [
       text: "Interviews viewed 80k+ times across all platforms",
       link: "https://www.youtube.com/watch?v=6TlJ-XfXd6U"
     },
-    category: "engineering",
-    techStack: ["Fusion360", "Onshape", "C++", "Git"]
+    category: "engineering" as const,
+    techStack: ["Fusion360", "Onshape", "C++", "Git"],
+    gallery: [],
   },
   {
     title: "QPIN",
@@ -33,31 +33,32 @@ const PROJECTS = [
     modelRotation: [-Math.PI/4, Math.PI, Math.PI] as [number, number, number],
     techStack: ["C++", "CAD", "PCB Design", "Embedded Systems", "ESP32"],
     awards: ["Most Outstanding Company Award at Leangap Startup Incubator & Pitch Competition 2025"],
-    category: "engineering",
+    category: "engineering" as const,
+    gallery: [],
   },
   {
     title: "WebAble",
     problem: "",
     solution: "Chrome extension that uses DOM manipulation to allow users to better navigate any website.",
     techStack: ["HTML", "CSS", "JavaScript", "Chrome Extension API", "Git"],
-    placeholderType: "accessibility" as const,
-    category: "programming",
+    category: "programming" as const,
+    gallery: [],
   },
   {
     title: "QPin Connect",
     problem: "",
     solution: "Built companion iOS app for QPIN, a wearable digital pin for advocacy and self-expression.",
     techStack: ["Swift", "BLE"],
-    placeholderType: "abstract" as const,
-    category: "programming",
+    category: "programming" as const,
+    gallery: [],
   },
   {
     title: "QPin Website",
     problem: "",
     solution: "Built website for QPin, a wearable digital pin for advocacy and self-expression.",
     techStack: ["HTML", "CSS", "JS", "Flask", "ThreeJS"],
-    placeholderType: "abstract" as const,
-    category: "programming",
+    category: "programming" as const,
+    gallery: [],
   }
 ];
 

@@ -97,7 +97,7 @@ export default function About() {
   }, { scope: containerRef });
 
   return (
-    <section id="about" ref={containerRef} className="w-full max-w-6xl mx-auto px-6 py-32 bg-[var(--bg-primary)]">
+    <section id="about" ref={containerRef} className="relative z-[2] w-full max-w-6xl mx-auto px-6 py-32">
       <div className="about-text-container text-center space-y-8 mb-24 max-w-4xl mx-auto">
         <h2 className="about-text text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
           I build at the intersection of <span className="text-[var(--accent)] font-bold">hardware</span> and <span className="text-[var(--accent)] font-bold">software</span>.
