@@ -3,6 +3,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Suspense } from "react";
+import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 
 interface SceneProps {
   children: React.ReactNode;
@@ -15,11 +16,13 @@ export default function Scene({
   className = "",
   enableControls = true,
 }: SceneProps) {
+  const { isMobile, isLowPower } = useDeviceCapability();
+
   return (
     <div className={`w-full h-full relative ${className}`}>
       <Canvas
-        dpr={[1, 2]} // Support retina displays
-        gl={{ antialias: true, alpha: true }} // Transparent background
+        dpr={isMobile || isLowPower ? [1, 1] : [1, 2]} // Lower DPR on mobile to save performance
+        gl={{ antialias: !isLowPower, alpha: true }} // Disable antialiasing on low power
         camera={{ position: [0, 0, 5], fov: 45 }}
       >
         <Suspense fallback={null}>

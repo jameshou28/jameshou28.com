@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 
 interface ModelViewerProps {
   modelPath: string;
@@ -28,6 +29,7 @@ export default function ModelViewer({
 }: ModelViewerProps) {
   const { scene } = useGLTF(modelPath);
   const groupRef = useRef<THREE.Group>(null);
+  const { isMobile, isLowPower } = useDeviceCapability();
   
   // Store initial rotation to rotate relative to it
   const initialRotation = useRef(new THREE.Euler(...rotation));
@@ -56,7 +58,8 @@ export default function ModelViewer({
       groupRef.current.rotation.y += delta * 0.2;
     }
 
-    if (enableParallax) {
+    // Disable parallax on mobile/low power to save performance and avoid touch jank
+    if (enableParallax && !isMobile && !isLowPower) {
       // Calculate target rotation based on mouse position (-1 to 1)
       const targetX = initialRotation.current.x + (state.pointer.y * 0.2);
       const targetY = initialRotation.current.y + (state.pointer.x * 0.3);
