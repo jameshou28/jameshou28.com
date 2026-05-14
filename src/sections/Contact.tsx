@@ -1,11 +1,49 @@
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Contact() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    // Title and text
+    gsap.fromTo(".contact-header", 
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+      }
+    );
+
+    // Contact cards
+    gsap.fromTo(".contact-card", 
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "back.out(1.2)",
+        delay: 0.2,
+      }
+    );
+  }, { scope: containerRef });
+
   return (
-    <section className="w-full max-w-6xl mx-auto px-6 py-32 bg-[var(--bg-primary)]">
+    <section ref={containerRef} className="w-full max-w-6xl mx-auto px-6 py-32 bg-[var(--bg-primary)]">
       <div className="text-center space-y-8 mb-16 max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
+        <h2 className="contact-header opacity-0 text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
           Let's build something together.
         </h2>
-        <p className="text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
+        <p className="contact-header opacity-0 text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
           Whether you're interested in collaboration, have a project in mind, or just want to connect — I'd love to hear from you.
         </p>
       </div>
@@ -13,7 +51,7 @@ export default function Contact() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
         <a
           href="mailto:james.william.hou@gmail.com"
-          className="group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-8 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
+          className="contact-card opacity-0 group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-8 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
         >
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="relative z-10">
@@ -32,7 +70,7 @@ export default function Contact() {
           href="https://github.com/jameshou28"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-8 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
+          className="contact-card opacity-0 group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-8 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
         >
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="relative z-10">
@@ -48,7 +86,7 @@ export default function Contact() {
 
         <a
           href="https://www.linkedin.com/in/jameshou28/"
-          className="group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-8 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
+          className="contact-card opacity-0 group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-8 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
         >
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="relative z-10">
