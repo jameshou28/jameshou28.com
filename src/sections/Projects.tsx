@@ -1,4 +1,5 @@
 import ProjectItem from "./ProjectItem";
+import type { ProjectLink } from "./ProjectItem";
 import Link from "next/link";
 
 const PROJECTS = [
@@ -24,6 +25,10 @@ const PROJECTS = [
     category: "engineering" as const,
     techStack: ["Fusion360", "Onshape", "C++", "Git"],
     gallery: [],
+    links: [
+      { type: "custom", url: "https://events.vex.com/teams/v5rc/4610Z", label: "Team Page" } as ProjectLink,
+      { type: "custom", url: "https://www.youtube.com/watch?v=6TlJ-XfXd6U", label: "YouTube" } as ProjectLink,
+    ],
   },
   {
     title: "QPIN",
@@ -35,6 +40,10 @@ const PROJECTS = [
     awards: ["Most Outstanding Company Award at Leangap Startup Incubator & Pitch Competition 2025"],
     category: "engineering" as const,
     gallery: [],
+    links: [
+      { type: "github", url: "https://github.com/jameshou28" } as ProjectLink,
+      { type: "website", url: "https://qpin.cc" } as ProjectLink,
+    ],
   },
   {
     title: "WebAble",
@@ -43,6 +52,9 @@ const PROJECTS = [
     techStack: ["HTML", "CSS", "JavaScript", "Chrome Extension API", "Git"],
     category: "programming" as const,
     gallery: [],
+    links: [
+      { type: "github", url: "https://github.com/jameshou28" } as ProjectLink,
+    ],
   },
   {
     title: "QPin Connect",
@@ -51,6 +63,9 @@ const PROJECTS = [
     techStack: ["Swift", "BLE"],
     category: "programming" as const,
     gallery: [],
+    links: [
+      { type: "github", url: "https://github.com/jameshou28" } as ProjectLink,
+    ],
   },
   {
     title: "QPin Website",
@@ -59,6 +74,10 @@ const PROJECTS = [
     techStack: ["HTML", "CSS", "JS", "Flask", "ThreeJS"],
     category: "programming" as const,
     gallery: [],
+    links: [
+      { type: "github", url: "https://github.com/jameshou28" } as ProjectLink,
+      { type: "website", url: "https://qpin.cc" } as ProjectLink,
+    ],
   }
 ];
 
