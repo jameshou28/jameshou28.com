@@ -41,8 +41,7 @@ const PROJECTS = [
     category: "engineering" as const,
     gallery: [],
     links: [
-      { type: "github", url: "https://github.com/jameshou28" } as ProjectLink,
-      { type: "website", url: "https://qpin.cc" } as ProjectLink,
+      { type: "website", url: "https://www.wearqpin.com" } as ProjectLink
     ],
   },
   {
