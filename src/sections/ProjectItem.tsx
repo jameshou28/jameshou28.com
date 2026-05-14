@@ -120,7 +120,7 @@ export default function ProjectItem({
 
   return (
     <div ref={containerRef}>
-      <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-24`}>
+      <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-6`}>
         {/* Visual Side */}
         <div className={`${reversed ? "lg:order-2" : "lg:order-1"}`}>
           <div className="project-visual opacity-0 h-[50vh] lg:h-[70vh] rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative">

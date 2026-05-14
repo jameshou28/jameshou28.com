@@ -130,7 +130,7 @@ export default function Projects({ category }: { category: "engineering" | "prog
         </Link>
       </div>
       
-      <div className="flex flex-col space-y-12">
+      <div className="flex flex-col space-y-6">
         {filteredProjects.map((project, idx) => (
           <ProjectItem key={idx} {...project} />
         ))}
