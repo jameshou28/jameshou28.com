@@ -70,7 +70,7 @@ const PROJECTS = [
       { type: "image" as const, src: "/images/webAble/ex3.png" },
     ],
     links: [
-      { type: "github", url: "https://https://github.com/jameshou28/WebAble" } as ProjectLink,
+      { type: "github", url: "https://github.com/jameshou28/WebAble" } as ProjectLink,
     ],
   },
   {
@@ -85,7 +85,7 @@ const PROJECTS = [
       { type: "image" as const, src: "/images/QPinConnect/ex2.jpg" },
     ],
     links: [
-      { type: "custom", label: "App Store", url: "https://apps.apple.com/us/app/qpin-connect/id67494997948" } as ProjectLink,
+      { type: "custom", label: "App Store", url: "https://apps.apple.com/us/app/qpin-connect/id6749499794" } as ProjectLink,
     ],
   },
   {
