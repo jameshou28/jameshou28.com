@@ -5,6 +5,13 @@ import gsap from "gsap";
 import { PORTFOLIO_ASSETS } from "@/data/portfolioAssets";
 
 const MIN_LOADING_MS = 2000;
+const ENTER_ANIMATION = {
+  clipDuration: 1.1,
+  fadeDuration: 0.6,
+  overlap: 0.5,
+  clipEase: "power4.inOut",
+  fadeEase: "power2.out",
+};
 
 const isVideoAsset = (asset: string) => asset.endsWith(".mp4") || asset.endsWith(".webm");
 const isModelAsset = (asset: string) => asset.endsWith(".glb") || asset.endsWith(".gltf");
@@ -107,7 +114,8 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
     if (!isReady || isEntering) return;
     setIsEntering(true);
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = typeof window !== "undefined"
+      && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const scrollBehavior = reduceMotion ? "auto" : "smooth";
 
     const finish = () => {
@@ -125,14 +133,14 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
     gsap.timeline({ onComplete: finish })
       .to(overlay, {
         clipPath: "circle(0% at 50% 50%)",
-        duration: 1.1,
-        ease: "power4.inOut",
+        duration: ENTER_ANIMATION.clipDuration,
+        ease: ENTER_ANIMATION.clipEase,
       })
       .to(overlay, {
         opacity: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      }, "-=0.5");
+        duration: ENTER_ANIMATION.fadeDuration,
+        ease: ENTER_ANIMATION.fadeEase,
+      }, `-=${ENTER_ANIMATION.overlap}`);
   };
 
   return (
