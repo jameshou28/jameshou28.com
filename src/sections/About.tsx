@@ -83,8 +83,10 @@ export default function About() {
     <section id="about" ref={containerRef} className="relative z-[2] w-full max-w-6xl mx-auto px-6 py-32">
       <div className="about-text-container text-center space-y-8 mb-24 max-w-4xl mx-auto">
         <h2 className="about-text text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
-          I build <span className="text-[var(--accent)] font-bold">software</span> experiences and <span className="text-[var(--accent)] font-bold">AI-powered</span> tools that turn ideas into useful products.
+          {/* I build <span className="text-[var(--accent)] font-bold">software</span> experiences and <span className="text-[var(--accent)] font-bold">AI-powered</span> tools that turn ideas into useful products. */}
+          I'm a high school developer focused on <span className="text-[var(--accent)] font-bold">software</span>, <span className="text-[var(--accent)] font-bold">web</span>, and <span className="text-[var(--accent)] font-bold">applied AI</span>.
         </h2>
+         
         <p className="about-text text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
           From accessibility extensions to mobile apps and creative web builds, I love shipping code that helps people. I&apos;m especially interested in applied AI that makes products smarter and more helpful.
         </p>
