@@ -36,6 +36,14 @@ const loadModelAsset = async (asset: string) => {
   }
 };
 
+const loadFonts = () => {
+  if (typeof document === "undefined" || !("fonts" in document)) {
+    return Promise.resolve();
+  }
+
+  return document.fonts.ready.catch(() => undefined);
+};
+
 const loadAsset = (asset: string) => {
   if (isModelAsset(asset)) return loadModelAsset(asset);
   if (isVideoAsset(asset)) return loadVideoAsset(asset);
@@ -54,9 +62,7 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
   useEffect(() => {
     let isMounted = true;
     const minimumDelay = new Promise((resolve) => setTimeout(resolve, MIN_LOADING_MS));
-    const fontReady = typeof document !== "undefined" && "fonts" in document
-      ? document.fonts.ready.catch(() => undefined)
-      : Promise.resolve();
+    const fontReady = loadFonts();
 
     const assetPromises = PORTFOLIO_ASSETS.map((asset) =>
       loadAsset(asset).finally(() => {
@@ -101,14 +107,16 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
     if (!isReady || isEntering) return;
     setIsEntering(true);
 
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const scrollBehavior = reduceMotion ? "auto" : "smooth";
+
     const finish = () => {
       setHasEntered(true);
       setIsEntering(false);
-      document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("hero")?.scrollIntoView({ behavior: scrollBehavior });
     };
 
     const overlay = overlayRef.current;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!overlay || reduceMotion) {
       finish();
       return;
