@@ -2,13 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
+import Image from "next/image";
 import { PORTFOLIO_ASSETS } from "@/data/portfolioAssets";
 
-const MIN_LOADING_MS = 2000;
+const MIN_LOADING_MS = 1500;
 const ENTER_ANIMATION = {
-  clipDuration: 1.1,
+  clipDuration: 1.5,
   fadeDuration: 0.6,
-  overlap: 0.5,
+  overlap: 0.2,
   clipEase: "power4.inOut",
   fadeEase: "power2.out",
 };
@@ -18,7 +19,7 @@ const isModelAsset = (asset: string) => asset.endsWith(".glb") || asset.endsWith
 
 const loadImageAsset = (asset: string) =>
   new Promise<void>((resolve) => {
-    const image = new Image();
+    const image = new window.Image();
     image.onload = () => resolve();
     image.onerror = () => resolve();
     image.src = asset;
@@ -59,10 +60,14 @@ const loadAsset = (asset: string) => {
 
 export default function LoadingScreen({ children }: { children: React.ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const statusTextRef = useRef<HTMLParagraphElement>(null);
   const [loadedCount, setLoadedCount] = useState(0);
   const [isReady, setIsReady] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   const [isEntering, setIsEntering] = useState(false);
+  const [staggeredProgress, setStaggeredProgress] = useState(0);
+  const [currentStatus, setCurrentStatus] = useState<"warming" | "loading" | "ready">("warming");
+  const [hasSwitched, setHasSwitched] = useState(false);
   const totalAssets = useMemo(() => PORTFOLIO_ASSETS.length, []);
   const initialOverflowRef = useRef<string | null>(null);
 
@@ -90,6 +95,70 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
   }, []);
 
   useEffect(() => {
+    const progress = totalAssets === 0 ? 1 : Math.min(loadedCount / totalAssets, 1);
+    const progressPercent = Math.round(progress * 100);
+    
+    if (isReady) {
+      setStaggeredProgress(100);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setStaggeredProgress((current) => {
+        const randomIncrement = Math.random() * 15 + 5;
+        const newProgress = Math.min(current + randomIncrement, progressPercent);
+        return newProgress;
+      });
+    }, 200);
+
+    return () => clearInterval(interval);
+  }, [loadedCount, totalAssets, isReady]);
+
+  useEffect(() => {
+    if (hasSwitched || staggeredProgress < 50) return;
+
+    const textEl = statusTextRef.current;
+    if (!textEl) return;
+
+    setHasSwitched(true);
+
+    gsap.to(textEl, {
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.out",
+      onComplete: () => {
+        setCurrentStatus("loading");
+        gsap.to(textEl, {
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.in",
+        });
+      },
+    });
+  }, [staggeredProgress, hasSwitched]);
+
+  useEffect(() => {
+    if (currentStatus === "ready" || staggeredProgress < 100) return;
+
+    const textEl = statusTextRef.current;
+    if (!textEl) return;
+
+    gsap.to(textEl, {
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.out",
+      onComplete: () => {
+        setCurrentStatus("ready");
+        gsap.to(textEl, {
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.in",
+        });
+      },
+    });
+  }, [staggeredProgress, currentStatus]);
+
+  useEffect(() => {
     if (initialOverflowRef.current === null) {
       initialOverflowRef.current = document.body.style.overflow;
     }
@@ -106,9 +175,6 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
       }
     };
   }, [hasEntered]);
-
-  const progress = totalAssets === 0 ? 1 : Math.min(loadedCount / totalAssets, 1);
-  const progressPercent = Math.round(progress * 100);
 
   const handleEnter = () => {
     if (!isReady || isEntering) return;
@@ -157,37 +223,51 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--accent-glow),_transparent_60%)]" />
           <div className="relative z-10 w-full max-w-xl px-6 text-center">
-            <p className="text-xs uppercase tracking-[0.35em] text-[var(--text-secondary)]">
-              Initializing
+            <p className="text-xs uppercase tracking-[0.35em] text-[var(--text-secondary)] font-[family-name:var(--font-body)]">
+              Initializing Portfolio
             </p>
-            <h1 className="mt-4 text-4xl md:text-5xl font-bold font-[family-name:var(--font-display)]">
-              Loading Portfolio
-            </h1>
-            <p className="mt-3 text-sm text-[var(--text-secondary)]">
-              Warming up 3D scenes and visuals
+            
+            <div className="mt-8 mb-6 flex justify-center">
+              <div className="relative w-24 h-24 overflow-hidden rounded-2xl shadow-[0_0_30px_var(--accent-glow)] border border-[var(--border)]">
+                <Image 
+                  src="/images/favicon.jpg" 
+                  alt="James Hou Logo" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            <p 
+              ref={statusTextRef}
+              className="mt-3 text-sm text-[var(--text-secondary)] font-[family-name:var(--font-body)]"
+            >
+              {currentStatus === "warming" ? "Warming up 3D scenes" : currentStatus === "loading" ? "Loading assets" : ""}
             </p>
 
-            <div className="mt-10 h-2 w-full rounded-full bg-[var(--border)] overflow-hidden">
+            <div className="mt-10 h-3 w-full rounded-full bg-[var(--bg-subtle)] border border-[var(--border)] overflow-hidden shadow-inner p-0.5">
               <div
-                className="h-full bg-[var(--accent)] transition-[width] duration-300"
-                style={{ width: `${progressPercent}%` }}
-              />
+                className="h-full rounded-full bg-[var(--accent)] transition-[width] duration-300 relative overflow-hidden"
+                style={{ width: `${staggeredProgress}%` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-full -translate-x-full animate-[shimmer_2s_infinite]"></div>
+              </div>
             </div>
-            <div className="mt-3 flex items-center justify-between text-xs text-[var(--text-secondary)]">
-              <span>{progressPercent}%</span>
-              <span>{isReady ? "Ready" : "Loading assets"}</span>
+            <div className="mt-4 flex items-center justify-between text-xs text-[var(--text-secondary)] font-[family-name:var(--font-body)] uppercase tracking-wider font-semibold">
+              <span>{Math.round(staggeredProgress)}%</span>
+              <span>{isReady ? "" : "Loading assets"}</span>
             </div>
 
             {isReady ? (
               <button
                 type="button"
                 onClick={handleEnter}
-                className="mt-10 inline-flex items-center justify-center rounded-full border border-[var(--text-primary)] px-8 py-3 text-sm font-medium tracking-wide text-[var(--bg-primary)] bg-[var(--text-primary)] hover:bg-transparent hover:text-[var(--text-primary)] transition-all"
+                className="mt-10 inline-flex items-center justify-center rounded-full border border-[var(--text-primary)] px-8 py-3 text-sm font-medium tracking-wide text-[var(--bg-primary)] bg-[var(--text-primary)] hover:bg-transparent hover:text-[var(--text-primary)] transition-all font-[family-name:var(--font-body)] uppercase cursor-pointer"
               >
                 Enter Portfolio
               </button>
             ) : (
-              <p className="mt-10 text-sm text-[var(--text-secondary)]">
+              <p className="mt-10 text-sm text-[var(--text-secondary)] font-[family-name:var(--font-body)]">
                 Preparing your experience...
               </p>
             )}
