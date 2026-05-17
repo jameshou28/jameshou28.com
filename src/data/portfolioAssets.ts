@@ -12,6 +12,7 @@ export const MEDIA_ASSETS = [
   "/images/qpin/qpinRender1.png",
   "/images/qpin/qpinRender3.png",
   "/images/qpin/GIFDisplay.mp4",
+  "/images/midScoring.mp4",
   "/images/webAble/main.png",
   "/images/webAble/ex1.png",
   "/images/webAble/ex2.png",
