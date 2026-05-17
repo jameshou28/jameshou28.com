@@ -255,7 +255,7 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
             </div>
             <div className="mt-4 flex items-center justify-between text-xs text-[var(--text-secondary)] font-[family-name:var(--font-body)] uppercase tracking-wider font-semibold">
               <span>{Math.round(staggeredProgress)}%</span>
-              <span>{isReady ? "" : "Loading assets"}</span>
+              {/* <span>{isReady ? "" : "Loading assets"}</span> */}
             </div>
 
             {isReady ? (
