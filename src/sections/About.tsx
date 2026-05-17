@@ -15,9 +15,9 @@ const GitHubCalendar = dynamic(() => import('react-github-calendar').then((mod) 
 
 const SKILLS = [
   { category: "Languages", items: "Python, C++, Java, HTML, CSS, JavaScript" },
-  { category: "Frameworks", items: "Flask, Django" },
+  { category: "Frameworks", items: "Flask, Django, ThreeJS" },
   { category: "Systems & Tools", items: "Git, Vercel, PlatformIO, ArduinoIDE, Figma" },
-  { category: "CAD & Design", items: "Fusion 360, Onshape" },
+  { category: "CAD & Design", items: "Fusion 360, Onshape, Blender" },
   { category: "Adobe Creative Suite", items: "Photoshop, Illustrator, Lightroom, Premiere Pro" },
 ];
 

@@ -9,7 +9,7 @@ export default function Footer() {
             James Hou
           </Link>
           <p className="text-sm text-[var(--text-secondary)] mt-1">
-            Hardware & Software Engineer
+            Software & Hardware Engineer
           </p>
         </div>
         

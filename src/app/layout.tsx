@@ -17,7 +17,7 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "James Hou",
-  description: "Personal portfolio of James Hou, showcasing hardware and software engineering projects.",
+  description: "Personal portfolio of James Hou, showcasing software and hardware engineering projects.",
   icons: {
     icon: "/images/favicon.jpg",
   },
