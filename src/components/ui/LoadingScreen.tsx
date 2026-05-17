@@ -115,7 +115,8 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
     setIsEntering(true);
 
     const reduceMotion = typeof window !== "undefined"
-      && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false;
     const scrollBehavior = reduceMotion ? "auto" : "smooth";
 
     const finish = () => {
