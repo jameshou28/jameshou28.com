@@ -1,14 +1,25 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+const ROLE_TITLES = ["Full Stack Developer", "Robotics Engineer", "Applied AI"];
+const TYPING_SPEED = 120;
+const DELETING_SPEED = 60;
+const PAUSE_DURATION = 1200;
+
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const currentRole = ROLE_TITLES[roleIndex];
+  const displayText = currentRole.slice(0, charIndex);
 
   useGSAP(() => {
-    gsap.fromTo(".hero-text", 
+    gsap.fromTo(
+      ".hero-text",
       { y: 40, opacity: 0 },
       {
         y: 0,
@@ -21,6 +32,33 @@ export default function Hero() {
     );
   }, { scope: containerRef });
 
+  useEffect(() => {
+    const atEnd = !isDeleting && charIndex === currentRole.length;
+    const atStart = isDeleting && charIndex === 0;
+    const timeoutDuration = atEnd || atStart
+      ? PAUSE_DURATION
+      : isDeleting
+        ? DELETING_SPEED
+        : TYPING_SPEED;
+
+    const timeout = window.setTimeout(() => {
+      if (atEnd) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (atStart) {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % ROLE_TITLES.length);
+        return;
+      }
+
+      setCharIndex((prev) => prev + (isDeleting ? -1 : 1));
+    }, timeoutDuration);
+
+    return () => window.clearTimeout(timeout);
+  }, [charIndex, currentRole.length, isDeleting]);
+
   return (
     <section id="hero" ref={containerRef} className="relative w-full h-screen overflow-hidden">
       {/* HTML Overlay */}
@@ -29,8 +67,14 @@ export default function Hero() {
           <h1 className="hero-text opacity-0 text-6xl md:text-8xl font-bold font-[family-name:var(--font-display)] tracking-tighter mb-6">
             James Hou
           </h1>
-          <p className="hero-text opacity-0 text-xl md:text-2xl font-[family-name:var(--font-body)] opacity-90 max-w-2xl mx-auto font-light">
-            From CAD to code — engineering what matters.
+          <p
+            className="hero-text opacity-0 text-xl md:text-2xl font-[family-name:var(--font-body)] opacity-90 max-w-2xl mx-auto font-light"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <span className="border-r-2 border-current pr-1 animate-pulse">
+              {displayText || "\u00A0"}
+            </span>
           </p>
           
           <div className="hero-text opacity-0">
