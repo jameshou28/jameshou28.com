@@ -26,9 +26,9 @@ export default function Scene({
         camera={{ position: [0, 0, 5], fov: 45 }}
       >
         <Suspense fallback={null}>
-          <Environment preset="studio" />
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <Environment preset="studio" environmentIntensity={0.4} />
+          <ambientLight intensity={0.2} />
+          <directionalLight position={[10, 10, 5]} intensity={0.4} />
           
           {children}
 

@@ -7,7 +7,8 @@ const PROJECTS = [
     title: "VEX Robotics (4610Z)",
     problem: "",
     solution: "Designed, programmed, and built robots for the VEX Robotics Competition. Led team to awards including:",
-    modelPath: "/models/qpin2.glb",
+    modelPath: "/models/vex.glb",
+    modelScale: 0.05,
     reversed: true,
     awards: [
       "2026 World Championship Innovate Award",
@@ -41,7 +42,7 @@ const PROJECTS = [
     problem: "",
     solution: "Co-Founder & CTO. Used Fusion 360 to design case for QPin, a wearable digital pin for advocacy and self-expression. Programmed software used on microcontrollers (ESP32).",
     modelPath: "/models/qpin.glb",
-    modelRotation: [-Math.PI/4, Math.PI, Math.PI] as [number, number, number],
+    modelRotation: [-Math.PI/4, Math.PI/2, Math.PI/4] as [number, number, number],
     techStack: ["C++", "CAD", "PCB Design", "Embedded Systems", "ESP32"],
     awards: ["Most Outstanding Company Award at Leangap Startup Incubator & Pitch Competition 2025"],
     category: "engineering" as const,

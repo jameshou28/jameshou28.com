@@ -1,6 +1,6 @@
 "use client";
 
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Center } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
@@ -72,7 +72,9 @@ export default function ModelViewer({
 
   return (
     <group ref={groupRef} position={position} rotation={rotation} scale={scale}>
-      <primitive object={scene} />
+      <Center>
+        <primitive object={scene} />
+      </Center>
     </group>
   );
 }

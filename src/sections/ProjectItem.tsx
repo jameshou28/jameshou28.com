@@ -22,6 +22,7 @@ interface ProjectItemProps {
   solution: string;
   modelPath?: string;
   modelRotation?: [number, number, number];
+  modelScale?: number;
   imagePath?: string;
   techStack: string[];
   awards?: string[];
@@ -68,6 +69,7 @@ export default function ProjectItem({
   solution,
   modelPath,
   modelRotation = [0, 0, 0],
+  modelScale,
   imagePath,
   techStack,
   awards,
@@ -129,7 +131,7 @@ export default function ProjectItem({
               <Scene enableControls={true}>
                 <ModelViewer
                   modelPath={modelPath}
-                  scale={20}
+                  scale={modelScale || 20}
                   rotation={modelRotation}
                   autoRotate={true}
                   enableParallax={false}
