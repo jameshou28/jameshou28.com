@@ -125,19 +125,40 @@ export default function Projects({ category }: { category: "engineering" | "prog
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 py-24 bg-[var(--bg-primary)]">
-      <div className="mb-12 flex flex-col md:flex-row md:justify-between md:items-end border-b border-[var(--border)] pb-8 gap-6">
+      <div className="mb-10 flex flex-col md:flex-row md:justify-between md:items-end border-b border-[var(--border)] pb-8 gap-6">
         <div className="max-w-2xl">
           <h2 className="text-sm uppercase tracking-wider text-[var(--text-secondary)] font-semibold mb-2">Selected Work</h2>
-          <h3 className="text-4xl md:text-5xl font-[family-name:var(--font-display)] font-bold text-[var(--text-primary)] mb-4">{title}</h3>
-          <p className="text-lg text-[var(--text-secondary)] leading-relaxed">{description}</p>
+          <h1 className="text-4xl md:text-5xl font-[family-name:var(--font-display)] font-bold text-[var(--text-primary)]">
+            {title}
+          </h1>
         </div>
         <Link href="/" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium transition-colors shrink-0">
           &larr; Back to Home
         </Link>
       </div>
+
+      <div className="mb-12 max-w-3xl">
+        <p className="text-lg text-[var(--text-secondary)] leading-relaxed">{description}</p>
+      </div>
       
       {category === "programming" && (
-        <div className="mb-12">
+        <div className="mb-16">
+          <div className="mb-6 max-w-3xl">
+            <div className="flex flex-wrap items-center gap-3 text-sm uppercase tracking-wider text-[var(--text-secondary)] font-semibold">
+              <span>GitHub Activity</span>
+              <a
+                href="https://github.com/jameshou28"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors underline decoration-[var(--border)] underline-offset-4 hover:decoration-[var(--accent)]"
+              >
+                jameshou28
+              </a>
+            </div>
+            <p className="mt-3 text-base text-[var(--text-secondary)] leading-relaxed">
+              A quick snapshot of recent contributions, highlighting the pace of experimentation and iteration behind my software projects.
+            </p>
+          </div>
           <GithubGraph />
         </div>
       )}
