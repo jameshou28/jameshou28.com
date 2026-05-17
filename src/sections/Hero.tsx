@@ -8,10 +8,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ROLE_TITLES = ["Full Stack Developer", "Robotics Engineer", "Applied AI"];
-const TYPING_SPEED = 300;
-const DELETING_SPEED = 500;
-const PAUSE_DURATION = 1200;
 const HERO_VIDEO_SRC = "/images/midScoring.mp4";
+
+/** Typewriter tagline — lower delays = faster typing */
+const HERO_TYPEWRITER = {
+  typingDelayMs: 45,
+  deletingDelayMs: 30,
+  pauseDelayMs: 1200,
+} as const;
+
+/** Hero text/video entrance animation */
+const HERO_ENTRANCE = {
+  duration: 0.9,
+  stagger: 0.12,
+  delay: 0.25,
+} as const;
 
 /** Desktop hero video scroll scrub — tweak these to change feel */
 const HERO_VIDEO_SCROLL = {
@@ -48,10 +59,10 @@ export default function Hero() {
       {
         y: 0,
         opacity: 1,
-        duration: 1.5,
-        stagger: 0.2,
+        duration: HERO_ENTRANCE.duration,
+        stagger: HERO_ENTRANCE.stagger,
         ease: "power3.out",
-        delay: 0.5,
+        delay: HERO_ENTRANCE.delay,
       }
     );
 
@@ -61,9 +72,9 @@ export default function Hero() {
       {
         scale: 1,
         opacity: 1,
-        duration: 1.5,
+        duration: HERO_ENTRANCE.duration,
         ease: "power3.out",
-        delay: 0.7,
+        delay: HERO_ENTRANCE.delay + 0.15,
       }
     );
 
@@ -105,10 +116,10 @@ export default function Hero() {
     const atEnd = !isDeleting && charIndex === currentRole.length;
     const atStart = isDeleting && charIndex === 0;
     const timeoutDuration = atEnd || atStart
-      ? PAUSE_DURATION
+      ? HERO_TYPEWRITER.pauseDelayMs
       : isDeleting
-        ? DELETING_SPEED
-        : TYPING_SPEED;
+        ? HERO_TYPEWRITER.deletingDelayMs
+        : HERO_TYPEWRITER.typingDelayMs;
 
     const timeout = window.setTimeout(() => {
       if (atEnd) {
