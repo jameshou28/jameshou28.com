@@ -1,9 +1,27 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { PORTFOLIO_ASSETS } from "@/data/portfolioAssets";
+
+const PORTFOLIO_ENTERED_KEY = "portfolio-has-entered";
+
+const hasEnteredBefore = () => {
+  try {
+    return localStorage.getItem(PORTFOLIO_ENTERED_KEY) === "true";
+  } catch {
+    return false;
+  }
+};
+
+const markPortfolioEntered = () => {
+  try {
+    localStorage.setItem(PORTFOLIO_ENTERED_KEY, "true");
+  } catch {
+    // ignore (e.g. private browsing)
+  }
+};
 
 const MIN_LOADING_MS = 1500;
 const ENTER_ANIMATION = {
@@ -64,6 +82,7 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
   const [loadedCount, setLoadedCount] = useState(0);
   const [isReady, setIsReady] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
+  const [persistenceChecked, setPersistenceChecked] = useState(false);
   const [isEntering, setIsEntering] = useState(false);
   const [staggeredProgress, setStaggeredProgress] = useState(0);
   const [currentStatus, setCurrentStatus] = useState<"warming" | "loading" | "ready">("warming");
@@ -71,7 +90,16 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
   const totalAssets = useMemo(() => PORTFOLIO_ASSETS.length, []);
   const initialOverflowRef = useRef<string | null>(null);
 
+  useLayoutEffect(() => {
+    if (hasEnteredBefore()) {
+      setHasEntered(true);
+    }
+    setPersistenceChecked(true);
+  }, []);
+
   useEffect(() => {
+    if (!persistenceChecked || hasEntered) return;
+
     let isMounted = true;
     const minimumDelay = new Promise((resolve) => setTimeout(resolve, MIN_LOADING_MS));
     const fontReady = loadFonts();
@@ -92,7 +120,7 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [persistenceChecked, hasEntered]);
 
   useEffect(() => {
     const progress = totalAssets === 0 ? 1 : Math.min(loadedCount / totalAssets, 1);
@@ -186,6 +214,7 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
     const scrollBehavior = reduceMotion ? "auto" : "smooth";
 
     const finish = () => {
+      markPortfolioEntered();
       setHasEntered(true);
       setIsEntering(false);
       document.getElementById("hero")?.scrollIntoView({ behavior: scrollBehavior });
@@ -210,10 +239,18 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
       }, `-=${ENTER_ANIMATION.overlap}`);
   };
 
+  const showOverlay = persistenceChecked && !hasEntered;
+  const hideChildren = !persistenceChecked || showOverlay;
+
   return (
     <div className="relative">
-      {children}
-      {!hasEntered && (
+      <div className={hideChildren ? "invisible" : undefined} aria-hidden={hideChildren || undefined}>
+        {children}
+      </div>
+      {!persistenceChecked && (
+        <div className="fixed inset-0 z-[1000] bg-[var(--bg-primary)]" aria-hidden />
+      )}
+      {showOverlay && (
         <div
           ref={overlayRef}
           className="fixed inset-0 z-[1000] flex items-center justify-center bg-[var(--bg-primary)] text-[var(--text-primary)]"
