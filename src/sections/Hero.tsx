@@ -22,7 +22,7 @@ export default function Hero() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen overflow-hidden">
+    <section id="hero" ref={containerRef} className="relative w-full h-screen overflow-hidden">
       {/* HTML Overlay */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full pointer-events-none">
         <div className="text-center px-4 text-[var(--text-primary)]">
