@@ -1,6 +1,7 @@
 import ProjectItem from "./ProjectItem";
 import type { ProjectLink } from "./ProjectItem";
 import Link from "next/link";
+import GithubGraph from "@/components/ui/GithubGraph";
 
 const PROJECTS = [
   {
@@ -135,6 +136,12 @@ export default function Projects({ category }: { category: "engineering" | "prog
         </Link>
       </div>
       
+      {category === "programming" && (
+        <div className="mb-12">
+          <GithubGraph />
+        </div>
+      )}
+
       <div className="flex flex-col space-y-6">
         {filteredProjects.map((project, idx) => (
           <ProjectItem key={idx} {...project} />

@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRef } from 'react';
 import gsap from 'gsap';
@@ -8,10 +7,6 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const GitHubCalendar = dynamic(() => import('react-github-calendar').then((mod) => mod.GitHubCalendar), {
-  ssr: false,
-});
 
 const SKILLS = [
   { category: "Languages", items: "Python, C++, Java, HTML, CSS, JavaScript" },
@@ -65,19 +60,7 @@ export default function About() {
       }
     });
 
-    // GitHub Graph
-    gsap.from(".about-github", {
-      y: 30,
-      opacity: 0,
-      duration: 1.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".about-github",
-        start: "top 85%",
-        once: true,
-      }
-    });
-    
+
     // Nav Buttons
     gsap.fromTo(".about-nav", 
       { y: 30, opacity: 0 },
@@ -136,24 +119,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* Bottom: GitHub Graph */}
-      <div className="about-github w-full">
-        <div className="p-8 bg-[var(--bg-subtle)] rounded-2xl border border-[var(--border)] flex justify-center overflow-x-auto overflow-y-hidden">
-          <div className="min-w-[700px] flex justify-center">
-            <GitHubCalendar 
-              username="jameshou28" 
-              colorScheme="light"
-              blockSize={14}
-              blockMargin={5}
-              fontSize={14}
-              theme={{
-                light: ['#ebe8e4', '#a1ecd4', '#5ddca9', '#2ab989', '#00b87a'],
-                dark: ['#ebe8e4', '#a1ecd4', '#5ddca9', '#2ab989', '#00b87a']
-              }}
-            />
-          </div>
-        </div>
-      </div>
+
 
       {/* Portfolio Navigation */}
       <div className="about-nav-container w-full mt-24 grid grid-cols-1 md:grid-cols-2 gap-8">
