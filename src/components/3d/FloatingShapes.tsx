@@ -184,7 +184,7 @@ export default function FloatingShapes() {
     <>
       <div
         ref={wrapperRef}
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="absolute inset-x-0 top-0 h-screen z-0 pointer-events-none"
         aria-hidden="true"
       />
 
