@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import Projects from "@/sections/Projects";
 
+const pageDescription =
+  "James Hou is an applied AI engineer sharing software, web, and accessibility projects.";
+
 export const metadata: Metadata = {
-  title: "Programming",
-  description:
-    "Programming portfolio featuring web apps, accessibility tools, and software projects by James Hou.",
+  title: "James Hou | Applied AI Engineer",
+  description: pageDescription,
+  openGraph: {
+    title: "James Hou | Applied AI Engineer",
+    description: pageDescription,
+  },
 };
 
 export default function ProgrammingPage() {

@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import Contact from "@/sections/Contact";
 
+const pageDescription =
+  "James Hou is an applied AI engineer—reach out for collaborations, projects, or opportunities.";
+
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact James Hou for collaborations, projects, or opportunities.",
+  title: "James Hou | Applied AI Engineer",
+  description: pageDescription,
+  openGraph: {
+    title: "James Hou | Applied AI Engineer",
+    description: pageDescription,
+  },
 };
 
 export default function ContactPage() {
