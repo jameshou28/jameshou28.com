@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ROLE_TITLES = ["Full Stack Developer", "Robotics Engineer", "Applied AI"];
+const ROLE_TITLES = ["Full Stack Developer", "Software & Hardware Engineer", "Applied AI"];
 const HERO_VIDEO_SRC = "/images/midScoring.mp4";
 
 /** Typewriter tagline — lower delays = faster typing */
