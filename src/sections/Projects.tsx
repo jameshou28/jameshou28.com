@@ -123,7 +123,7 @@ export default function Projects({ category }: { category: "engineering" | "prog
     : "I build software to solve real problems, including accessibility tools, websites, and apps.";
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-6 py-24 bg-[var(--bg-primary)]">
+    <section className="w-full max-w-7xl mx-auto px-6 py-24">
       <div className="mb-10 flex flex-col md:flex-row md:justify-between md:items-end border-b border-[var(--border)] pb-8 gap-6">
         <div className="max-w-2xl">
           <h2 className="text-sm uppercase tracking-wider text-[var(--text-secondary)] font-semibold mb-2">Selected Work</h2>

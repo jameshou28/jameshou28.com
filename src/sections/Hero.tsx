@@ -78,7 +78,7 @@ export default function Hero() {
     >
       <div className="sticky top-0 z-10 flex h-screen items-center justify-center px-6 md:px-12 lg:px-16 pointer-events-none">
         <div className="w-full max-w-4xl mx-auto text-center text-[var(--text-primary)]">
-          <h1 className="hero-text opacity-0 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-[family-name:var(--font-display)] tracking-tighter mb-6">
+          <h1 className="hero-text opacity-0 text-7xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-[family-name:var(--font-display)] tracking-tighter mb-6">
             James Hou
           </h1>
           <p

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-[var(--border)] bg-[var(--bg-primary)] py-12 px-6">
+    <footer className="w-full border-t border-[var(--border)] bg-[var(--bg-primary)]/60 backdrop-blur-sm py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="mb-4 md:mb-0 text-center md:text-left">
           <Link href="/" className="text-xl font-bold font-[family-name:var(--font-display)] text-[var(--text-primary)] hover:opacity-70 transition-opacity">

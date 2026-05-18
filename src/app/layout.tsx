@@ -3,6 +3,7 @@ import { Space_Grotesk, DM_Sans } from "next/font/google";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
+import SiteParticleBackground from "@/components/ui/SiteParticleBackground";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -81,9 +82,12 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <CustomCursor />
-        <Navbar />
-        {children}
-        <Footer />
+        <SiteParticleBackground />
+        <div className="relative z-10 flex min-h-screen flex-col">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
