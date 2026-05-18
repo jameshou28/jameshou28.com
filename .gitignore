@@ -56,3 +56,8 @@ next-env.d.ts
 
 # agents
 .agents/
+
+# local docs
+AGENTS.md
+CLAUDE.md
+DECISIONS.md
