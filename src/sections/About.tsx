@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const SKILLS = [
   { category: "Languages", items: "Python, C++, Java, HTML, CSS, JavaScript" },
   { category: "Frameworks", items: "Flask, Django, ThreeJS" },
-  { category: "Systems & Tools", items: "Git, Vercel, PlatformIO, ArduinoIDE, Figma" },
+  { category: "Systems & Tools", items: "Git, Vercel, PlatformIO, ArduinoIDE, Jupyter, Google Colab, Figma" },
   { category: "CAD & Design", items: "Fusion 360, Onshape, Blender" },
   { category: "Adobe Creative Suite", items: "Photoshop, Illustrator, Lightroom, Premiere Pro" },
 ];

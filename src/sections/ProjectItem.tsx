@@ -164,7 +164,7 @@ export default function ProjectItem({
           {/* Gallery Button */}
           <button
             onClick={() => setIsGalleryOpen(true)}
-            className="project-text opacity-0 mt-4 w-full py-3.5 rounded-xl bg-[var(--accent)] text-sm font-semibold text-[var(--bg-primary)] shadow-lg shadow-[var(--accent)]/20 hover:shadow-xl hover:shadow-[var(--accent)]/30 hover:-translate-y-0.5 transition-all"
+            className="project-text opacity-0 mt-4 w-full py-3.5 rounded-xl border border-[var(--accent)] bg-transparent text-sm font-semibold text-[var(--accent)] hover:bg-[var(--accent)]/10 hover:-translate-y-0.5 transition-all"
           >
             View Gallery →
           </button>
