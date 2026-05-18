@@ -88,7 +88,7 @@ export default function About() {
         </h2>
          
         <p className="about-text text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
-          From accessibility extensions to mobile apps and creative web builds, I love shipping code that helps people. I&apos;m especially interested in applied AI that makes products smarter and more helpful.
+          I've built a variety of projects, including websites, mobile apps, Chrome extensions, and applied AI tools. Outside of projects, I compete in USACO Gold. I care about writing code that solves real problems. 
         </p>
       </div>
 
