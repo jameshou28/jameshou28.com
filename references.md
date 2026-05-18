@@ -1,1 +1,0 @@
-https://github.com/Naresh-Khatri/3d-portfolio
