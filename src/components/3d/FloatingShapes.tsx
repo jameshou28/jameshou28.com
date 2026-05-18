@@ -15,17 +15,19 @@ function FloatingShape({
   geometry, 
   color,
   wireframe = false,
+  rotationSpeed = { x: 0.15, y: 0.2 },
 }: { 
-  geometry: "torus" | "icosahedron" | "octahedron" | "torusKnot" | "dodecahedron";
+  geometry: "torus" | "icosahedron" | "octahedron" | "torusKnot" | "dodecahedron" | "tetrahedron" | "sphere" | "cone";
   color: string;
   wireframe?: boolean;
+  rotationSpeed?: { x: number; y: number };
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame((_, delta) => {
     if (!meshRef.current) return;
-    meshRef.current.rotation.x += delta * 0.15;
-    meshRef.current.rotation.y += delta * 0.2;
+    meshRef.current.rotation.x += delta * rotationSpeed.x;
+    meshRef.current.rotation.y += delta * rotationSpeed.y;
   });
 
   const geometryElement = {
@@ -34,6 +36,10 @@ function FloatingShape({
     octahedron: <octahedronGeometry args={[1, 0]} />,
     torusKnot: <torusKnotGeometry args={[0.8, 0.3, 64, 16]} />,
     dodecahedron: <dodecahedronGeometry args={[1, 0]} />,
+    // New geometries
+    tetrahedron: <tetrahedronGeometry args={[1, 0]} />,           // 4-faced pyramid, sharp and minimal
+    sphere: <sphereGeometry args={[1, 12, 8]} />,                 // low-poly globe look when wireframed
+    cone: <coneGeometry args={[0.8, 1.8, 6, 1]} />,              // 6-sided cone, angular and clean
   }[geometry];
 
   return (
@@ -53,6 +59,7 @@ function FloatingShape({
 
 /* ── Shape configuration ── */
 const SHAPES = [
+  // Top left: green wireframe torus (kept from original, strong brand color)
   { 
     id: "shape-1",
     geometry: "torus" as const,
@@ -61,42 +68,63 @@ const SHAPES = [
     position: { top: "8%", left: "5%" },
     size: "clamp(100px, 12vw, 180px)",
     parallaxY: -80,
+    rotationSpeed: { x: 0.1, y: 0.18 },
   },
+  // Top right: dark wireframe sphere — looks like a globe/network node
   { 
     id: "shape-2",
-    geometry: "icosahedron" as const,
+    geometry: "sphere" as const,
     color: "#1a1a1a",
     wireframe: true,
-    position: { top: "15%", right: "8%" },
+    position: { top: "12%", right: "7%" },
     size: "clamp(80px, 10vw, 150px)",
     parallaxY: -120,
+    rotationSpeed: { x: 0.05, y: 0.12 },  // slow rotation so the grid lines read well
   },
+  // Middle left: green solid tetrahedron — sharp contrast to the rounder shapes
   { 
     id: "shape-3",
-    geometry: "octahedron" as const,
+    geometry: "tetrahedron" as const,
     color: "#00b87a",
     wireframe: false,
-    position: { top: "55%", left: "3%" },
-    size: "clamp(60px, 8vw, 120px)",
+    position: { top: "50%", left: "3%" },
+    size: "clamp(60px, 8vw, 110px)",
     parallaxY: -60,
+    rotationSpeed: { x: 0.2, y: 0.15 },
   },
+  // Middle right: gray wireframe torusKnot (kept, most complex shape on screen)
   { 
     id: "shape-4",
     geometry: "torusKnot" as const,
     color: "#6b6b6b",
     wireframe: true,
-    position: { top: "65%", right: "4%" },
+    position: { top: "60%", right: "4%" },
     size: "clamp(90px, 11vw, 160px)",
     parallaxY: -100,
+    rotationSpeed: { x: 0.12, y: 0.22 },
+    
   },
+  // Bottom left: cream wireframe cone — angular, less common, adds variety
   { 
     id: "shape-5",
-    geometry: "dodecahedron" as const,
-    color: "#e0ddd8",
-    wireframe: false,
-    position: { bottom: "10%", left: "12%" },
+    geometry: "cone" as const,
+    color: "#c8c4bc",
+    wireframe: true,
+    position: { bottom: "12%", left: "10%" },
     size: "clamp(50px, 7vw, 100px)",
     parallaxY: -40,
+    rotationSpeed: { x: 0.18, y: 0.08 },
+  },
+  // Bottom right: dark solid icosahedron — grounding element, tucked in corner
+  { 
+    id: "shape-6",
+    geometry: "icosahedron" as const,
+    color: "#2a2a2a",
+    wireframe: false,
+    position: { bottom: "18%", right: "9%" },
+    size: "clamp(45px, 6vw, 90px)",
+    parallaxY: -50,
+    rotationSpeed: { x: 0.08, y: 0.14 },
   },
 ];
 
@@ -116,7 +144,6 @@ export default function FloatingShapes() {
       const el = document.getElementById(shape.id);
       if (!el) return;
 
-      // Entrance: fade in only (no scale to avoid conflict with parallax transforms)
       gsap.fromTo(el,
         { opacity: 0 },
         { 
@@ -127,7 +154,6 @@ export default function FloatingShapes() {
         }
       );
 
-      // Parallax drift on scroll
       gsap.to(el, {
         y: shape.parallaxY,
         ease: "none",
@@ -140,7 +166,6 @@ export default function FloatingShapes() {
       });
     });
 
-    // Fade out the entire fixed layer when scrolling past the wrapper
     gsap.to(fixedLayer, {
       opacity: 0,
       ease: "none",
@@ -157,15 +182,12 @@ export default function FloatingShapes() {
 
   return (
     <>
-      {/* Invisible marker div that lives in the document flow — 
-          ScrollTrigger uses this as the trigger region */}
       <div 
         ref={wrapperRef}
         className="absolute inset-0 z-0 pointer-events-none"
         aria-hidden="true"
       />
 
-      {/* Fixed layer that stays on screen while scrolling */}
       <div
         ref={fixedLayerRef}
         className="fixed inset-0 z-[1] pointer-events-none overflow-hidden"
@@ -193,6 +215,7 @@ export default function FloatingShapes() {
                 geometry={shape.geometry}
                 color={shape.color}
                 wireframe={shape.wireframe}
+                rotationSpeed={shape.rotationSpeed}
               />
             </Canvas>
           </div>
@@ -201,4 +224,3 @@ export default function FloatingShapes() {
     </>
   );
 }
-
