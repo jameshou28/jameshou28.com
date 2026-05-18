@@ -11,12 +11,12 @@ import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── Shape component rendered inside each mini-Canvas ── */
-function FloatingShape({ 
-  geometry, 
+function FloatingShape({
+  geometry,
   color,
   wireframe = false,
   rotationSpeed = { x: 0.15, y: 0.2 },
-}: { 
+}: {
   geometry: "torus" | "icosahedron" | "octahedron" | "torusKnot" | "dodecahedron" | "tetrahedron" | "sphere" | "cone";
   color: string;
   wireframe?: boolean;
@@ -45,8 +45,8 @@ function FloatingShape({
   return (
     <mesh ref={meshRef}>
       {geometryElement}
-      <meshStandardMaterial 
-        color={color} 
+      <meshStandardMaterial
+        color={color}
         wireframe={wireframe}
         roughness={0.3}
         metalness={0.1}
@@ -60,7 +60,7 @@ function FloatingShape({
 /* ── Shape configuration ── */
 const SHAPES = [
   // Top left: green wireframe torus (kept from original, strong brand color)
-  { 
+  {
     id: "shape-1",
     geometry: "torus" as const,
     color: "#00b87a",
@@ -71,7 +71,7 @@ const SHAPES = [
     rotationSpeed: { x: 0.1, y: 0.18 },
   },
   // Top right: dark wireframe sphere — looks like a globe/network node
-  { 
+  {
     id: "shape-2",
     geometry: "sphere" as const,
     color: "#1a1a1a",
@@ -82,7 +82,7 @@ const SHAPES = [
     rotationSpeed: { x: 0.05, y: 0.12 },  // slow rotation so the grid lines read well
   },
   // Middle left: green solid tetrahedron — sharp contrast to the rounder shapes
-  { 
+  {
     id: "shape-3",
     geometry: "tetrahedron" as const,
     color: "#00b87a",
@@ -93,7 +93,7 @@ const SHAPES = [
     rotationSpeed: { x: 0.2, y: 0.15 },
   },
   // Middle right: gray wireframe torusKnot (kept, most complex shape on screen)
-  { 
+  {
     id: "shape-4",
     geometry: "torusKnot" as const,
     color: "#6b6b6b",
@@ -102,10 +102,10 @@ const SHAPES = [
     size: "clamp(90px, 11vw, 160px)",
     parallaxY: -100,
     rotationSpeed: { x: 0.12, y: 0.22 },
-    
+
   },
   // Bottom left: cream wireframe cone — angular, less common, adds variety
-  { 
+  {
     id: "shape-5",
     geometry: "cone" as const,
     color: "#c8c4bc",
@@ -116,7 +116,7 @@ const SHAPES = [
     rotationSpeed: { x: 0.18, y: 0.08 },
   },
   // Bottom right: dark solid icosahedron — grounding element, tucked in corner
-  { 
+  {
     id: "shape-6",
     geometry: "icosahedron" as const,
     color: "#2a2a2a",
@@ -146,9 +146,9 @@ export default function FloatingShapes() {
 
       gsap.fromTo(el,
         { opacity: 0 },
-        { 
-          opacity: 1, 
-          duration: 1.5, 
+        {
+          opacity: 1,
+          duration: 1.5,
           ease: "power3.out",
           delay: Math.random() * 0.6,
         }
@@ -182,7 +182,7 @@ export default function FloatingShapes() {
 
   return (
     <>
-      <div 
+      <div
         ref={wrapperRef}
         className="absolute inset-0 z-0 pointer-events-none"
         aria-hidden="true"
@@ -211,7 +211,7 @@ export default function FloatingShapes() {
             >
               <ambientLight intensity={0.8} />
               <directionalLight position={[5, 5, 5]} intensity={0.6} />
-              <FloatingShape 
+              <FloatingShape
                 geometry={shape.geometry}
                 color={shape.color}
                 wireframe={shape.wireframe}
