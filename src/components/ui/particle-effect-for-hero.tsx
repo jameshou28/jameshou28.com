@@ -63,7 +63,7 @@ export default function ParticleEffectForHero({
   const fixedRef = useRef(fixed);
   const { isMobile, isLowPower } = useDeviceCapability();
 
-  const particleDensity = isMobile ? 0.00003 : isLowPower ? 0.00005 : 0.00004;
+  const particleDensity = isMobile ? 0.00003 : isLowPower ? 0.00005 : 0.000045;
   const bgParticleDensity = isMobile ? 0.00001 : 0.000025;
 
   const densityRef = useRef({ particleDensity, bgParticleDensity });
