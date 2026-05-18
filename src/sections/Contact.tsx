@@ -38,7 +38,7 @@ export default function Contact() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="w-full max-w-6xl mx-auto px-6 py-32 bg-[var(--bg-primary)]">
+    <section ref={containerRef} className="w-full max-w-6xl mx-auto px-6 py-32">
       <div className="text-center space-y-8 mb-16 max-w-4xl mx-auto">
         <h2 className="contact-header opacity-0 text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
           Let's build something together.
