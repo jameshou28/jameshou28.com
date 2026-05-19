@@ -144,18 +144,17 @@ export default function About() {
       </div>
 
       <div className="featured-projects-container mb-16">
-        <div className="text-center space-y-3 mb-10">
-          <h3 className="text-xs uppercase tracking-[0.3em] text-[var(--text-secondary)] font-semibold">
+        <div className="mb-10 flex items-center gap-6">
+        <span className="h-px flex-1 bg-[var(--border)]" />
+        <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium">
             Featured Projects
-          </h3>
-          <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium">
-            Some of my favorite projects
-          </p>
-        </div>
+        </p>
+        <span className="h-px flex-1 bg-[var(--border)]" />
+      </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div
-            className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+            className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none"
             onMouseEnter={() => setIsWebAbleHovered(true)}
             onMouseLeave={() => setIsWebAbleHovered(false)}
             onFocus={() => setIsWebAbleHovered(true)}
@@ -186,7 +185,14 @@ export default function About() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6">
+          <div
+            className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none"
+            onMouseEnter={handleVideoPlay}
+            onMouseLeave={handleVideoReset}
+            onFocus={handleVideoPlay}
+            onBlur={handleVideoReset}
+            tabIndex={0}
+          >
             <div className="aspect-video w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-black">
               <video
                 ref={videoRef}
@@ -195,12 +201,7 @@ export default function About() {
                 muted
                 playsInline
                 preload="metadata"
-                tabIndex={0}
                 aria-label="VEX Robotics highlight video"
-                onMouseEnter={handleVideoPlay}
-                onMouseLeave={handleVideoReset}
-                onFocus={handleVideoPlay}
-                onBlur={handleVideoReset}
                 onPlay={(e) => {
                   e.currentTarget.playbackRate = FEATURED_VIDEO_PLAYBACK_RATE;
                 }}
@@ -218,9 +219,9 @@ export default function About() {
 
       <div className="mb-10 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
-        <span className="text-xs uppercase tracking-[0.3em] text-[var(--text-secondary)] font-semibold">
-          View full portfolios
-        </span>
+        <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium">
+            View full portfolios
+        </p>
         <span className="h-px flex-1 bg-[var(--border)]" />
       </div>
 
