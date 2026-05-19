@@ -16,6 +16,8 @@ const SKILLS = [
   { category: "Adobe Creative Suite", items: "Photoshop, Illustrator, Lightroom, Premiere Pro" },
 ];
 
+const FEATURED_VIDEO_PLAYBACK_RATE = 1;
+
 export default function About() {
   const containerRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -23,6 +25,12 @@ export default function About() {
   const handleVideoPlay = () => {
     const video = videoRef.current;
     if (!video) return;
+    const requestedPlaybackRate = Number(video.dataset.playbackRate ?? FEATURED_VIDEO_PLAYBACK_RATE);
+    const normalizedPlaybackRate = Number.isFinite(requestedPlaybackRate) && requestedPlaybackRate > 0
+      ? requestedPlaybackRate
+      : FEATURED_VIDEO_PLAYBACK_RATE;
+    video.playbackRate = normalizedPlaybackRate;
+    video.defaultPlaybackRate = normalizedPlaybackRate;
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {});
@@ -170,6 +178,7 @@ export default function About() {
                 muted
                 playsInline
                 preload="metadata"
+                data-playback-rate={FEATURED_VIDEO_PLAYBACK_RATE}
                 tabIndex={0}
                 aria-label="VEX Robotics highlight video"
                 onMouseEnter={handleVideoPlay}
