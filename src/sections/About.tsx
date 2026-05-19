@@ -121,7 +121,6 @@ export default function About() {
         ".featured-project-card",
         {
           y: -40,
-          opacity: 0,
           ease: "none",
           stagger: 0.1,
         },
