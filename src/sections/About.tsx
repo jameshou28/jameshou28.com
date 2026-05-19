@@ -16,7 +16,7 @@ const SKILLS = [
   { category: "Adobe Creative Suite", items: "Photoshop, Illustrator, Lightroom, Premiere Pro" },
 ];
 
-const FEATURED_VIDEO_PLAYBACK_RATE = 1;
+const FEATURED_VIDEO_PLAYBACK_RATE = 1.75;
 
 export default function About() {
   const containerRef = useRef<HTMLElement>(null);
@@ -25,12 +25,8 @@ export default function About() {
   const handleVideoPlay = () => {
     const video = videoRef.current;
     if (!video) return;
-    const requestedPlaybackRate = Number(video.dataset.playbackRate ?? FEATURED_VIDEO_PLAYBACK_RATE);
-    const normalizedPlaybackRate = Number.isFinite(requestedPlaybackRate) && requestedPlaybackRate > 0
-      ? requestedPlaybackRate
-      : FEATURED_VIDEO_PLAYBACK_RATE;
-    video.playbackRate = normalizedPlaybackRate;
-    video.defaultPlaybackRate = normalizedPlaybackRate;
+    video.playbackRate = FEATURED_VIDEO_PLAYBACK_RATE;
+    video.defaultPlaybackRate = FEATURED_VIDEO_PLAYBACK_RATE;
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {});
@@ -158,14 +154,16 @@ export default function About() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6">
-            <div
-              className="aspect-video w-full rounded-2xl border border-dashed border-[var(--border)] bg-[var(--bg-primary)]"
-              aria-hidden="true"
-            />
-            <div className="space-y-3" aria-hidden="true">
-              <div className="h-5 w-40 rounded-full bg-[var(--border)] opacity-50" />
-              <div className="h-4 w-full rounded-full bg-[var(--border)] opacity-40" />
-              <div className="h-4 w-4/5 rounded-full bg-[var(--border)] opacity-40" />
+            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-primary)] flex items-center justify-center relative">
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/30" />
+              <span className="text-xs uppercase tracking-[0.25em] text-[var(--text-secondary)] opacity-60">WebAble</span>
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-xl font-semibold text-[var(--text-primary)]">WebAble</h4>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                Chrome extension that uses DOM manipulation to allow users to better navigate any website.
+              </p>
             </div>
           </div>
 
@@ -178,13 +176,15 @@ export default function About() {
                 muted
                 playsInline
                 preload="metadata"
-                data-playback-rate={FEATURED_VIDEO_PLAYBACK_RATE}
                 tabIndex={0}
                 aria-label="VEX Robotics highlight video"
                 onMouseEnter={handleVideoPlay}
                 onMouseLeave={handleVideoReset}
                 onFocus={handleVideoPlay}
                 onBlur={handleVideoReset}
+                onPlay={(e) => {
+                  e.currentTarget.playbackRate = FEATURED_VIDEO_PLAYBACK_RATE;
+                }}
               />
             </div>
             <div className="space-y-2">
