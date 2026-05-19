@@ -68,6 +68,7 @@ const SHAPES = [
     position: { top: "8%", left: "5%" },
     size: "clamp(100px, 12vw, 180px)",
     parallaxY: -80,
+    exit: { x: "-150vw", y: "-150vh" },
     rotationSpeed: { x: 0.1, y: 0.18 },
   },
   // Top right: dark wireframe sphere — looks like a globe/network node
@@ -79,6 +80,7 @@ const SHAPES = [
     position: { top: "12%", right: "7%" },
     size: "clamp(80px, 10vw, 150px)",
     parallaxY: -120,
+    exit: { x: "150vw", y: "-150vh" },
     rotationSpeed: { x: 0.05, y: 0.12 },  // slow rotation so the grid lines read well
   },
   // Middle left: green solid tetrahedron — sharp contrast to the rounder shapes
@@ -90,6 +92,7 @@ const SHAPES = [
     position: { top: "50%", left: "3%" },
     size: "clamp(60px, 8vw, 110px)",
     parallaxY: -60,
+    exit: { x: "-150vw" },
     rotationSpeed: { x: 0.2, y: 0.15 },
   },
   // Middle right: gray wireframe torusKnot (kept, most complex shape on screen)
@@ -101,6 +104,7 @@ const SHAPES = [
     position: { top: "60%", right: "4%" },
     size: "clamp(90px, 11vw, 160px)",
     parallaxY: -100,
+    exit: { x: "150vw" },
     rotationSpeed: { x: 0.12, y: 0.22 },
 
   },
@@ -113,6 +117,7 @@ const SHAPES = [
     position: { bottom: "12%", left: "10%" },
     size: "clamp(50px, 7vw, 100px)",
     parallaxY: -40,
+    exit: { y: "150vh" },
     rotationSpeed: { x: 0.18, y: 0.08 },
   },
   // Bottom right: dark solid icosahedron — grounding element, tucked in corner
@@ -124,6 +129,7 @@ const SHAPES = [
     position: { bottom: "18%", right: "9%" },
     size: "clamp(45px, 6vw, 90px)",
     parallaxY: -50,
+    exit: { x: "150vw", y: "150vh" },
     rotationSpeed: { x: 0.08, y: 0.14 },
   },
 ];
@@ -137,8 +143,8 @@ export default function FloatingShapes() {
   useGSAP(() => {
     if (isMobile) return;
 
-    const fixedLayer = fixedLayerRef.current;
-    if (!fixedLayer) return;
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
 
     SHAPES.forEach((shape) => {
       const el = document.getElementById(shape.id);
@@ -158,24 +164,32 @@ export default function FloatingShapes() {
         y: shape.parallaxY,
         ease: "none",
         scrollTrigger: {
-          trigger: wrapperRef.current,
+          trigger: wrapper,
           start: "top top",
           end: "bottom top",
           scrub: 1,
         },
       });
+
+      const exitAnimation: gsap.TweenVars = {
+        ease: "none",
+        overwrite: "auto",
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "bottom center",
+          end: "bottom top",
+          scrub: true,
+        },
+      };
+
+      if (shape.exit?.x) exitAnimation.x = shape.exit.x;
+      if (shape.exit?.y) exitAnimation.y = shape.exit.y;
+
+      if (shape.exit?.x || shape.exit?.y) {
+        gsap.to(el, exitAnimation);
+      }
     });
 
-    gsap.to(fixedLayer, {
-      opacity: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: wrapperRef.current,
-        start: "bottom center",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
   }, { dependencies: [isMobile] });
 
   if (isMobile) return null;
