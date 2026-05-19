@@ -154,9 +154,6 @@ export default function Projects({ category }: { category: "engineering" | "prog
                 jameshou28
               </a>
             </div>
-            <p className="mt-3 text-base text-[var(--text-secondary)] leading-relaxed">
-              A quick snapshot of recent contributions, highlighting the pace of experimentation and iteration behind my software projects.
-            </p>
           </div>
           <GithubGraph />
         </div>
