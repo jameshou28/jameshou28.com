@@ -99,6 +99,34 @@ export default function About() {
         }
       }
     );
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".featured-projects-container",
+        start: "top 60%",
+        end: "bottom top",
+        scrub: true,
+      },
+    })
+      .to(
+        ".featured-projects-heading",
+        {
+          y: -20,
+          opacity: 0,
+          ease: "none",
+        },
+        0
+      )
+      .to(
+        ".featured-project-card",
+        {
+          y: -40,
+          opacity: 0,
+          ease: "none",
+          stagger: 0.1,
+        },
+        0
+      );
   }, { scope: containerRef });
 
   return (
@@ -144,7 +172,7 @@ export default function About() {
       </div>
 
       <div className="featured-projects-container mb-16">
-        <div className="mb-10 flex items-center gap-6">
+        <div className="featured-projects-heading mb-10 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
         <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium">
             Featured Projects
@@ -154,7 +182,7 @@ export default function About() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div
-            className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none"
+            className="featured-project-card rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none"
             onMouseEnter={() => setIsWebAbleHovered(true)}
             onMouseLeave={() => setIsWebAbleHovered(false)}
             onFocus={() => setIsWebAbleHovered(true)}
@@ -186,7 +214,7 @@ export default function About() {
           </div>
 
           <div
-            className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none"
+            className="featured-project-card rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none"
             onMouseEnter={handleVideoPlay}
             onMouseLeave={handleVideoReset}
             onFocus={handleVideoPlay}
