@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,8 +16,30 @@ const SKILLS = [
   { category: "Adobe Creative Suite", items: "Photoshop, Illustrator, Lightroom, Premiere Pro" },
 ];
 
+const FEATURED_VIDEO_PLAYBACK_RATE = 1.75;
+
 export default function About() {
   const containerRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isWebAbleHovered, setIsWebAbleHovered] = useState(false);
+
+  const handleVideoPlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.playbackRate = FEATURED_VIDEO_PLAYBACK_RATE;
+    video.defaultPlaybackRate = FEATURED_VIDEO_PLAYBACK_RATE;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+  };
+
+  const handleVideoReset = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.pause();
+    video.currentTime = 0;
+  };
 
   useGSAP(() => {
     // Narrative text
@@ -121,7 +143,87 @@ export default function About() {
         </div>
       </div>
 
+      <div className="featured-projects-container mb-16">
+        <div className="mb-10 flex items-center gap-6">
+        <span className="h-px flex-1 bg-[var(--border)]" />
+        <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium">
+            Featured Projects
+        </p>
+        <span className="h-px flex-1 bg-[var(--border)]" />
+      </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div
+            className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none"
+            onMouseEnter={() => setIsWebAbleHovered(true)}
+            onMouseLeave={() => setIsWebAbleHovered(false)}
+            onFocus={() => setIsWebAbleHovered(true)}
+            onBlur={() => setIsWebAbleHovered(false)}
+            tabIndex={0}
+          >
+            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-black relative">
+              <img
+                src="/images/webAble/featured/before.png"
+                alt="WebAble extension before DOM manipulation"
+                className={`absolute inset-0 h-full w-full object-cover object-top ${
+                  isWebAbleHovered ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <img
+                src="/images/webAble/featured/after.png"
+                alt="WebAble extension after DOM manipulation"
+                className={`absolute inset-0 h-full w-full object-cover object-top ${
+                  isWebAbleHovered ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-xl font-semibold text-[var(--text-primary)]">WebAble</h4>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                Chrome extension that uses DOM manipulation to allow users to better navigate any website.
+              </p>
+            </div>
+          </div>
+
+          <div
+            className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none"
+            onMouseEnter={handleVideoPlay}
+            onMouseLeave={handleVideoReset}
+            onFocus={handleVideoPlay}
+            onBlur={handleVideoReset}
+            tabIndex={0}
+          >
+            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-black">
+              <video
+                ref={videoRef}
+                className="h-full w-full object-cover"
+                src="/images/midScoring.mp4"
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="VEX Robotics highlight video"
+                onPlay={(e) => {
+                  e.currentTarget.playbackRate = FEATURED_VIDEO_PLAYBACK_RATE;
+                }}
+              />
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-xl font-semibold text-[var(--text-primary)]">VEX Robotics</h4>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                Design, build, and code World-Championship VEX Robotics Robots
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-10 flex items-center gap-6">
+        <span className="h-px flex-1 bg-[var(--border)]" />
+        <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium">
+            View full portfolios
+        </p>
+        <span className="h-px flex-1 bg-[var(--border)]" />
+      </div>
 
       {/* Portfolio Navigation */}
       <div className="about-nav-container w-full mt-24 grid grid-cols-1 md:grid-cols-2 gap-8">
