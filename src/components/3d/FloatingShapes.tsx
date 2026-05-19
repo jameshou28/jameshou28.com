@@ -68,6 +68,7 @@ const SHAPES = [
     position: { top: "8%", left: "5%" },
     size: "clamp(100px, 12vw, 180px)",
     parallaxY: -80,
+    exit: { x: "-150vw", y: "-150vh" },
     rotationSpeed: { x: 0.1, y: 0.18 },
   },
   // Top right: dark wireframe sphere — looks like a globe/network node
@@ -79,6 +80,7 @@ const SHAPES = [
     position: { top: "12%", right: "7%" },
     size: "clamp(80px, 10vw, 150px)",
     parallaxY: -120,
+    exit: { x: "150vw", y: "-150vh" },
     rotationSpeed: { x: 0.05, y: 0.12 },  // slow rotation so the grid lines read well
   },
   // Middle left: green solid tetrahedron — sharp contrast to the rounder shapes
@@ -90,6 +92,7 @@ const SHAPES = [
     position: { top: "50%", left: "3%" },
     size: "clamp(60px, 8vw, 110px)",
     parallaxY: -60,
+    exit: { x: "-150vw" },
     rotationSpeed: { x: 0.2, y: 0.15 },
   },
   // Middle right: gray wireframe torusKnot (kept, most complex shape on screen)
@@ -101,6 +104,7 @@ const SHAPES = [
     position: { top: "60%", right: "4%" },
     size: "clamp(90px, 11vw, 160px)",
     parallaxY: -100,
+    exit: { x: "150vw" },
     rotationSpeed: { x: 0.12, y: 0.22 },
 
   },
@@ -113,6 +117,7 @@ const SHAPES = [
     position: { bottom: "12%", left: "10%" },
     size: "clamp(50px, 7vw, 100px)",
     parallaxY: -40,
+    exit: { y: "150vh" },
     rotationSpeed: { x: 0.18, y: 0.08 },
   },
   // Bottom right: dark solid icosahedron — grounding element, tucked in corner
@@ -124,6 +129,7 @@ const SHAPES = [
     position: { bottom: "18%", right: "9%" },
     size: "clamp(45px, 6vw, 90px)",
     parallaxY: -50,
+    exit: { x: "150vw", y: "150vh" },
     rotationSpeed: { x: 0.08, y: 0.14 },
   },
 ];
@@ -137,13 +143,14 @@ export default function FloatingShapes() {
   useGSAP(() => {
     if (isMobile) return;
 
-    const fixedLayer = fixedLayerRef.current;
-    if (!fixedLayer) return;
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
 
     SHAPES.forEach((shape) => {
       const el = document.getElementById(shape.id);
       if (!el) return;
 
+      // 1. Entrance animation (fade in on mount)
       gsap.fromTo(el,
         { opacity: 0 },
         {
@@ -154,28 +161,43 @@ export default function FloatingShapes() {
         }
       );
 
-      gsap.to(el, {
-        y: shape.parallaxY,
-        ease: "none",
+      // 2. Unified ScrollTrigger timeline for scroll-driven motion (Parallax -> Exit/Fade)
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: wrapperRef.current,
+          trigger: wrapper,
           start: "top top",
           end: "bottom top",
           scrub: 1,
         },
       });
+
+      // Segment 1 (0.0 to 0.2): Gentle parallax before exit starts
+      tl.to(el, {
+        y: shape.parallaxY * 0.2,
+        ease: "none",
+        duration: 0.2,
+      }, 0);
+
+      // Segment 2 (0.2 to 1.0): Smooth exit and fade-out
+      const exitProps: gsap.TweenVars = {
+        opacity: 0,
+        ease: "power1.inOut",
+        duration: 0.8,
+      };
+
+      if (shape.exit?.x) {
+        exitProps.x = shape.exit.x;
+      }
+      if (shape.exit?.y) {
+        exitProps.y = shape.exit.y;
+      } else {
+        // If there's no exit y target, continue the parallax to its full value
+        exitProps.y = shape.parallaxY;
+      }
+
+      tl.to(el, exitProps, 0.2);
     });
 
-    gsap.to(fixedLayer, {
-      opacity: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: wrapperRef.current,
-        start: "bottom center",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
   }, { dependencies: [isMobile] });
 
   if (isMobile) return null;
@@ -184,7 +206,7 @@ export default function FloatingShapes() {
     <>
       <div
         ref={wrapperRef}
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="absolute inset-x-0 top-0 h-screen z-0 pointer-events-none"
         aria-hidden="true"
       />
 
