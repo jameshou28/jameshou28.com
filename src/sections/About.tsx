@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -21,6 +21,7 @@ const FEATURED_VIDEO_PLAYBACK_RATE = 1.75;
 export default function About() {
   const containerRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isWebAbleHovered, setIsWebAbleHovered] = useState(false);
 
   const handleVideoPlay = () => {
     const video = videoRef.current;
@@ -153,11 +154,29 @@ export default function About() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6">
-            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-primary)] flex items-center justify-center relative">
-              <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
-              <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/30" />
-              <span className="text-xs uppercase tracking-[0.25em] text-[var(--text-secondary)] opacity-60">WebAble</span>
+          <div
+            className="rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 space-y-6 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+            onMouseEnter={() => setIsWebAbleHovered(true)}
+            onMouseLeave={() => setIsWebAbleHovered(false)}
+            onFocus={() => setIsWebAbleHovered(true)}
+            onBlur={() => setIsWebAbleHovered(false)}
+            tabIndex={0}
+          >
+            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-black relative">
+              <img
+                src="/images/webAble/featured/before.png"
+                alt="WebAble extension before DOM manipulation"
+                className={`absolute inset-0 h-full w-full object-cover object-top ${
+                  isWebAbleHovered ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <img
+                src="/images/webAble/featured/after.png"
+                alt="WebAble extension after DOM manipulation"
+                className={`absolute inset-0 h-full w-full object-cover object-top ${
+                  isWebAbleHovered ? "opacity-100" : "opacity-0"
+                }`}
+              />
             </div>
             <div className="space-y-2">
               <h4 className="text-xl font-semibold text-[var(--text-primary)]">WebAble</h4>
