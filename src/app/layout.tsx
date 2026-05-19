@@ -21,20 +21,20 @@ const siteUrl =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
 const siteDescription =
-  "James Hou is an applied AI engineer building software, AI, and robotics projects.";
+  "James Hou is a high school developer building mobile apps, websites, AI projects, and more.";
 
 const personStructuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "James Hou",
   url: siteUrl,
-  jobTitle: "Applied AI Engineer",
+  jobTitle: "High School Developer",
   sameAs: ["https://github.com/jameshou28", "https://www.linkedin.com/in/jameshou28/"],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "James Hou | Applied AI Engineer",
+  title: "James Hou | High School Developer",
   description: siteDescription,
   applicationName: "James Hou Portfolio",
   keywords: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "James Hou | Applied AI Engineer",
+    title: "James Hou | High School Developer",
     description: siteDescription,
     url: "/",
     siteName: "James Hou",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "James Hou | Applied AI Engineer",
+    title: "James Hou | High School Developer",
     description: siteDescription,
     images: ["/images/profile.jpg"],
   },
