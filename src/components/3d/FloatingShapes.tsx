@@ -150,6 +150,7 @@ export default function FloatingShapes() {
       const el = document.getElementById(shape.id);
       if (!el) return;
 
+      // 1. Entrance animation (fade in on mount)
       gsap.fromTo(el,
         { opacity: 0 },
         {
@@ -160,9 +161,8 @@ export default function FloatingShapes() {
         }
       );
 
-      gsap.to(el, {
-        y: shape.parallaxY,
-        ease: "none",
+      // 2. Unified ScrollTrigger timeline for scroll-driven motion (Parallax -> Exit/Fade)
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
           start: "top top",
@@ -171,23 +171,31 @@ export default function FloatingShapes() {
         },
       });
 
-      const exitAnimation: gsap.TweenVars = {
+      // Segment 1 (0.0 to 0.2): Gentle parallax before exit starts
+      tl.to(el, {
+        y: shape.parallaxY * 0.2,
         ease: "none",
-        overwrite: "auto",
-        scrollTrigger: {
-          trigger: wrapper,
-          start: "bottom center",
-          end: "bottom top",
-          scrub: true,
-        },
+        duration: 0.2,
+      }, 0);
+
+      // Segment 2 (0.2 to 1.0): Smooth exit and fade-out
+      const exitProps: gsap.TweenVars = {
+        opacity: 0,
+        ease: "power1.inOut",
+        duration: 0.8,
       };
 
-      if (shape.exit?.x) exitAnimation.x = shape.exit.x;
-      if (shape.exit?.y) exitAnimation.y = shape.exit.y;
-
-      if (shape.exit?.x || shape.exit?.y) {
-        gsap.to(el, exitAnimation);
+      if (shape.exit?.x) {
+        exitProps.x = shape.exit.x;
       }
+      if (shape.exit?.y) {
+        exitProps.y = shape.exit.y;
+      } else {
+        // If there's no exit y target, continue the parallax to its full value
+        exitProps.y = shape.parallaxY;
+      }
+
+      tl.to(el, exitProps, 0.2);
     });
 
   }, { dependencies: [isMobile] });
