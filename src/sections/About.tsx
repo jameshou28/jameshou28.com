@@ -9,7 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const SKILLS = [
-  { category: "Languages", items: "Python, C++, Java, HTML, CSS, JavaScript" },
+  { category: "Languages", items: "Python, C++, Java, HTML, CSS, JavaScript, Swift" },
   { category: "Frameworks", items: "Flask, Django, ThreeJS" },
   { category: "Systems & Tools", items: "Git, Vercel, PlatformIO, ArduinoIDE, Jupyter, Google Colab, Figma" },
   { category: "CAD & Design", items: "Fusion 360, Onshape, Blender" },
