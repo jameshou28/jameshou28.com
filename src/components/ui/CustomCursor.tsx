@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 
 export default function CustomCursor() {
   const { isMobile } = useDeviceCapability();
+  const pathname = usePathname();
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
 
@@ -95,6 +97,20 @@ export default function CustomCursor() {
       });
     };
   }, [isMobile]);
+
+  useEffect(() => {
+    if (isMobile) return;
+    const cursor = cursorRef.current;
+    const follower = followerRef.current;
+    if (!cursor || !follower) return;
+
+    gsap.set(cursor, { scale: 1, opacity: 1 });
+    gsap.set(follower, {
+      scale: 1,
+      backgroundColor: "transparent",
+      borderColor: "var(--text-secondary)",
+    });
+  }, [isMobile, pathname]);
 
   if (isMobile) return null;
 
