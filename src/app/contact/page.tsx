@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Contact from "@/sections/Contact";
 
 const pageDescription =
-  "James Hou is a high school developer building mobile apps, websites, AI projects, and more.";
+  "Get in touch with James Hou. Connect via email, LinkedIn, or GitHub for collaborations and opportunities.";
 
 export const metadata: Metadata = {
-  title: "James Hou | High School Developer",
+  title: "James Hou | Contact",
   description: pageDescription,
   openGraph: {
-    title: "James Hou | High School Developer",
+    title: "James Hou | Contact",
     description: pageDescription,
   },
 };

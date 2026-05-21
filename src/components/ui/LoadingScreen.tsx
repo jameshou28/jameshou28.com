@@ -46,10 +46,31 @@ const loadImageAsset = (asset: string) =>
 const loadVideoAsset = (asset: string) =>
   new Promise<void>((resolve) => {
     const video = document.createElement("video");
-    const finish = () => resolve();
+    
+    // Safety timeout: resolve if loading takes longer than 2.5 seconds
+    const timeoutId = setTimeout(() => {
+      cleanup();
+      resolve();
+    }, 2500);
+
+    const cleanup = () => {
+      clearTimeout(timeoutId);
+      video.onloadeddata = null;
+      video.onerror = null;
+      video.onsuspend = null;
+      video.onstalled = null;
+    };
+
+    const finish = () => {
+      cleanup();
+      resolve();
+    };
+
     video.preload = "auto";
     video.onloadeddata = finish;
     video.onerror = finish;
+    video.onsuspend = finish;
+    video.onstalled = finish;
     video.src = asset;
   });
 
@@ -67,7 +88,11 @@ const loadFonts = () => {
     return Promise.resolve();
   }
 
-  return document.fonts.ready.catch(() => undefined);
+  // Safety timeout of 2 seconds for font loading
+  return Promise.race([
+    document.fonts.ready,
+    new Promise((resolve) => setTimeout(resolve, 2000))
+  ]).catch(() => undefined);
 };
 
 const loadAsset = (asset: string) => {
@@ -112,7 +137,10 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
       })
     );
 
-    Promise.all([minimumDelay, fontReady, ...assetPromises]).then(() => {
+    const preloadPromise = Promise.all([minimumDelay, fontReady, ...assetPromises]);
+    const failsafePromise = new Promise((resolve) => setTimeout(resolve, 6000));
+
+    Promise.race([preloadPromise, failsafePromise]).then(() => {
       if (!isMounted) return;
       setIsReady(true);
     });

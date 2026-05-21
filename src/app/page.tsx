@@ -5,7 +5,7 @@ import LoadingScreen from "@/components/ui/LoadingScreen";
 import FloatingShapes from "@/components/3d/FloatingShapes";
 
 const pageDescription =
-  "James Hou is a high school developer building mobile apps, websites, AI projects, and more.";
+  "Explore the portfolio of James Hou, a high school developer at Newark Academy building mobile apps, web applications, AI projects, and physical engineering.";
 
 export const metadata: Metadata = {
   title: "James Hou | High School Developer",

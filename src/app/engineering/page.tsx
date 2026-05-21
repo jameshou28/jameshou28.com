@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Projects from "@/sections/Projects";
 
 const pageDescription =
-  "James Hou is a high school developer building mobile apps, websites, AI projects, and more.";
+  "Discover the physical engineering, hardware projects, and robotics built by James Hou.";
 
 export const metadata: Metadata = {
-  title: "James Hou | High School Developer",
+  title: "James Hou | Engineering Projects",
   description: pageDescription,
   openGraph: {
-    title: "James Hou | High School Developer",
+    title: "James Hou | Engineering Projects",
     description: pageDescription,
   },
 };

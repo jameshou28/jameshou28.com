@@ -18,7 +18,7 @@ const dmSans = DM_Sans({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  (process.env.NODE_ENV === "production" ? "https://jameshou28.com" : "http://localhost:3000");
 
 const siteDescription =
   "James Hou is a high school developer building mobile apps, websites, AI projects, and more.";
