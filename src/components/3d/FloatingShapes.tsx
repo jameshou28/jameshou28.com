@@ -144,13 +144,20 @@ export default function FloatingShapes() {
     if (isMobile) return;
 
     const wrapper = wrapperRef.current;
-    if (!wrapper) return;
+    const layer = fixedLayerRef.current;
+    if (!wrapper || !layer) return;
 
-    SHAPES.forEach((shape) => {
-      const el = document.getElementById(shape.id);
+    // Collect outer elements (managed by ScrollTrigger) and inner elements (managed by entrance animation)
+    const outerEls = SHAPES.map((s) => layer.querySelector<HTMLElement>(`#${s.id}`));
+    const entranceEls = SHAPES.map((s) => layer.querySelector<HTMLElement>(`#${s.id} .shape-entrance`));
+
+    // Reset inline styles from any previous mount cycles
+    outerEls.forEach((el) => el && gsap.set(el, { clearProps: "opacity,x,y,transform" }));
+    entranceEls.forEach((el) => el && gsap.set(el, { clearProps: "opacity" }));
+
+    // 1. Entrance animation on the inner containers
+    entranceEls.forEach((el) => {
       if (!el) return;
-
-      // 1. Entrance animation (fade in on mount)
       gsap.fromTo(el,
         { opacity: 0 },
         {
@@ -160,8 +167,13 @@ export default function FloatingShapes() {
           delay: Math.random() * 0.6,
         }
       );
+    });
 
-      // 2. Unified ScrollTrigger timeline for scroll-driven motion (Parallax -> Exit/Fade)
+    // 2. ScrollTrigger setup on the outer containers immediately.
+    SHAPES.forEach((shape, i) => {
+      const el = outerEls[i];
+      if (!el) return;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
@@ -191,14 +203,16 @@ export default function FloatingShapes() {
       if (shape.exit?.y) {
         exitProps.y = shape.exit.y;
       } else {
-        // If there's no exit y target, continue the parallax to its full value
         exitProps.y = shape.parallaxY;
       }
 
       tl.to(el, exitProps, 0.2);
     });
 
-  }, { dependencies: [isMobile] });
+    // Refresh ScrollTrigger calculations now that DOM is set up
+    ScrollTrigger.refresh();
+
+  }, { scope: fixedLayerRef, dependencies: [isMobile] });
 
   if (isMobile) return null;
 
@@ -219,27 +233,29 @@ export default function FloatingShapes() {
           <div
             key={shape.id}
             id={shape.id}
-            className="absolute opacity-0"
+            className="absolute"
             style={{
               ...shape.position,
               width: shape.size,
               height: shape.size,
             }}
           >
-            <Canvas
-              dpr={[1, 1.5]}
-              gl={{ antialias: false, alpha: true }}
-              camera={{ position: [0, 0, 3], fov: 50 }}
-            >
-              <ambientLight intensity={0.8} />
-              <directionalLight position={[5, 5, 5]} intensity={0.6} />
-              <FloatingShape
-                geometry={shape.geometry}
-                color={shape.color}
-                wireframe={shape.wireframe}
-                rotationSpeed={shape.rotationSpeed}
-              />
-            </Canvas>
+            <div className="w-full h-full opacity-0 shape-entrance">
+              <Canvas
+                dpr={[1, 1.5]}
+                gl={{ antialias: false, alpha: true }}
+                camera={{ position: [0, 0, 3], fov: 50 }}
+              >
+                <ambientLight intensity={0.8} />
+                <directionalLight position={[5, 5, 5]} intensity={0.6} />
+                <FloatingShape
+                  geometry={shape.geometry}
+                  color={shape.color}
+                  wireframe={shape.wireframe}
+                  rotationSpeed={shape.rotationSpeed}
+                />
+              </Canvas>
+            </div>
           </div>
         ))}
       </div>
