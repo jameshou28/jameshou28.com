@@ -256,7 +256,7 @@ export default function About() {
       <div className="about-nav-container w-full mt-24 grid grid-cols-1 md:grid-cols-2 gap-8">
         <Link 
           href="/programming"
-          className="about-nav group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-12 text-center hover:border-[var(--text-primary)] transition-all duration-300 cursor-pointer"
+          className="about-nav group relative overflow-hidden rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border)] p-12 text-center hover:border-[var(--text-primary)] transition-colors duration-300 cursor-pointer"
         >
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
           <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-4">Software & Web</h3>
@@ -265,7 +265,7 @@ export default function About() {
         
         <Link 
           href="/engineering"
-          className="about-nav group relative overflow-hidden rounded-3xl bg-[var(--text-primary)] border border-[var(--text-primary)] p-12 text-center hover:bg-transparent transition-all duration-300 cursor-pointer"
+          className="about-nav group relative overflow-hidden rounded-3xl bg-[var(--text-primary)] border border-[var(--text-primary)] p-12 text-center hover:bg-transparent transition-colors duration-300 cursor-pointer"
         >
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
           <h3 className="text-sm uppercase tracking-wider text-[var(--bg-subtle)] group-hover:text-[var(--accent)] font-semibold mb-4 transition-colors">Hardware & CAD</h3>
