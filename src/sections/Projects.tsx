@@ -120,7 +120,7 @@ export default function Projects({ category }: { category: "engineering" | "prog
 
   const description = category === "engineering"
     ? "I design and build physical systems, from competition robots to wearable hardware. Most projects involve both CAD and embedded programming."
-    : "I build software to solve real problems, including accessibility tools, websites, and apps.";
+    : "I build software to solve real problems, including accessibility tools, websites, and apps. I also do competitive programming and compete in USACO Gold.";
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 py-24">

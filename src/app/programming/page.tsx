@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Projects from "@/sections/Projects";
 
 const pageDescription =
-  "Browse the programming projects, web applications, AI tools, and software developed by James Hou.";
+  "Browse the programming projects, web applications, AI tools, and software developed by James Hou, a high school software & hardware engineer.";
 
 export const metadata: Metadata = {
   title: "James Hou | Programming Projects",

@@ -77,7 +77,7 @@ const SHAPES = [
     geometry: "sphere" as const,
     color: "#1a1a1a",
     wireframe: true,
-    position: { top: "12%", right: "7%" },
+    position: { top: "10%", right: "6%" },
     size: "clamp(80px, 10vw, 150px)",
     parallaxY: -120,
     exit: { x: "150vw", y: "-150vh" },
@@ -101,7 +101,7 @@ const SHAPES = [
     geometry: "torusKnot" as const,
     color: "#6b6b6b",
     wireframe: true,
-    position: { top: "60%", right: "4%" },
+    position: { top: "45%", right: "2%" },
     size: "clamp(90px, 11vw, 160px)",
     parallaxY: -100,
     exit: { x: "150vw" },
@@ -126,7 +126,7 @@ const SHAPES = [
     geometry: "icosahedron" as const,
     color: "#2a2a2a",
     wireframe: false,
-    position: { bottom: "18%", right: "9%" },
+    position: { bottom: "10%", right: "8%" },
     size: "clamp(45px, 6vw, 90px)",
     parallaxY: -50,
     exit: { x: "150vw", y: "150vh" },
@@ -244,7 +244,7 @@ export default function FloatingShapes() {
               <Canvas
                 dpr={[1, 1.5]}
                 gl={{ antialias: false, alpha: true }}
-                camera={{ position: [0, 0, 3], fov: 50 }}
+                camera={{ position: [0, 0, 4.2], fov: 50 }}
               >
                 <ambientLight intensity={0.8} />
                 <directionalLight position={[5, 5, 5]} intensity={0.6} />

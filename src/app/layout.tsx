@@ -21,20 +21,20 @@ const siteUrl =
   (process.env.NODE_ENV === "production" ? "https://jameshou28.com" : "http://localhost:3000");
 
 const siteDescription =
-  "James Hou is a high school developer building mobile apps, websites, AI projects, and more.";
+  "James Hou is a high school software & hardware engineer building mobile apps, websites, AI projects, and more.";
 
 const personStructuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "James Hou",
   url: siteUrl,
-  jobTitle: "High School Developer",
+  jobTitle: "Software & Hardware Engineer",
   sameAs: ["https://github.com/jameshou28", "https://www.linkedin.com/in/jameshou28/"],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "James Hou | High School Developer",
+  title: "James Hou | Software & Hardware Engineer",
   description: siteDescription,
   applicationName: "James Hou Portfolio",
   keywords: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "James Hou | High School Developer",
+    title: "James Hou | Software & Hardware Engineer",
     description: siteDescription,
     url: "/",
     siteName: "James Hou",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "James Hou | High School Developer",
+    title: "James Hou | Software & Hardware Engineer",
     description: siteDescription,
     images: ["/images/profile.jpg"],
   },
