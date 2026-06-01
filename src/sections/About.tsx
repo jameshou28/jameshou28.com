@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Experience from "@/sections/Experience";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -243,6 +244,8 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      <Experience />
 
       <div className="mb-10 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
