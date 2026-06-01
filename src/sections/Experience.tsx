@@ -7,79 +7,72 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EXPERIENCES = [
-  {
-    role: "Software Engineering Intern",
-    org: "Luminerra",
-    date: "Dec 2025 – May 2026",
-    description:
-      "Built internal admin platform for managing user access and audit workflows. Implemented multi-agent orchestration system that analyzes security, compliance, and operational clauses in real estate acquisition documents.",
-    tags: ["Python", "Multi-Agent AI", "Admin Systems"],
-    link: null,
-  },
-  {
-    role: "Co-Founder & CTO",
-    org: "QPin",
-    date: "July 2025 – Present",
-    description:
-      "Co-founded hardware startup building a wearable digital pin for advocacy and self-expression. Designed 3D-printed case in Fusion360, programmed the microcontroller in Python, and shipped a companion iOS app.",
-    tags: ["Fusion360", "Python", "Swift", "ESP32"],
-    link: "https://www.wearqpin.com",
-  },
-  {
-    role: "Lead Programmer & Builder",
-    org: "Robot Revolution — VEX Robotics 4610Z",
-    date: "Sept 2019 – Present",
-    description:
-      "Lead programmer on a VEX World Championship team. Ranked 18th of 6,800+ teams globally in the 2026 Skills Challenge. World Semifinalist (2025). Multiple state and world-level awards.",
-    tags: ["C++", "Motion Control", "LiDAR", "Onshape"],
-    link: "https://events.vex.com/teams/v5rc/4610Z",
-  },
-  {
-    role: "Fellow",
-    org: "Computer Engineering for Good — NYU",
-    date: "June – July 2025",
-    description:
-      "Designed and built a low-cost weather monitoring network using LoRa microcontrollers, GPS, and environmental sensors. Deployed 12 stations to map air quality data across a 6-mile radius.",
-    tags: ["LoRa", "UART", "Embedded Systems", "C++"],
-    link: null,
-  },
-  {
-    role: "Outreach Manager",
-    org: "Techshare Project",
-    date: "Aug 2025 – Present",
-    description:
-      "Build partnerships and create social media content for an international 501(c)(3) nonprofit promoting technology access and STEM education. Developing the Eduquality 2.0 mobile app.",
-    tags: ["Nonprofit", "Mobile Dev", "STEM Outreach"],
-    link: null,
-  },
+type Category = "Internship" | "Competition" | "Leadership" | "Project";
+
+interface Experience {
+  role: string;
+  org: string;
+  date: string;
+  category: Category;
+  link?: string;
+}
+
+const CATEGORY_COLORS: Record<Category, string> = {
+  Internship: "text-rose-400 border-rose-400/40 bg-rose-400/8",
+  Project:   "text-sky-400 border-sky-400/40 bg-sky-400/8",
+  Leadership: "text-emerald-400 border-emerald-400/40 bg-emerald-400/8",
+  Competition:    "text-violet-400 border-violet-400/40 bg-violet-400/8",
+};
+
+// const CATEGORY_COLORS: Record<Category, string> = {
+//   Internship: "text-amber-400 border-amber-400/40 bg-amber-400/8",      // Warm corporate accent
+//   Project:    "text-cyan-400 border-cyan-400/40 bg-cyan-400/8",        // Technical builder blue
+//   Leadership: "text-rose-400 border-rose-400/40 bg-rose-400/8",        // Bold authority red/pink
+//   Competition: "text-fuchsia-400 border-fuchsia-400/40 bg-fuchsia-400/8", // High-energy purple
+// };
+
+const EXPERIENCES: Experience[] = [
+  { role: "Software Engineering Intern",  org: "Luminerra",                   date: "Dec 2025 – May 2026",  category: "Internship", link: "https://luminerra.net/" },
+  { role: "Co-Founder & CTO",             org: "QPin",                        date: "Jul 2025 – Present",   category: "Leadership",   link: "https://www.wearqpin.com" },
+  { role: "Programmer & Builder",    org: "VEX Robotics 4610Z",          date: "Sep 2019 – Present",   category: "Competition", link: "https://events.vex.com/teams/v5rc/4610Z" },
+  { role: "Outreach Manager",             org: "Techshare Project",           date: "Aug 2025 – Present",   category: "Leadership", link: "https://www.techshareproject.org/"},
 ];
+
+function ArrowIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      <polyline points="15 3 21 3 21 9" />
+      <line x1="10" y1="14" x2="21" y2="3" />
+    </svg>
+  );
+}
 
 export default function Experience() {
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
     gsap.from(".experience-heading", {
-      y: 30,
+      y: 20,
       opacity: 0,
-      duration: 1,
+      duration: 0.9,
       ease: "power3.out",
       scrollTrigger: {
         trigger: ".experience-heading",
-        start: "top 85%",
+        start: "top 88%",
         once: true,
       },
     });
 
-    gsap.from(".experience-card", {
-      y: 40,
+    gsap.from(".exp-row", {
+      x: -12,
       opacity: 0,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: "power3.out",
+      duration: 0.55,
+      stagger: 0.07,
+      ease: "power2.out",
       scrollTrigger: {
-        trigger: ".experience-list",
-        start: "top 80%",
+        trigger: ".experience-table",
+        start: "top 82%",
         once: true,
       },
     });
@@ -90,8 +83,8 @@ export default function Experience() {
       ref={containerRef}
       className="relative z-[2] w-full max-w-6xl mx-auto px-6 pb-24"
     >
-      {/* Section header — matches the "Featured Projects" divider pattern */}
-      <div className="experience-heading mb-10 flex items-center gap-6">
+      {/* Section divider header */}
+      <div className="experience-heading mb-8 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
         <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium whitespace-nowrap">
           Experience
@@ -99,78 +92,75 @@ export default function Experience() {
         <span className="h-px flex-1 bg-[var(--border)]" />
       </div>
 
-      {/* Card list */}
-      <div className="experience-list flex flex-col gap-4">
-        {EXPERIENCES.map((exp, idx) => (
-          <div
-            key={idx}
-            className="experience-card group relative rounded-3xl border border-[var(--border)] bg-[var(--bg-subtle)] p-6 md:p-8 transition-colors duration-300 hover:border-[var(--text-primary)]"
-          >
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              {/* Left: role + org + description */}
-              <div className="flex-1 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-                  <h3 className="text-lg font-semibold text-[var(--text-primary)] leading-snug">
-                    {exp.role}
-                  </h3>
-                  <span className="hidden sm:inline text-[var(--border)]">·</span>
-                  <span className="text-sm font-medium text-[var(--accent)]">
-                    {exp.org}
-                  </span>
-                </div>
+      {/* Table */}
+      <div
+        className="experience-table rounded-2xl border border-[var(--border)] overflow-hidden"
+      >
+        {EXPERIENCES.map((exp, idx) => {
+          const isLast = idx === EXPERIENCES.length - 1;
+          const colorClass = CATEGORY_COLORS[exp.category];
 
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-                  {exp.description}
-                </p>
+          const inner = (
+            <div
+              className={`exp-row flex items-center gap-3 px-5 py-3.5 transition-colors duration-200 group
+                ${!isLast ? "border-b border-[var(--border)]" : ""}
+                ${exp.link ? "hover:bg-[var(--bg-subtle)] cursor-pointer" : ""}
+              `}
+            >
+              {/* Connector dot */}
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--border)] group-hover:bg-[var(--accent)] transition-colors shrink-0" />
 
-                {/* Tech tags */}
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {exp.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full border border-[var(--border)] text-xs text-[var(--text-secondary)]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {/* Category badge */}
+              <span
+                className={`shrink-0 text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded border ${colorClass}`}
+                style={{ fontVariantNumeric: "tabular-nums" }}
+              >
+                {exp.category}
+              </span>
 
-              {/* Right: date + optional link */}
-              <div className="flex flex-row md:flex-col items-start md:items-end gap-3 shrink-0">
-                <span className="text-xs uppercase tracking-wider text-[var(--text-secondary)] font-semibold whitespace-nowrap">
-                  {exp.date}
+              {/* Role */}
+              <span className="text-sm font-medium text-[var(--text-primary)] truncate">
+                {exp.role}
+              </span>
+
+              {/* @ separator + org */}
+              <span className="text-[var(--text-secondary)] text-sm shrink-0 opacity-40">@</span>
+              <span className="text-sm text-[var(--text-secondary)] truncate min-w-0">
+                {exp.org}
+              </span>
+
+              {/* Spacer */}
+              <span className="flex-1" />
+
+              {/* Date */}
+              <span className="text-xs text-[var(--text-secondary)] opacity-60 shrink-0 tabular-nums whitespace-nowrap">
+                {exp.date}
+              </span>
+
+              {/* Link arrow */}
+              {exp.link && (
+                <span className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity ml-1">
+                  <ArrowIcon />
                 </span>
-
-                {exp.link && (
-                  <a
-                    href={exp.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                    aria-label={`Visit ${exp.org}`}
-                  >
-                    <svg
-                      width="13"
-                      height="13"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                    Visit
-                  </a>
-                )}
-              </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+
+          return exp.link ? (
+            <a
+              key={idx}
+              href={exp.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+              aria-label={`${exp.role} at ${exp.org}`}
+            >
+              {inner}
+            </a>
+          ) : (
+            <div key={idx}>{inner}</div>
+          );
+        })}
       </div>
     </section>
   );
