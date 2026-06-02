@@ -7,9 +7,9 @@ const pageDescription =
 export const metadata: Metadata = {
   title: "James Hou | Engineering Projects",
   description: pageDescription,
-  openGraph: {
+  openGraph: { 
     title: "James Hou | Engineering Projects",
-    description: pageDescription,
+    description: pageDescription, 
   },
 };
 
