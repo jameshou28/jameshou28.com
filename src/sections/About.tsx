@@ -163,7 +163,7 @@ export default function About() {
                   {skill.category}
                 </span>
                 <span className="text-sm text-[var(--text-secondary)] md:col-span-2">
-                  {skill.items}
+                  {skill.items} 
                 </span>
               </div>
             ))}
