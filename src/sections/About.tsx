@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Experience from "@/sections/Experience";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -161,14 +162,16 @@ export default function About() {
                 <span className="text-sm font-semibold text-[var(--text-primary)] md:text-right">
                   {skill.category}
                 </span>
-                <span className="text-sm text-[var(--text-secondary)] md:col-span-2">
-                  {skill.items}
-                </span>
+                <span className="text-sm text-[var(--text-secondary)] md:col-span-2"> 
+                  {skill.items} 
+                </span> 
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      <Experience />
 
       <div className="featured-projects-container mb-16">
         <div className="featured-projects-heading mb-10 flex items-center gap-6">
@@ -243,6 +246,8 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      
 
       <div className="mb-10 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
