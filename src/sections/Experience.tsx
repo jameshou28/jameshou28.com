@@ -34,7 +34,7 @@ const EXPERIENCES: Experience[] = [
     link: "https://luminerra.net/",
     bullets: [
       "Built internal admin platform for user access management and audit workflows",
-      "Implemented multi-agent orchestration system to analyze security and compliance clauses in real estate documents",
+      "Accepted into NVIDIA Inception and Intel Partner Alliance programs",
     ],
   },
   {
