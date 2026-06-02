@@ -162,9 +162,9 @@ export default function About() {
                 <span className="text-sm font-semibold text-[var(--text-primary)] md:text-right">
                   {skill.category}
                 </span>
-                <span className="text-sm text-[var(--text-secondary)] md:col-span-2">
+                <span className="text-sm text-[var(--text-secondary)] md:col-span-2"> 
                   {skill.items} 
-                </span>
+                </span> 
               </div>
             ))}
           </div>

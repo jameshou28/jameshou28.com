@@ -14,9 +14,9 @@ export default function Footer() {
         </div>
         
         <div className="flex space-x-6 text-sm font-medium text-[var(--text-secondary)]">
+          <a href="mailto:james.william.hou@gmail.com" className="hover:text-[var(--text-primary)] transition-colors">Email</a>
           <a href="https://github.com/jameshou28" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">GitHub</a>
           <a href="https://www.linkedin.com/in/jameshou28/" className="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
-          <a href="mailto:james.william.hou@gmail.com" className="hover:text-[var(--text-primary)] transition-colors">Email</a>
         </div>
       </div>
     </footer>
