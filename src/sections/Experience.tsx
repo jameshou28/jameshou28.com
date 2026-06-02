@@ -44,21 +44,23 @@ const EXPERIENCES: Experience[] = [
     category: "Leadership",
     link: "https://www.wearqpin.com",
     bullets: [
+      "Led team of seven in technical development of wearable digital pin",
       "Designed 3D-printed hardware case in Fusion360 and programmed ESP32 microcontroller in Python",
       "Shipped companion iOS app on the App Store via Swift and BLE",
-      "Won Most Outstanding Company at Leangap 2025 pitch competition",
+      "Built product landing page",
     ],
   },
   {
     role: "Programmer & Builder",
-    org: "VEX Robotics 4610Z",
+    org: "VEX Robotics",
     date: "Sep 2019 – Present",
     category: "Competition",
     link: "https://events.vex.com/teams/v5rc/4610Z",
     bullets: [
-      "Ranked 18th of 6,800+ teams globally in the 2026 Skills Challenge",
-      "World Championship Semifinalist (2025); Innovate Award (2024, 2026)",
-      "NJ State Champion (2024); Excellence Award and State Finalist (2026)",
+      "World Championship Semifinalist (2025); 2x World Championship Innovate Award (2024, 2026)",
+      "NJ State Champion (2024); NJ State Excellence Award and NJ State Finalist (2026)",
+      "Lead team interviews (viewed 80k+ times across all platforms)",
+      "Founded middle school robotics program. Designed curriculum and delivered lesson plans to teach 40+ middle school students robotics, including engineering and software development",
     ],
   },
   {
@@ -69,7 +71,7 @@ const EXPERIENCES: Experience[] = [
     link: "https://www.techshareproject.org/",
     bullets: [
       "Build partnerships and manage social media for international 501(c)(3) nonprofit",
-      "Lead FutureHacks initiative, planning and running hackathon event. ",
+      "Leading FutureHacks initiative, planning and running hackathon event",
     ],
   },
 ];
