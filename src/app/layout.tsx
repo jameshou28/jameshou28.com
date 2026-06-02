@@ -16,9 +16,10 @@ const dmSans = DM_Sans({
   variable: "--font-body",
 });
 
+const canonicalBase = "https://jameshou28.com";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.NODE_ENV === "production" ? "https://jameshou28.com" : "http://localhost:3000");
+  (process.env.NODE_ENV === "production" ? canonicalBase : "http://localhost:3000");
 
 const siteDescription =
   "James Hou is a high school software & hardware engineer building mobile apps, websites, AI projects, and more.";
@@ -33,7 +34,7 @@ const personStructuredData = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(canonicalBase),
   title: "James Hou | Software & Hardware Engineer",
   description: siteDescription,
   applicationName: "James Hou Portfolio",
