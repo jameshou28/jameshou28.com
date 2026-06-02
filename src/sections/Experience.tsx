@@ -69,7 +69,7 @@ const EXPERIENCES: Experience[] = [
     link: "https://www.techshareproject.org/",
     bullets: [
       "Build partnerships and manage social media for international 501(c)(3) nonprofit",
-      "Developing Eduquality 2.0 mobile app to provide tech tutorials to underserved communities",
+      "Lead FutureHacks initiative, planning and running hackathon event. ",
     ],
   },
 ];
