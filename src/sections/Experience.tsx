@@ -107,14 +107,14 @@ export default function Experience() {
                 ${exp.link ? "hover:bg-[var(--bg-subtle)] cursor-pointer" : ""}
               `}
             >
-              {/* Connector dot */}
+              {/* Connector dot */} 
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--border)] group-hover:bg-[var(--accent)] transition-colors shrink-0" />
 
               {/* Category badge */}
               <span
                 className={`shrink-0 text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded border ${colorClass}`}
                 style={{ fontVariantNumeric: "tabular-nums" }}
-              >
+              > 
                 {exp.category}
               </span>
 
