@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,33 +14,75 @@ interface Experience {
   org: string;
   date: string;
   category: Category;
+  bullets: string[];
   link?: string;
 }
 
 const CATEGORY_COLORS: Record<Category, string> = {
-  Internship: "text-rose-400 border-rose-400/40 bg-rose-400/8",
-  Project:   "text-sky-400 border-sky-400/40 bg-sky-400/8",
-  Leadership: "text-emerald-400 border-emerald-400/40 bg-emerald-400/8",
-  Competition:    "text-violet-400 border-violet-400/40 bg-violet-400/8",
+  Internship:  "text-rose-400 border-rose-400/40 bg-rose-400/8",
+  Project:     "text-sky-400 border-sky-400/40 bg-sky-400/8",
+  Leadership:  "text-emerald-400 border-emerald-400/40 bg-emerald-400/8",
+  Competition: "text-violet-400 border-violet-400/40 bg-violet-400/8",
 };
 
-// const CATEGORY_COLORS: Record<Category, string> = {
-//   Internship: "text-amber-400 border-amber-400/40 bg-amber-400/8",      // Warm corporate accent
-//   Project:    "text-cyan-400 border-cyan-400/40 bg-cyan-400/8",        // Technical builder blue
-//   Leadership: "text-rose-400 border-rose-400/40 bg-rose-400/8",        // Bold authority red/pink
-//   Competition: "text-fuchsia-400 border-fuchsia-400/40 bg-fuchsia-400/8", // High-energy purple
-// };
-
 const EXPERIENCES: Experience[] = [
-  { role: "Software Engineering Intern",  org: "Luminerra",                   date: "Dec 2025 – May 2026",  category: "Internship", link: "https://luminerra.net/" },
-  { role: "Co-Founder & CTO",             org: "QPin",                        date: "Jul 2025 – Present",   category: "Leadership",   link: "https://www.wearqpin.com" },
-  { role: "Programmer & Builder",    org: "VEX Robotics 4610Z",          date: "Sep 2019 – Present",   category: "Competition", link: "https://events.vex.com/teams/v5rc/4610Z" },
-  { role: "Outreach Manager",             org: "Techshare Project",           date: "Aug 2025 – Present",   category: "Leadership", link: "https://www.techshareproject.org/"},
+  {
+    role: "Software Engineering Intern",
+    org: "Luminerra",
+    date: "Dec 2025 – May 2026",
+    category: "Internship",
+    link: "https://luminerra.net/",
+    bullets: [
+      "Built internal admin platform for user access management and audit workflows",
+      "Implemented multi-agent orchestration system to analyze security and compliance clauses in real estate documents",
+    ],
+  },
+  {
+    role: "Co-Founder & CTO",
+    org: "QPin",
+    date: "Jul 2025 – Present",
+    category: "Leadership",
+    link: "https://www.wearqpin.com",
+    bullets: [
+      "Designed 3D-printed hardware case in Fusion360 and programmed ESP32 microcontroller in Python",
+      "Shipped companion iOS app on the App Store via Swift and BLE",
+      "Won Most Outstanding Company at Leangap 2025 pitch competition",
+    ],
+  },
+  {
+    role: "Programmer & Builder",
+    org: "VEX Robotics 4610Z",
+    date: "Sep 2019 – Present",
+    category: "Competition",
+    link: "https://events.vex.com/teams/v5rc/4610Z",
+    bullets: [
+      "Ranked 18th of 6,800+ teams globally in the 2026 Skills Challenge",
+      "World Championship Semifinalist (2025); Innovate Award (2024, 2026)",
+      "NJ State Champion (2024); Excellence Award and State Finalist (2026)",
+    ],
+  },
+  {
+    role: "Outreach Manager",
+    org: "Techshare Project",
+    date: "Aug 2025 – Present",
+    category: "Leadership",
+    link: "https://www.techshareproject.org/",
+    bullets: [
+      "Build partnerships and manage social media for international 501(c)(3) nonprofit",
+      "Developing Eduquality 2.0 mobile app to provide tech tutorials to underserved communities",
+    ],
+  },
 ];
 
-function ArrowIcon() {
+function genHash() {
+  return Math.floor(Math.random() * 0xfffffff).toString(16).padStart(7, "0");
+}
+
+const HASHES = EXPERIENCES.map(() => genHash());
+
+function ExternalLinkIcon() {
   return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
       <polyline points="15 3 21 3 21 9" />
       <line x1="10" y1="14" x2="21" y2="3" />
@@ -48,14 +90,33 @@ function ArrowIcon() {
   );
 }
 
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`transition-transform duration-200 ${open ? "rotate-90" : ""}`}
+    >
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
 export default function Experience() {
   const containerRef = useRef<HTMLElement>(null);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   useGSAP(() => {
     gsap.from(".experience-heading", {
       y: 20,
       opacity: 0,
-      duration: 0.9,
+      duration: 0.9, 
       ease: "power3.out",
       scrollTrigger: {
         trigger: ".experience-heading",
@@ -78,10 +139,13 @@ export default function Experience() {
     });
   }, { scope: containerRef });
 
+  const toggle = (idx: number) =>
+    setOpenIdx((prev) => (prev === idx ? null : idx));
+
   return (
     <section
       ref={containerRef}
-      className="relative z-[2] w-full max-w-6xl mx-auto px-6 pb-24"
+      className="relative z-[2] w-full max-w-6xl mx-auto px-4 sm:px-6 pb-24"
     >
       {/* Section divider header */}
       <div className="experience-heading mb-8 flex items-center gap-6">
@@ -93,72 +157,99 @@ export default function Experience() {
       </div>
 
       {/* Table */}
-      <div
-        className="experience-table rounded-2xl border border-[var(--border)] overflow-hidden"
-      >
+      <div className="experience-table rounded-2xl border border-[var(--border)] overflow-hidden">
         {EXPERIENCES.map((exp, idx) => {
           const isLast = idx === EXPERIENCES.length - 1;
+          const isOpen = openIdx === idx;
           const colorClass = CATEGORY_COLORS[exp.category];
+          const hash = HASHES[idx];
 
-          const inner = (
+          return (
             <div
-              className={`exp-row flex items-center gap-3 px-5 py-3.5 transition-colors duration-200 group
-                ${!isLast ? "border-b border-[var(--border)]" : ""}
-                ${exp.link ? "hover:bg-[var(--bg-subtle)] cursor-pointer" : ""}
-              `}
+              key={idx}
+              className={`exp-row ${!isLast ? "border-b border-[var(--border)]" : ""}`}
             >
-              {/* Connector dot */} 
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--border)] group-hover:bg-[var(--accent)] transition-colors shrink-0" />
-
-              {/* Category badge */}
-              <span
-                className={`shrink-0 text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded border ${colorClass}`}
-                style={{ fontVariantNumeric: "tabular-nums" }}
-              > 
-                {exp.category}
-              </span>
-
-              {/* Role */}
-              <span className="text-sm font-medium text-[var(--text-primary)] truncate">
-                {exp.role}
-              </span>
-
-              {/* @ separator + org */}
-              <span className="text-[var(--text-secondary)] text-sm shrink-0 opacity-40">@</span>
-              <span className="text-sm text-[var(--text-secondary)] truncate min-w-0">
-                {exp.org}
-              </span>
-
-              {/* Spacer */}
-              <span className="flex-1" />
-
-              {/* Date */}
-              <span className="text-xs text-[var(--text-secondary)] opacity-60 shrink-0 tabular-nums whitespace-nowrap">
-                {exp.date}
-              </span>
-
-              {/* Link arrow */}
-              {exp.link && (
-                <span className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity ml-1">
-                  <ArrowIcon />
+              {/* Main row — clickable to expand */}
+              <button
+                onClick={() => toggle(idx)}
+                className="w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-3.5 hover:bg-[var(--bg-subtle)] transition-colors duration-150 text-left group"
+                aria-expanded={isOpen}
+              >
+                {/* Chevron */}
+                <span className="text-[var(--text-secondary)] opacity-40 group-hover:opacity-80 transition-opacity shrink-0">
+                  <ChevronIcon open={isOpen} />
                 </span>
+
+                {/* Hash — hidden on smallest screens */}
+                <span className="hidden sm:inline text-[10px] font-mono text-[var(--text-secondary)] opacity-40 shrink-0 tabular-nums">
+                  {hash}
+                </span>
+
+                {/* Category badge */}
+                <span
+                  className={`shrink-0 text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold px-1.5 sm:px-2 py-0.5 rounded border ${colorClass}`}
+                >
+                  {exp.category}
+                </span>
+
+                {/* Role + org — stacked on mobile, inline on desktop */}
+                <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2 min-w-0 flex-1">
+                  <span className="text-sm font-medium text-[var(--text-primary)] truncate">
+                    {exp.role}
+                  </span>
+                  <span className="text-[var(--text-secondary)] text-xs sm:text-sm opacity-40 hidden sm:inline shrink-0">@</span>
+                  <span className="text-xs sm:text-sm text-[var(--text-secondary)] truncate">
+                    {exp.org}
+                  </span>
+                </span>
+
+                {/* Date — shortened on mobile */}
+                <span className="text-[10px] sm:text-xs text-[var(--text-secondary)] opacity-50 shrink-0 tabular-nums whitespace-nowrap ml-auto pl-2">
+                  <span className="hidden sm:inline">{exp.date}</span>
+                  <span className="sm:hidden">{exp.date.split("–")[0].trim()}</span>
+                </span>
+              </button>
+
+              {/* Dropdown — git show style */}
+              {isOpen && (
+                <div className="px-3 sm:px-5 pb-4 border-t border-[var(--border)] bg-[var(--bg-subtle)]">
+                  {/* git show command line */}
+                  <p className="font-mono text-[11px] sm:text-xs text-[var(--text-secondary)] opacity-50 pt-3 pb-2">
+                    $ git show {hash} --stat
+                  </p>
+
+                  {/* Bullet lines */}
+                  <ul className="space-y-1.5 mb-3">
+                    {exp.bullets.map((b, i) => (
+                      <li key={i} className="flex items-start gap-2 font-mono text-[11px] sm:text-xs">
+                        <span className="text-emerald-400 shrink-0 mt-0.5">+</span>
+                        <span className="text-[var(--text-secondary)]">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* insertions line + link */}
+                  <div className="flex items-center justify-between">
+                    <p className="font-mono text-[11px] sm:text-xs text-[var(--text-secondary)] opacity-40">
+                      {exp.bullets.length} insertion{exp.bullets.length !== 1 ? "s" : ""}(+), 0 deletions(-)
+                    </p>
+
+                    {exp.link && (
+                      <a
+                        href={exp.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 text-[11px] sm:text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+                      >
+                        Visit {exp.org}
+                        <ExternalLinkIcon />
+                      </a>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
-          );
-
-          return exp.link ? (
-            <a
-              key={idx}
-              href={exp.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-              aria-label={`${exp.role} at ${exp.org}`}
-            >
-              {inner}
-            </a>
-          ) : (
-            <div key={idx}>{inner}</div>
           );
         })}
       </div>
