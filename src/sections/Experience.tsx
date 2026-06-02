@@ -30,7 +30,7 @@ const EXPERIENCES: Experience[] = [
     role: "Software Engineering Intern",
     org: "Luminerra",
     date: "Dec 2025 – May 2026",
-    category: "Internship",
+    category: "Internship", 
     link: "https://luminerra.net/",
     bullets: [
       "Built internal admin platform for user access management and audit workflows",
@@ -47,7 +47,7 @@ const EXPERIENCES: Experience[] = [
       "Led team of seven in technical development of wearable digital pin",
       "Designed 3D-printed hardware case in Fusion360 and programmed ESP32 microcontroller in Python",
       "Shipped companion iOS app on the App Store via Swift and BLE",
-      "Built product landing page",
+      "Built product landing page", 
     ],
   },
   {

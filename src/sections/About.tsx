@@ -171,6 +171,8 @@ export default function About() {
         </div>
       </div>
 
+      <Experience />
+
       <div className="featured-projects-container mb-16">
         <div className="featured-projects-heading mb-10 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
@@ -245,7 +247,7 @@ export default function About() {
         </div>
       </div>
 
-      <Experience />
+      
 
       <div className="mb-10 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
