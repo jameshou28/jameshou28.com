@@ -5,7 +5,7 @@ import LoadingScreen from "@/components/ui/LoadingScreen";
 import FloatingShapes from "@/components/3d/FloatingShapes";
 
 const pageDescription =
-  "The portfolio of James Hou, a high school developer at Newark Academy, NJ,building mobile apps, web applications, AI projects, and physical engineering.";
+  "The portfolio of James Hou, a high school developer at Newark Academy, New Jersey (NJ),building mobile apps, web applications, AI projects, and physical engineering.";
 
 export const metadata: Metadata = {
   title: "James Hou | High School Developer",

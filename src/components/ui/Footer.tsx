@@ -18,7 +18,7 @@ export default function Footer() {
           <a href="https://github.com/jameshou28" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">GitHub</a>
           <a href="https://www.linkedin.com/in/jameshou28/" className="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
         </div>
-      </div>
+      </div> 
     </footer>
   );
 }
