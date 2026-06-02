@@ -74,12 +74,6 @@ const EXPERIENCES: Experience[] = [
   },
 ];
 
-function genHash() {
-  return Math.floor(Math.random() * 0xfffffff).toString(16).padStart(7, "0");
-}
-
-const HASHES = EXPERIENCES.map(() => genHash());
-
 function ExternalLinkIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -116,7 +110,7 @@ export default function Experience() {
     gsap.from(".experience-heading", {
       y: 20,
       opacity: 0,
-      duration: 0.9, 
+      duration: 0.9,
       ease: "power3.out",
       scrollTrigger: {
         trigger: ".experience-heading",
@@ -147,7 +141,6 @@ export default function Experience() {
       ref={containerRef}
       className="relative z-[2] w-full max-w-6xl mx-auto px-4 sm:px-6 pb-24"
     >
-      {/* Section divider header */}
       <div className="experience-heading mb-8 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
         <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium whitespace-nowrap">
@@ -156,43 +149,33 @@ export default function Experience() {
         <span className="h-px flex-1 bg-[var(--border)]" />
       </div>
 
-      {/* Table */}
       <div className="experience-table rounded-2xl border border-[var(--border)] overflow-hidden">
         {EXPERIENCES.map((exp, idx) => {
           const isLast = idx === EXPERIENCES.length - 1;
           const isOpen = openIdx === idx;
           const colorClass = CATEGORY_COLORS[exp.category];
-          const hash = HASHES[idx];
 
           return (
             <div
               key={idx}
               className={`exp-row ${!isLast ? "border-b border-[var(--border)]" : ""}`}
             >
-              {/* Main row — clickable to expand */}
+              {/* Main row */}
               <button
                 onClick={() => toggle(idx)}
                 className="w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-3.5 hover:bg-[var(--bg-subtle)] transition-colors duration-150 text-left group"
                 aria-expanded={isOpen}
               >
-                {/* Chevron */}
                 <span className="text-[var(--text-secondary)] opacity-40 group-hover:opacity-80 transition-opacity shrink-0">
                   <ChevronIcon open={isOpen} />
                 </span>
 
-                {/* Hash — hidden on smallest screens */}
-                <span className="hidden sm:inline text-[10px] font-mono text-[var(--text-secondary)] opacity-40 shrink-0 tabular-nums">
-                  {hash}
-                </span>
-
-                {/* Category badge */}
                 <span
                   className={`shrink-0 text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold px-1.5 sm:px-2 py-0.5 rounded border ${colorClass}`}
                 >
                   {exp.category}
                 </span>
 
-                {/* Role + org — stacked on mobile, inline on desktop */}
                 <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2 min-w-0 flex-1">
                   <span className="text-sm font-medium text-[var(--text-primary)] truncate">
                     {exp.role}
@@ -203,50 +186,36 @@ export default function Experience() {
                   </span>
                 </span>
 
-                {/* Date — shortened on mobile */}
                 <span className="text-[10px] sm:text-xs text-[var(--text-secondary)] opacity-50 shrink-0 tabular-nums whitespace-nowrap ml-auto pl-2">
                   <span className="hidden sm:inline">{exp.date}</span>
                   <span className="sm:hidden">{exp.date.split("–")[0].trim()}</span>
                 </span>
               </button>
 
-              {/* Dropdown — git show style */}
+              {/* Dropdown */}
               {isOpen && (
-                <div className="px-3 sm:px-5 pb-4 border-t border-[var(--border)] bg-[var(--bg-subtle)]">
-                  {/* git show command line */}
-                  <p className="font-mono text-[11px] sm:text-xs text-[var(--text-secondary)] opacity-50 pt-3 pb-2">
-                    $ git show {hash} --stat
-                  </p>
-
-                  {/* Bullet lines */}
-                  <ul className="space-y-1.5 mb-3">
+                <div className="px-3 sm:px-5 py-4 border-t border-[var(--border)] bg-[var(--bg-subtle)]">
+                  <ul className="space-y-2 mb-4">
                     {exp.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-2 font-mono text-[11px] sm:text-xs">
-                        <span className="text-emerald-400 shrink-0 mt-0.5">+</span>
+                      <li key={i} className="flex items-start gap-2 text-[11px] sm:text-xs">
+                        <span className="text-[var(--accent)] shrink-0 mt-0.5">•</span>
                         <span className="text-[var(--text-secondary)]">{b}</span>
                       </li>
                     ))}
                   </ul>
 
-                  {/* insertions line + link */}
-                  <div className="flex items-center justify-between">
-                    <p className="font-mono text-[11px] sm:text-xs text-[var(--text-secondary)] opacity-40">
-                      {exp.bullets.length} insertion{exp.bullets.length !== 1 ? "s" : ""}(+), 0 deletions(-)
-                    </p>
-
-                    {exp.link && (
-                      <a
-                        href={exp.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex items-center gap-1.5 text-[11px] sm:text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                      >
-                        Visit {exp.org}
-                        <ExternalLinkIcon />
-                      </a>
-                    )}
-                  </div>
+                  {exp.link && (
+                    <a
+                      href={exp.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+                    >
+                      Visit {exp.org}
+                      <ExternalLinkIcon />
+                    </a>
+                  )}
                 </div>
               )}
             </div>
