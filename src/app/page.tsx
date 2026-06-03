@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "James Hou | High School Developer",
     description: pageDescription,
-  }, 
-}; 
+  },
+};
 
 export default function Home() {
   return (

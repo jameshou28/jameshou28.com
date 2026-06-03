@@ -60,7 +60,7 @@ const PROJECTS = [
   {
     title: "WebAble",
     problem: "",
-    solution: "Chrome extension that uses DOM manipulation to allow users to better navigate any website.",
+    solution: "Chrome extension that improves web accessibility for users with dyslexia. Injects custom CSS (line spacing, letter spacing, dyslexia-friendly fonts) via DOM manipulation.",
     techStack: ["HTML", "CSS", "JavaScript", "Chrome Extension API", "Git"],
     category: "programming" as const,
     imagePath: "/images/webAble/main.png",
@@ -77,7 +77,7 @@ const PROJECTS = [
   {
     title: "QPin Connect",
     problem: "",
-    solution: "Built companion iOS app for QPIN, a wearable digital pin for advocacy and self-expression.",
+    solution: "iOS companion app for QPin. Uses BLE to connect with the ESP32 microcontroller and control what displays on the wearable pin.",
     techStack: ["Swift", "BLE"],
     category: "programming" as const,
     imagePath: "/images/QPinConnect/ex1.jpg",

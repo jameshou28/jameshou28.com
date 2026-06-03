@@ -212,7 +212,7 @@ export default function About() {
             <div className="space-y-2">
               <h4 className="text-xl font-semibold text-[var(--text-primary)]">WebAble</h4>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                Chrome extension that uses DOM manipulation to allow users to better navigate any website.
+                Chrome extension that improves web accessibility for users with dyslexia. Injects custom CSS (line spacing, letter spacing, dyslexia-friendly fonts) via DOM manipulation
               </p>
             </div>
           </div>
