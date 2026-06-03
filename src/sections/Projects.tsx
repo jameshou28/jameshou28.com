@@ -92,7 +92,8 @@ const PROJECTS = [
   {
     title: "QPin Website",
     problem: "",
-    solution: "Built website for QPin, a wearable digital pin for advocacy and self-expression.",
+    // solution: "Built website for QPin, a wearable digital pin for advocacy and self-expression.",
+    solution: "Marketing and product site for QPin. Built with Flask and ThreeJS to showcase the wearable pin and drive App Store downloads.",
     techStack: ["HTML", "CSS", "JS", "Flask", "ThreeJS"],
     category: "programming" as const,
     imagePath: "/images/qpinWeb/ss1.png",
