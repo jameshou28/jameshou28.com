@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: siteUrl,
       lastModified,
       changeFrequency: "weekly",
-      priority: 1,
+      priority: 1, 
     },
     {
       url: `${siteUrl}/programming`,

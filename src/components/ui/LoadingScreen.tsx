@@ -23,7 +23,7 @@ const markPortfolioEntered = () => {
   }
 };
 
-const MIN_LOADING_MS = 1500;
+const MIN_LOADING_MS = 600;
 const ENTER_ANIMATION = {
   clipDuration: 1.5,
   fadeDuration: 0.6,
