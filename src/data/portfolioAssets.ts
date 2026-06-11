@@ -9,7 +9,6 @@ export const MEDIA_ASSETS = [
   "/images/vex/pb3.jpg",
   "/images/qpin/Pin1.jpg",
   "/images/qpin/Pin2.jpg",
-  "/images/qpin/qpinRender1.png",
   "/images/qpin/qpinRender3.png",
   "/images/qpin/GIFDisplay.mp4",
   "/images/webAble/main.png",
