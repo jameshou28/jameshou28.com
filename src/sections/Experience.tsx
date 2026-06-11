@@ -165,21 +165,27 @@ export default function Experience() {
               {/* Main row */}
               <button
                 onClick={() => toggle(idx)}
-                className="w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-3.5 hover:bg-[var(--bg-subtle)] transition-colors duration-150 text-left group"
+                className="w-full flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 px-3 sm:px-5 py-3.5 hover:bg-[var(--bg-subtle)] transition-colors duration-150 text-left group"
                 aria-expanded={isOpen}
               >
-                <span className="text-[var(--text-secondary)] opacity-40 group-hover:opacity-80 transition-opacity shrink-0">
-                  <ChevronIcon open={isOpen} />
+                <span className="flex items-center gap-2 sm:gap-3">
+                  <span className="text-[var(--text-secondary)] opacity-40 group-hover:opacity-80 transition-opacity shrink-0">
+                    <ChevronIcon open={isOpen} />
+                  </span>
+
+                  <span
+                    className={`shrink-0 text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold px-1.5 sm:px-2 py-0.5 rounded border ${colorClass}`}
+                  >
+                    {exp.category}
+                  </span>
+
+                  <span className="text-[10px] text-[var(--text-secondary)] opacity-50 tabular-nums whitespace-nowrap ml-auto sm:hidden">
+                    {exp.date.split("–")[0].trim()}
+                  </span>
                 </span>
 
-                <span
-                  className={`shrink-0 text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold px-1.5 sm:px-2 py-0.5 rounded border ${colorClass}`}
-                >
-                  {exp.category}
-                </span>
-
-                <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2 min-w-0 flex-1">
-                  <span className="text-sm font-medium text-[var(--text-primary)] truncate">
+                <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2 min-w-0 flex-1 pl-[26px] sm:pl-0">
+                  <span className="text-sm font-medium text-[var(--text-primary)]">
                     {exp.role}
                   </span>
                   <span className="text-[var(--text-secondary)] text-xs sm:text-sm opacity-40 hidden sm:inline shrink-0">@</span>
@@ -188,9 +194,8 @@ export default function Experience() {
                   </span>
                 </span>
 
-                <span className="text-[10px] sm:text-xs text-[var(--text-secondary)] opacity-50 shrink-0 tabular-nums whitespace-nowrap ml-auto pl-2">
-                  <span className="hidden sm:inline">{exp.date}</span>
-                  <span className="sm:hidden">{exp.date.split("–")[0].trim()}</span>
+                <span className="hidden sm:inline text-xs text-[var(--text-secondary)] opacity-50 shrink-0 tabular-nums whitespace-nowrap ml-auto pl-2">
+                  {exp.date}
                 </span>
               </button>
 
