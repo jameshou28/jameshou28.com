@@ -37,12 +37,12 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div 
+      <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           isOpen ? 'max-h-64 opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0'
         }`}
       >
-        <div className="flex flex-col space-y-4 pb-2 text-base font-medium text-[var(--text-secondary)]">
+        <div className="flex flex-col space-y-4 pb-4 pt-2 px-2 -mx-2 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border)] text-base font-medium text-[var(--text-secondary)]">
           <Link href="/#about" className="hover:text-[var(--text-primary)] transition-colors" onClick={() => setIsOpen(false)}>About</Link>
           <Link href="/programming" className="hover:text-[var(--text-primary)] transition-colors" onClick={() => setIsOpen(false)}>Programming</Link>
           <Link href="/engineering" className="hover:text-[var(--text-primary)] transition-colors" onClick={() => setIsOpen(false)}>Engineering</Link>
