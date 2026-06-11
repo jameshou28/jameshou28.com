@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 px-6 py-4 backdrop-blur-md bg-[var(--bg-primary)]/60 border-b border-[var(--border)]">
+    <nav className={`fixed top-0 inset-x-0 z-50 px-6 py-4 backdrop-blur-md border-b border-[var(--border)] transition-colors ${isOpen ? 'bg-[var(--bg-primary)]' : 'bg-[var(--bg-primary)]/60'}`}>
       <div className="flex items-center justify-between">
         <Link href="/" className="text-xl font-bold font-[family-name:var(--font-display)] tracking-tight text-[var(--text-primary)] hover:opacity-70 transition-opacity" onClick={() => setIsOpen(false)}>
           James Hou
