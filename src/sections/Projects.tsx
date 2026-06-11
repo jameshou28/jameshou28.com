@@ -7,13 +7,13 @@ const PROJECTS = [
   {
     title: "VEX Robotics (4610Z)",
     problem: "",
-    solution: "Designed, programmed, and built robots for the VEX Robotics Competition. Led team to awards including:",
+    solution: "Designed, programmed, and built robots for the VEX Robotics Competition. Led the team to awards including:",
     modelPath: "/models/vex.glb",
     modelScale: 0.05,
     reversed: true,
     awards: [
       "2026 World Championship Innovate Award",
-      "2026 Ranked 18th out of 6,800+ teams in Skills Challenge",
+      "2026 Skills Challenge: Ranked 18th of 6,800+ teams",
       "2026 NJ State Championship Excellence Award, State Finalist",
       "2025 World Championship Semifinalist",
       "2025 LAUNCH Signature Event (international) Design Award",
@@ -41,7 +41,7 @@ const PROJECTS = [
   {
     title: "QPIN",
     problem: "",
-    solution: "Co-Founder & CTO. Used Fusion 360 to design case for QPin, a wearable digital pin for advocacy and self-expression. Programmed software used on microcontrollers (ESP32).",
+    solution: "Co-Founder & CTO. Used Fusion 360 to design a case for QPin, a wearable digital pin for advocacy and self-expression. Programmed the firmware running on the ESP32 microcontroller.",
     modelPath: "/models/qpin.glb",
     modelRotation: [-Math.PI/4, Math.PI/2, Math.PI/4] as [number, number, number],
     techStack: ["Python", "ESP32", "Arduino", "PlatformIO", "Fusion360", "Git"],
@@ -60,7 +60,7 @@ const PROJECTS = [
   {
     title: "WebAble",
     problem: "",
-    solution: "Chrome extension that improves web accessibility for users with dyslexia. Injects custom CSS (line spacing, letter spacing, dyslexia-friendly fonts) via DOM manipulation.",
+    solution: "A Chrome extension that improves web accessibility for users with dyslexia. Injects custom CSS (line spacing, letter spacing, dyslexia-friendly fonts) via DOM manipulation.",
     techStack: ["HTML", "CSS", "JavaScript", "Chrome Extension API", "Git"],
     category: "programming" as const,
     imagePath: "/images/webAble/main.png",
@@ -73,11 +73,11 @@ const PROJECTS = [
     links: [
       { type: "github", url: "https://github.com/jameshou28/WebAble" } as ProjectLink,
     ],
-  },
+  }, 
   {
     title: "QPin Connect",
     problem: "",
-    solution: "iOS companion app for QPin. Uses BLE to connect with the ESP32 microcontroller and control what displays on the wearable pin.",
+    solution: "An iOS companion app for QPin. Uses BLE to connect with the ESP32 microcontroller and control what displays on the wearable pin.",
     techStack: ["Swift", "BLE"],
     category: "programming" as const,
     imagePath: "/images/QPinConnect/ex1.jpg",
@@ -87,15 +87,15 @@ const PROJECTS = [
     ],
     links: [
       { type: "custom", label: "App Store", url: "https://apps.apple.com/us/app/qpin-connect/id6749499794" } as ProjectLink,
-    ],
+    ], 
   },
-  {
+  { 
     title: "QPin Website",
     problem: "",
     // solution: "Built website for QPin, a wearable digital pin for advocacy and self-expression.",
-    solution: "Marketing and product site for QPin. Built with Flask and ThreeJS to showcase the wearable pin and drive App Store downloads.",
+    solution: "A marketing and product site for QPin. Built with Flask and ThreeJS to showcase the wearable pin and drive App Store downloads.",
     techStack: ["HTML", "CSS", "JS", "Flask", "ThreeJS"],
-    category: "programming" as const,
+    category: "programming" as const, 
     imagePath: "/images/qpinWeb/ss1.png",
     gallery: [
       { type: "image" as const, src: "/images/qpinWeb/ss1.png" },

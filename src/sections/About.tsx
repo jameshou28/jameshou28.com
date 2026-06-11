@@ -135,7 +135,8 @@ export default function About() {
         <h2 className="about-text text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
           {/* I build <span className="text-[var(--accent)] font-bold">software</span> experiences and <span className="text-[var(--accent)] font-bold">AI-powered</span> tools that turn ideas into useful products. */}
           {/* I'm a high school developer focused on <span className="text-[var(--accent)] font-bold">software</span>, and <span className="text-[var(--accent)] font-bold">web</span>, and <span className="text-[var(--accent)] font-bold">applied AI</span>. */}
-          I'm a high school developer focused on <span className="text-[var(--accent)] font-bold">software</span> and <span className="text-[var(--accent)] font-bold">web</span>.
+          {/* I'm a high school developer who builds across <span className="text-[var(--accent)] font-bold">software</span>, <span className="text-[var(--accent)] font-bold">hardware</span>, and <span className="text-[var(--accent)] font-bold">AI</span>. */}
+          I'm a high school developer who builds across <span className="text-[var(--accent)] font-bold">software</span> and <span className="text-[var(--accent)] font-bold">hardware</span>.
         </h2>
          
         <p className="about-text text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
@@ -242,7 +243,7 @@ export default function About() {
             <div className="space-y-2">
               <h4 className="text-xl font-semibold text-[var(--text-primary)]">VEX Robotics</h4>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                Design, build, and code World-Championship VEX Robotics Robots
+                Design, build, and program competition robots that have reached the VEX World Championship
               </p>
             </div>
           </div>
