@@ -1,42 +1,50 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import type { Activity } from 'react-github-calendar';
+import { useEffect, useRef, useState } from 'react';
 
 const GitHubCalendar = dynamic(() => import('react-github-calendar').then((mod) => mod.GitHubCalendar), {
   ssr: false,
 });
 
-// On narrow screens, show only the most recent weeks so the calendar fits
-// without horizontal scrolling.
-const MOBILE_WEEKS = 18;
-
-function lastNWeeks(data: Activity[], weeks: number) {
-  return data.slice(-weeks * 7);
-}
+// A full year of contributions spans up to 53 weekly columns. We size each
+// block/margin so the whole year fits the available width without scrolling.
+const WEEKS_PER_YEAR = 53;
+const LABEL_RESERVED_PX = 36;
 
 export default function GithubGraph() {
-  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [blockSize, setBlockSize] = useState(14);
 
   useEffect(() => {
-    const mql = window.matchMedia('(max-width: 640px)');
-    const update = () => setIsMobile(mql.matches);
+    const el = containerRef.current;
+    if (!el) return;
+
+    const update = () => {
+      const available = el.clientWidth - LABEL_RESERVED_PX;
+      const margin = available < 350 ? 2 : 5;
+      const size = Math.floor(available / WEEKS_PER_YEAR) - margin;
+      setBlockSize(Math.max(4, Math.min(14, size)));
+    };
+
     update();
-    mql.addEventListener('change', update);
-    return () => mql.removeEventListener('change', update);
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
+
+  const blockMargin = blockSize < 8 ? 2 : 5;
+  const fontSize = Math.max(8, Math.min(14, blockSize));
 
   return (
     <div className="w-full">
-      <div className="p-4 sm:p-8 bg-[var(--bg-subtle)] rounded-2xl border border-[var(--border)] flex justify-center overflow-x-auto overflow-y-hidden">
+      <div ref={containerRef} className="p-4 sm:p-8 bg-[var(--bg-subtle)] rounded-2xl border border-[var(--border)] flex justify-center overflow-hidden">
         <GitHubCalendar
           username="jameshou28"
           colorScheme="light"
-          blockSize={isMobile ? 8 : 14}
-          blockMargin={isMobile ? 3 : 5}
-          fontSize={isMobile ? 10 : 14}
-          transformData={isMobile ? (data) => lastNWeeks(data, MOBILE_WEEKS) : undefined}
+          blockSize={blockSize}
+          blockMargin={blockMargin}
+          fontSize={fontSize}
           theme={{
             light: ['#ebe8e4', '#a1ecd4', '#5ddca9', '#2ab989', '#00b87a'],
             dark: ['#ebe8e4', '#a1ecd4', '#5ddca9', '#2ab989', '#00b87a']
