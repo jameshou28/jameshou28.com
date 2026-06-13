@@ -66,8 +66,8 @@ export default function GalleryModal({ isOpen, onClose, items, projectTitle }: G
         onClick={onClose}
       />
 
-      {/* Modal container */}
-      <div className="relative z-10 w-full max-w-5xl mx-4 max-h-[90vh] flex flex-col">
+      {/* Modal container — fixed height so controls stay pinned regardless of image size */}
+      <div className="relative z-10 w-full max-w-5xl mx-4 h-[90vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-white text-lg font-medium font-[family-name:var(--font-display)]">
@@ -90,18 +90,18 @@ export default function GalleryModal({ isOpen, onClose, items, projectTitle }: G
 
         {/* Content */}
         {hasItems && current ? (
-          <div className="relative flex-1 flex items-center justify-center rounded-2xl overflow-hidden bg-black/30">
+          <div className="relative flex-1 min-h-0 flex items-center justify-center rounded-2xl overflow-hidden bg-black/30">
             {current.type === "image" ? (
               <img
                 src={current.src}
                 alt={current.caption || projectTitle}
-                className="max-w-full max-h-[75vh] object-contain"
+                className="max-w-full max-h-full object-contain"
               />
             ) : (
               <video
                 src={current.src}
                 controls
-                className="max-w-full max-h-[75vh]"
+                className="max-w-full max-h-full"
               />
             )}
 
@@ -133,10 +133,8 @@ export default function GalleryModal({ isOpen, onClose, items, projectTitle }: G
           </div>
         )}
 
-        {/* Caption */}
-        {current?.caption && (
-          <p className="text-white/60 text-sm text-center mt-3">{current.caption}</p>
-        )}
+        {/* Caption — fixed slot so the thumbnail strip below never shifts */}
+        <p className="text-white/60 text-sm text-center mt-3 h-5 truncate">{current?.caption}</p>
 
         {/* Thumbnail strip */}
         {items.length > 1 && (
