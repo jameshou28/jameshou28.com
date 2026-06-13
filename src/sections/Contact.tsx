@@ -67,11 +67,17 @@ export default function Contact() {
           </div>
 
           {/* Desktop layout */}
-          <div className="hidden sm:block min-w-0">
-            <p className="text-xs uppercase tracking-[0.2em] text-[var(--bg-primary)]/60 mb-2">Email</p>
-            <p className="text-lg md:text-2xl font-medium font-[family-name:var(--font-display)] text-[var(--bg-primary)] break-normal">
-              james.william.hou@gmail.com
-            </p>
+          <div className="hidden sm:flex items-center gap-4 min-w-0">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-[var(--bg-primary)]">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <div className="min-w-0">
+              <p className="text-xs uppercase tracking-[0.2em] text-[var(--bg-primary)]/60 mb-2">Email</p>
+              <p className="text-lg md:text-2xl font-medium font-[family-name:var(--font-display)] text-[var(--bg-primary)] break-normal">
+                james.william.hou@gmail.com
+              </p>
+            </div>
           </div>
 
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px] sm:w-6 sm:h-6 shrink-0 text-[var(--bg-primary)] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
