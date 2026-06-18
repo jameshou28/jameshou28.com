@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# James Hou - Personal Website
 
-## Getting Started
+My personal website
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Interactive 3D models** — `.glb` models (VEX robot, QPin) rendered with React Three Fiber + Drei, with auto-rotating orbit controls and studio lighting.
+- **Performance-aware rendering** — a `useDeviceCapability` hook lowers DPR and disables antialiasing on mobile / low-core devices to keep 3D smooth.
+- **Scroll & entrance animation** — GSAP + ScrollTrigger drive the hero typewriter, staggered reveals, and parallax on featured cards.
+- **Two project portfolios** — separate `/programming` and `/engineering` routes filtered from a single project dataset, each with tech stacks, awards, and a gallery modal.
+- **Live GitHub activity** — contribution calendar via `react-github-calendar` on the programming page.
+- **Polished UI touches** — custom cursor, site-wide particle background, a loading screen that preloads key assets, and a light editorial theme driven by CSS variables.
+- **SEO & sharing** — per-page metadata, Open Graph / Twitter cards, JSON-LD `Person` structured data, `robots.ts`, and `sitemap.ts`.
+
+## Tech Stack
+
+| Area         | Tools                                                               |
+| ------------ | ------------------------------------------------------------------- |
+| Framework    | [Next.js 16](https://nextjs.org) (App Router), React 19, TypeScript |
+| 3D           | [three](https://threejs.org), @react-three/fiber, @react-three/drei, @react-three/postprocessing |
+| Animation    | [GSAP](https://gsap.com) (+ ScrollTrigger), @gsap/react             |
+| Styling      | [Tailwind CSS v4](https://tailwindcss.com), CSS variables, Space Grotesk + DM Sans |
+| Icons / misc | lucide-react, react-github-calendar                                 |
+| Deployment   | [Vercel](https://vercel.com)                                        |
+
+## Project Structure
+
+```
+src/
+├── app/                  # App Router routes
+│   ├── layout.tsx        # Root layout: fonts, metadata, JSON-LD, global UI
+│   ├── page.tsx          # Home (Hero + About)
+│   ├── programming/      # Software & web portfolio
+│   ├── engineering/      # Hardware & CAD portfolio
+│   ├── contact/          # Contact page
+│   ├── robots.ts         # robots.txt
+│   └── sitemap.ts        # sitemap.xml
+├── sections/             # Page sections (Hero, About, Experience, Projects, Contact)
+├── components/
+│   ├── 3d/               # Scene, ModelViewer, FloatingShapes, placeholder geometry
+│   └── ui/               # Navbar, Footer, cursor, modal, loading screen, etc.
+├── data/                 # portfolioAssets.ts — preload manifest
+└── hooks/                # useDeviceCapability — adaptive rendering
+public/
+├── models/               # .glb 3D models
+└── images/               # Project media (per-project folders)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel 
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built by [James Hou](https://github.com/jameshou28).
