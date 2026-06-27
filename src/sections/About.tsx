@@ -176,7 +176,7 @@ export default function About() {
 
       <Experience />
 
-      <div className="featured-projects-container mb-16">
+      {/* <div className="featured-projects-container mb-16">
         <div className="featured-projects-heading mb-10 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
         <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium">
@@ -248,7 +248,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       
 
