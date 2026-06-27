@@ -71,7 +71,7 @@ const EXPERIENCES: Experience[] = [
     link: "https://www.techshareproject.org/",
     bullets: [
       "Built partnerships and managed social media for an international 501(c)(3) nonprofit",
-      "Led the FutureHacks initiative, planning and running an online hackathon with over 100 participants and personally securing 8 of 9 sponsors, raising $5,000.",
+      "Led the FutureHacks initiative, planning and running an online international hackathon with over 200 participants and personally securing 8 of 9 sponsors, raising $5,000.",
     ],
   },
 ];
