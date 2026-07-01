@@ -3,7 +3,9 @@
 import { useState, useRef } from "react";
 import Scene from "@/components/3d/Scene";
 import ModelViewer from "@/components/3d/ModelViewer";
+import ModelErrorBoundary from "@/components/3d/ModelErrorBoundary";
 import GalleryModal, { GalleryItem } from "@/components/ui/GalleryModal";
+import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,6 +26,7 @@ interface ProjectItemProps {
   modelRotation?: [number, number, number];
   modelScale?: number;
   imagePath?: string;
+  fallbackImagePath?: string;
   techStack: string[];
   awards?: string[];
   additionalNote?: {
@@ -71,6 +74,7 @@ export default function ProjectItem({
   modelRotation = [0, 0, 0],
   modelScale,
   imagePath,
+  fallbackImagePath,
   techStack,
   awards,
   additionalNote,
@@ -81,6 +85,7 @@ export default function ProjectItem({
 }: ProjectItemProps) {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { hasWebGL } = useDeviceCapability();
 
   useGSAP(() => {
     const ctx = containerRef.current;
@@ -126,17 +131,41 @@ export default function ProjectItem({
         {/* Visual Side */}
         <div className={`${reversed ? "lg:order-2" : "lg:order-1"}`}>
           <div className="project-visual opacity-0 h-[50vh] lg:h-[70vh] rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative">
-            {category === "engineering" && modelPath ? (
-              /* Engineering: Interactive 3D model */
-              <Scene enableControls={true}>
-                <ModelViewer
-                  modelPath={modelPath}
-                  scale={modelScale || 20}
-                  rotation={modelRotation}
-                  autoRotate={true}
-                  enableParallax={false}
-                />
-              </Scene>
+            {category === "engineering" && modelPath && hasWebGL ? (
+              /* Engineering: Interactive 3D model, falls back to a static image
+                 if WebGL is unsupported or the model fails to load (older hardware) */
+              <ModelErrorBoundary
+                fallback={
+                  fallbackImagePath ? (
+                    <img
+                      src={fallbackImagePath}
+                      alt={title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <p className="text-sm text-[var(--text-secondary)]">Preview unavailable</p>
+                    </div>
+                  )
+                }
+              >
+                <Scene enableControls={true}>
+                  <ModelViewer
+                    modelPath={modelPath}
+                    scale={modelScale || 20}
+                    rotation={modelRotation}
+                    autoRotate={true}
+                    enableParallax={false}
+                  />
+                </Scene>
+              </ModelErrorBoundary>
+            ) : category === "engineering" && modelPath && fallbackImagePath ? (
+              /* No WebGL support at all: skip straight to the fallback image */
+              <img
+                src={fallbackImagePath}
+                alt={title}
+                className="w-full h-full object-cover"
+              />
             ) : imagePath ? (
               /* Programming with image */
               <img
