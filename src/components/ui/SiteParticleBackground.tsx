@@ -1,7 +1,7 @@
 "use client";
 
-import ParticleEffectForHero from "@/components/ui/particle-effect-for-hero";
+import VantaNetBackground from "@/components/ui/VantaNetBackground";
 
 export default function SiteParticleBackground() {
-  return <ParticleEffectForHero fixed />;
+  return <VantaNetBackground />;
 }
