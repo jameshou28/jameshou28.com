@@ -6,6 +6,7 @@ import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 
 interface VantaEffect {
   destroy: () => void;
+  linesMesh?: THREE.LineSegments;
 }
 
 export default function VantaNetBackground() {
@@ -26,12 +27,27 @@ export default function VantaNetBackground() {
         mouseControls: true,
         touchControls: false,
         gyroControls: false,
-        color: 0x00b87a,
+        color: 0xf0e6d8,
         backgroundColor: 0xf5f3f0,
         points: isMobile || isLowPower ? 5 : 8,
         maxDistance: 20,
         spacing: 18,
+        showDots: false,
+        // WebGL ignores line width, so render at half pixel ratio to
+        // make the 1px net lines appear twice as thick on retina.
+        scale: 2,
+        scaleMobile: 2,
       });
+      // Vanta passes the removed THREE.VertexColors constant, so newer
+      // three.js drops it and renders the lines plain white; re-enable
+      // per-vertex colors so the net picks up the configured color.
+      const material = effect.linesMesh?.material as
+        | THREE.LineBasicMaterial
+        | undefined;
+      if (material) {
+        material.vertexColors = true;
+        material.needsUpdate = true;
+      }
     });
 
     return () => {
@@ -45,7 +61,7 @@ export default function VantaNetBackground() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-0 pointer-events-none opacity-40"
+      className="fixed inset-0 z-0 pointer-events-none"
       aria-hidden="true"
     />
   );

@@ -1,7 +1,7 @@
 "use client";
 
-import VantaNetBackground from "@/components/ui/VantaNetBackground";
+import FlatSurfaceBackground from "@/components/ui/FlatSurfaceBackground";
 
 export default function SiteParticleBackground() {
-  return <VantaNetBackground />;
+  return <FlatSurfaceBackground />;
 }
