@@ -10,13 +10,13 @@ const GitHubCalendar = dynamic(() => import('react-github-calendar').then((mod) 
 const WEEKS_PER_YEAR = 53;
 const LABEL_RESERVED_PX = 36;
 
-const GITHUB_CONTRIBUTION_COLORS = [
+const GITHUB_CONTRIBUTION_COLORS: string[] = [
   '#ebedf0',
   '#9be9a8',
   '#40c463',
   '#30a14e',
   '#216e39',
-] as const;
+];
 
 export default function GithubGraph() {
   const containerRef = useRef<HTMLDivElement>(null);
