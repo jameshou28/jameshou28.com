@@ -64,13 +64,13 @@ const EXPERIENCES: Experience[] = [
     ],
   },
   {
-    role: "Outreach Manager",
+    role: "President",
     org: "Techshare Project",
     date: "Aug 2025 – Present",
     category: "Leadership",
     link: "https://www.techshareproject.org/",
     bullets: [
-      "Built partnerships and managed social media for an international 501(c)(3) nonprofit",
+      "Built partnerships and lead an international 501(c)(3) nonprofit",
       "Led the FutureHacks initiative, planning and running an online international hackathon with over 250 participants and personally securing 8 corporate sponsors, raising $5,000.",
     ],
   },

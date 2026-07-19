@@ -4,13 +4,12 @@ My personal website
 
 ## Features
 
-- **Interactive 3D models** — `.glb` models (VEX robot, QPin) rendered with React Three Fiber + Drei, with auto-rotating orbit controls and studio lighting.
-- **Performance-aware rendering** — a `useDeviceCapability` hook lowers DPR and disables antialiasing on mobile / low-core devices to keep 3D smooth.
-- **Scroll & entrance animation** — GSAP + ScrollTrigger drive the hero typewriter, staggered reveals, and parallax on featured cards.
-- **Two project portfolios** — separate `/programming` and `/engineering` routes filtered from a single project dataset, each with tech stacks, awards, and a gallery modal.
-- **Live GitHub activity** — contribution calendar via `react-github-calendar` on the programming page.
-- **Polished UI touches** — custom cursor, site-wide particle background, a loading screen that preloads key assets, and a light editorial theme driven by CSS variables.
-- **SEO & sharing** — per-page metadata, Open Graph / Twitter cards, JSON-LD `Person` structured data, `robots.ts`, and `sitemap.ts`.
+- Interactive 3D models: `.glb` models rendered with React Three Fiber + Drei. Also has auto-rotating orbit controls and studio lighting.
+- Performance-aware rendering: a `useDeviceCapability` hook lowers DPR and disables antialiasing on phones.
+- Scroll & entrance animation: GSAP + ScrollTrigger for hero typewriter, reveals, and parallax.
+- Project portfolios: separate `/programming` and `/engineering` routes, each with projects, awards, and gallery modals.
+- Live GitHub activity: contribution calendar via `react-github-calendar` in the programming portfolio.
+- Extra UI elemenst: custom cursor, particle background, and a loading screen to preload assets.
 
 ## Tech Stack
 
@@ -20,30 +19,30 @@ My personal website
 | 3D           | [three](https://threejs.org), @react-three/fiber, @react-three/drei, @react-three/postprocessing |
 | Animation    | [GSAP](https://gsap.com) (+ ScrollTrigger), @gsap/react             |
 | Styling      | [Tailwind CSS v4](https://tailwindcss.com), CSS variables, Space Grotesk + DM Sans |
-| Icons / misc | lucide-react, react-github-calendar                                 |
+| Icons/misc   | lucide-react, react-github-calendar                                 |
 | Deployment   | [Vercel](https://vercel.com)                                        |
 
 ## Project Structure
 
 ```
 src/
-├── app/                  # App Router routes
-│   ├── layout.tsx        # Root layout: fonts, metadata, JSON-LD, global UI
-│   ├── page.tsx          # Home (Hero + About)
-│   ├── programming/      # Software & web portfolio
-│   ├── engineering/      # Hardware & CAD portfolio
-│   ├── contact/          # Contact page
-│   ├── robots.ts         # robots.txt
-│   └── sitemap.ts        # sitemap.xml
-├── sections/             # Page sections (Hero, About, Experience, Projects, Contact)
+├── app/                 
+│   ├── layout.tsx       
+│   ├── page.tsx    
+│   ├── programming/
+│   ├── engineering/
+│   ├── contact/    
+│   ├── robots.ts   
+│   └── sitemap.ts  
+├── sections/       
 ├── components/
-│   ├── 3d/               # Scene, ModelViewer, FloatingShapes, placeholder geometry
-│   └── ui/               # Navbar, Footer, cursor, modal, loading screen, etc.
-├── data/                 # portfolioAssets.ts — preload manifest
-└── hooks/                # useDeviceCapability — adaptive rendering
+│   ├── 3d/         
+│   └── ui/         
+├── data/           
+└── hooks/          
 public/
-├── models/               # .glb 3D models
-└── images/               # Project media (per-project folders)
+├── models/         
+└── images/         
 ```
 
 ---
