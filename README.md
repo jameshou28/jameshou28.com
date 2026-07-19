@@ -1,6 +1,6 @@
 # James Hou - Personal Website
 
-My personal website
+My personal website and portfolio!
 
 ## Features
 
@@ -8,8 +8,8 @@ My personal website
 - Performance-aware rendering: a `useDeviceCapability` hook lowers DPR and disables antialiasing on phones.
 - Scroll & entrance animation: GSAP + ScrollTrigger for hero typewriter, reveals, and parallax.
 - Project portfolios: separate `/programming` and `/engineering` routes, each with projects, awards, and gallery modals.
-- Live GitHub activity: contribution calendar via `react-github-calendar` in the programming portfolio.
-- Extra UI elemenst: custom cursor, particle background, and a loading screen to preload assets.
+- Live GitHub activity: Live GitHub contribution calendar in my programming portfolio.
+- Extra UI elements: custom cursor, particle background, and a loading screen to preload assets.
 
 ## Tech Stack
 
@@ -21,29 +21,6 @@ My personal website
 | Styling      | [Tailwind CSS v4](https://tailwindcss.com), CSS variables, Space Grotesk + DM Sans |
 | Icons/misc   | lucide-react, react-github-calendar                                 |
 | Deployment   | [Vercel](https://vercel.com)                                        |
-
-## Project Structure
-
-```
-src/
-├── app/                 
-│   ├── layout.tsx       
-│   ├── page.tsx    
-│   ├── programming/
-│   ├── engineering/
-│   ├── contact/    
-│   ├── robots.ts   
-│   └── sitemap.ts  
-├── sections/       
-├── components/
-│   ├── 3d/         
-│   └── ui/         
-├── data/           
-└── hooks/          
-public/
-├── models/         
-└── images/         
-```
 
 ---
 
