@@ -7,10 +7,16 @@ const GitHubCalendar = dynamic(() => import('react-github-calendar').then((mod) 
   ssr: false,
 });
 
-// A full year of contributions spans up to 53 weekly columns. We size each
-// block/margin so the whole year fits the available width without scrolling.
 const WEEKS_PER_YEAR = 53;
 const LABEL_RESERVED_PX = 36;
+
+const GITHUB_CONTRIBUTION_COLORS = [
+  '#ebedf0',
+  '#9be9a8',
+  '#40c463',
+  '#30a14e',
+  '#216e39',
+] as const;
 
 export default function GithubGraph() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -46,8 +52,8 @@ export default function GithubGraph() {
           blockMargin={blockMargin}
           fontSize={fontSize}
           theme={{
-            light: ['#ebe8e4', '#a1ecd4', '#5ddca9', '#2ab989', '#00b87a'],
-            dark: ['#ebe8e4', '#a1ecd4', '#5ddca9', '#2ab989', '#00b87a']
+            light: GITHUB_CONTRIBUTION_COLORS,
+            dark: GITHUB_CONTRIBUTION_COLORS,
           }}
         />
       </div>
