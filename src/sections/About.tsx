@@ -10,11 +10,11 @@ import Experience from "@/sections/Experience";
 gsap.registerPlugin(ScrollTrigger);
 
 const SKILLS = [
-  { category: "Languages", items: "Python, C++, Java, HTML, CSS, JavaScript, Swift" },
-  { category: "Frameworks", items: "Flask, Django, ThreeJS" },
+  { category: "Languages", items: "Python, C++, Java, HTML, CSS, JavaScript, TypeScript, Swift" },
+  { category: "Frameworks", items: "Flask, Django, Next.js, ThreeJS "},
   { category: "Systems & Tools", items: "Git, Vercel, PlatformIO, ArduinoIDE, Jupyter, Google Colab, Figma" },
   { category: "CAD & Design", items: "Fusion 360, Onshape, Blender" },
-  { category: "Adobe Creative Suite", items: "Photoshop, Illustrator, Lightroom, Premiere Pro" },
+  { category: "Adobe Creative Suite", items: "Photoshop, Lightroom, Premiere Pro, Illustrator" },
 ];
 
 const FEATURED_VIDEO_PLAYBACK_RATE = 1.75;
