@@ -130,7 +130,11 @@ export default function ProjectItem({
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-6`}>
         {/* Visual Side */}
         <div className={`${reversed ? "lg:order-2" : "lg:order-1"}`}>
-          <div className="project-visual opacity-0 h-[50vh] lg:h-[70vh] rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative">
+          {/* Engineering (3D model / fallback) keeps a large near-square viewport;
+             programming images size to their own aspect ratio, capped in height. */}
+          <div className={`project-visual opacity-0 rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative ${
+            category === "programming" && imagePath ? "" : "h-[50vh] lg:h-[70vh]"
+          }`}>
             {category === "engineering" && modelPath && hasWebGL ? (
               /* Engineering: Interactive 3D model, falls back to a static image
                  if WebGL is unsupported or the model fails to load (older hardware) */
@@ -167,11 +171,14 @@ export default function ProjectItem({
                 className="w-full h-full object-cover"
               />
             ) : imagePath ? (
-              /* Programming with image */
+              /* Programming: the image sizes the box. Wide screenshots render short
+                 and full-width; tall phone screenshots cap at max-h and center, so
+                 nothing balloons into a 70vh well. */
               <img
                 src={imagePath}
                 alt={title}
-                className="w-full h-full object-contain p-4"
+                className="block mx-auto w-full h-auto max-h-[clamp(20rem,55vh,32rem)] object-contain"
+                style={{ width: "auto", maxWidth: "100%" }}
               />
             ) : (
               /* Placeholder for projects without images yet */
