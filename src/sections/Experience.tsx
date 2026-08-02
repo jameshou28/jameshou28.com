@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useState } from "react";
 
 type Category = "Internship" | "Competition" | "Leadership" | "Project";
 
@@ -106,42 +101,13 @@ function ChevronIcon({ open }: { open: boolean }) {
 }
 
 export default function Experience() {
-  const containerRef = useRef<HTMLElement>(null);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
-
-  useGSAP(() => {
-    gsap.from(".experience-heading", {
-      y: 20,
-      opacity: 0,
-      duration: 0.9,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".experience-heading",
-        start: "top 88%",
-        once: true,
-      },
-    });
-
-    gsap.from(".exp-row", {
-      x: -12,
-      opacity: 0,
-      duration: 0.55,
-      stagger: 0.07,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".experience-table",
-        start: "top 82%",
-        once: true,
-      },
-    });
-  }, { scope: containerRef });
 
   const toggle = (idx: number) =>
     setOpenIdx((prev) => (prev === idx ? null : idx));
 
   return (
     <section
-      ref={containerRef}
       className="relative z-[2] w-full max-w-6xl mx-auto px-4 sm:px-6 pb-24"
     >
       <div className="experience-heading mb-8 flex items-center gap-6">

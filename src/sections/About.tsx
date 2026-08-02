@@ -84,23 +84,6 @@ export default function About() {
     });
 
 
-    // Nav Buttons
-    gsap.fromTo(".about-nav", 
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".about-nav-container",
-          start: "top bottom",
-          once: true,
-        }
-      }
-    );
-
     gsap.timeline({
       scrollTrigger: {
         trigger: ".featured-projects-container",
