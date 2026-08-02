@@ -27,14 +27,15 @@ const CATEGORY_COLORS: Record<Category, string> = {
 
 const EXPERIENCES: Experience[] = [
   {
-    role: "Software Engineering Intern",
-    org: "Luminerra",
-    date: "Dec 2025 – Present",
-    category: "Internship", 
-    link: "https://luminerra.net/",
+    role: "President & CTO",
+    org: "Techshare Project",
+    date: "Aug 2025 – Present",
+    category: "Leadership",
+    link: "https://www.techshareproject.org/",
     bullets: [
-      "Built an internal admin platform for user access management and audit workflows",
-      "Worked at a startup accepted into NVIDIA Inception and Intel Partner Alliance programs",
+      "Lead international 501(c)(3) nonprofit promoting equitable access to technology.",
+      "Led the FutureHacks initiative, planning and running an online international hackathon with over 250 participants and personally securing 8 corporate sponsors, raising $5,000.",
+      "Built nonprofit website.",
     ],
   },
   {
@@ -44,10 +45,10 @@ const EXPERIENCES: Experience[] = [
     category: "Leadership",
     link: "https://www.wearqpin.com",
     bullets: [
-      "Led a team of seven in the technical development of a wearable digital pin",
-      "Designed a 3D-printed hardware case in Fusion360 and programmed the ESP32 microcontroller in Python",
-      "Shipped a companion iOS app on the App Store via Swift and BLE",
-      "Built the product landing page",
+      "Lead team of seven in the technical development of a wearable digital pin.",
+      "Designed a 3D-printed hardware case in Fusion360 and programmed the ESP32 microcontroller in Python.",
+      "Shipped companion iOS and Android apps that work with BLE.",
+      "Built the product landing page.",
     ],
   },
   {
@@ -57,21 +58,21 @@ const EXPERIENCES: Experience[] = [
     category: "Competition",
     link: "https://events.vex.com/teams/v5rc/4610Z",
     bullets: [
-      "World Championship Semifinalist (2025); 2x World Championship Innovate Award (2024, 2026)",
-      "NJ State Champion (2024); NJ State Excellence Award and NJ State Finalist (2026)",
-      "Led team interviews (viewed 80k+ times across all platforms)",
-      "Founded a middle school robotics program. Designed the curriculum and delivered lesson plans to teach 40+ middle school students robotics, including engineering and software development",
+      "World Championship Semifinalist (2025); 2x World Championship Innovate Award (2024, 2026).",
+      "NJ State Champion (2024); NJ State Excellence Award and NJ State Finalist (2026), NJ Design Award (2024).",
+      "Lead team interviews (viewed 80k+ times across all platforms).",
+      "Founded my school's middle school robotics program. Designed the curriculum and delivered lesson plans to teach 40+ middle school students robotics, including engineering and software development.",
     ],
   },
   {
-    role: "President",
-    org: "Techshare Project",
-    date: "Aug 2025 – Present",
-    category: "Leadership",
-    link: "https://www.techshareproject.org/",
+    role: "Software Engineering Intern",
+    org: "Luminerra",
+    date: "Dec 2025 – May 2026",
+    category: "Internship", 
+    link: "https://luminerra.net/",
     bullets: [
-      "Built partnerships and lead an international 501(c)(3) nonprofit",
-      "Led the FutureHacks initiative, planning and running an online international hackathon with over 250 participants and personally securing 8 corporate sponsors, raising $5,000.",
+      "Built an internal admin platform for user access management and audit workflows.",
+      "Recruited as first SWE Intern at Luminerra, a startup backed by NVIDIA Inception and Intel Partner Alliance programs automating commercial real estate audits with a deterministic engine and LLM council.",
     ],
   },
 ];
