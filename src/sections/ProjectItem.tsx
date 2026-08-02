@@ -1,16 +1,11 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Scene from "@/components/3d/Scene";
 import ModelViewer from "@/components/3d/ModelViewer";
 import ModelErrorBoundary from "@/components/3d/ModelErrorBoundary";
 import GalleryModal, { GalleryItem } from "@/components/ui/GalleryModal";
 import { useDeviceCapability } from "@/hooks/useDeviceCapability";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export interface ProjectLink {
   type: "github" | "website" | "custom";
@@ -56,7 +51,6 @@ function LinkIcon({ type }: { type: ProjectLink["type"] }) {
       </svg>
     );
   }
-  // Custom / external link
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -84,52 +78,13 @@ export default function ProjectItem({
   links = [],
 }: ProjectItemProps) {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
   const { hasWebGL } = useDeviceCapability();
 
-  useGSAP(() => {
-    const ctx = containerRef.current;
-    if (!ctx) return;
-
-    // Visual side animation
-    gsap.fromTo(ctx.querySelector(".project-visual"),
-      { scale: 0.95, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ctx,
-          start: "top 80%",
-          once: true,
-        },
-      }
-    );
-
-    // Text stagger
-    gsap.fromTo(ctx.querySelectorAll(".project-text"),
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ctx,
-          start: "top 80%",
-          once: true,
-        },
-      }
-    );
-  }, { scope: containerRef });
-
   return (
-    <div ref={containerRef}>
+    <div>
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-6`}>
         <div className={`${reversed ? "lg:order-2" : "lg:order-1"}`}>
-          <div className={`project-visual opacity-0 rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative ${
+          <div className={`rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative ${
             category === "programming" && imagePath ? "" : "h-[50vh] lg:h-[70vh]"
           }`}>
             {category === "engineering" && modelPath && hasWebGL ? (
@@ -187,33 +142,30 @@ export default function ProjectItem({
             )}
           </div>
 
-          {/* Gallery Button */}
           <button
             onClick={() => setIsGalleryOpen(true)}
-            className="project-text opacity-0 mt-4 w-full py-3.5 rounded-xl border border-[var(--accent)] bg-transparent text-sm font-semibold text-[var(--accent)] hover:bg-[var(--accent)]/10 hover:-translate-y-0.5 transition-all"
+            className="mt-4 w-full py-3.5 rounded-xl border border-[var(--accent)] bg-transparent text-sm font-semibold text-[var(--accent)] hover:bg-[var(--accent)]/10 hover:-translate-y-0.5 transition-all"
           >
             View Gallery →
           </button>
         </div>
-
-        {/* Text Side */}
         <div className={`flex flex-col space-y-6 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
-          <h2 className="project-text opacity-0 text-4xl lg:text-5xl font-bold font-[family-name:var(--font-display)]">{title}</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold font-[family-name:var(--font-display)]">{title}</h2>
 
           {problem && (
-            <div className="project-text opacity-0">
+            <div className="">
               <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">The Problem</h3>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed">{problem}</p>
             </div>
           )}
 
-          <div className="project-text opacity-0">
+          <div className="">
             <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-2">{problem ? "The Solution" : "Description"}</h3>
             <p className="text-[var(--text-primary)] text-lg leading-relaxed">{solution}</p>
           </div>
 
           {awards && awards.length > 0 && (
-            <div className="project-text opacity-0 pt-4">
+            <div className="pt-4">
               <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-3">Awards & Achievements</h3>
               <ul className="space-y-2">
                 {awards.map((award, idx) => (
@@ -227,7 +179,7 @@ export default function ProjectItem({
           )}
 
           {additionalNote && (
-            <div className="project-text opacity-0 pt-2">
+            <div className="pt-2">
               <a
                 href={additionalNote.link}
                 target="_blank"
@@ -239,7 +191,7 @@ export default function ProjectItem({
             </div>
           )}
 
-          <div className="project-text opacity-0 flex flex-wrap gap-2 pt-4">
+          <div className="flex flex-wrap gap-2 pt-4">
             {techStack.map((tech) => (
               <span key={tech} className="px-3 py-1 rounded-full border border-[var(--border)] text-sm text-[var(--text-secondary)]">
                 {tech}
@@ -247,7 +199,7 @@ export default function ProjectItem({
             ))}
           </div> 
           {links.length > 0 && (
-            <div className="project-text opacity-0 flex items-center gap-3 pt-4">
+            <div className="flex items-center gap-3 pt-4">
               {links.map((link, idx) => (
                 <a
                   key={idx}
