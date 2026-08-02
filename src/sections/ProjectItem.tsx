@@ -128,16 +128,11 @@ export default function ProjectItem({
   return (
     <div ref={containerRef}>
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-6`}>
-        {/* Visual Side */}
         <div className={`${reversed ? "lg:order-2" : "lg:order-1"}`}>
-          {/* Engineering (3D model / fallback) keeps a large near-square viewport;
-             programming images size to their own aspect ratio, capped in height. */}
           <div className={`project-visual opacity-0 rounded-2xl bg-[var(--bg-subtle)] overflow-hidden relative ${
             category === "programming" && imagePath ? "" : "h-[50vh] lg:h-[70vh]"
           }`}>
             {category === "engineering" && modelPath && hasWebGL ? (
-              /* Engineering: Interactive 3D model, falls back to a static image
-                 if WebGL is unsupported or the model fails to load (older hardware) */
               <ModelErrorBoundary
                 fallback={
                   fallbackImagePath ? (
@@ -164,16 +159,12 @@ export default function ProjectItem({
                 </Scene>
               </ModelErrorBoundary>
             ) : category === "engineering" && modelPath && fallbackImagePath ? (
-              /* No WebGL support at all: skip straight to the fallback image */
               <img
                 src={fallbackImagePath}
                 alt={title}
                 className="w-full h-full object-cover"
               />
             ) : imagePath ? (
-              /* Programming: the image sizes the box. Wide screenshots render short
-                 and full-width; tall phone screenshots cap at max-h and center, so
-                 nothing balloons into a 70vh well. */
               <img
                 src={imagePath}
                 alt={title}
@@ -181,7 +172,6 @@ export default function ProjectItem({
                 style={{ width: "auto", maxWidth: "100%" }}
               />
             ) : (
-              /* Placeholder for projects without images yet */
               <div className="w-full h-full flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[var(--border)] flex items-center justify-center">
@@ -255,8 +245,7 @@ export default function ProjectItem({
                 {tech}
               </span>
             ))}
-          </div>
-
+          </div> 
           {links.length > 0 && (
             <div className="project-text opacity-0 flex items-center gap-3 pt-4">
               {links.map((link, idx) => (

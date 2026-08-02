@@ -5,6 +5,25 @@ import GithubGraph from "@/components/ui/GithubGraph";
 
 const PROJECTS = [
   {
+    title: "Long Exposures iOS App",
+    problem: "",
+    solution: "An iOS app that turns your Live Photos and videos into real long-exposure shots. Pick a frame range, choose a blend mode, and get motion blur or light trails without a tripod.",
+    techStack: ["Swift", "SwiftUI", "Metal"],
+    category: "programming" as const,
+    imagePath: "/images/long-exposures/LE_cover.png",
+    gallery: [
+      { type: "image" as const, src: "/images/long-exposures/LE_cover.png" },
+      { type: "video" as const, src: "https://cdn.hackclub.com/019fbffd-d8b7-7fc4-9dc2-a66c07bdc3fa/demo.mp4", caption: "App walkthrough" },
+      { type: "video" as const, src: "/images/long-exposures/l-e.mp4", caption: "Long exposure result" },
+      { type: "image" as const, src: "/images/long-exposures/l-e.webp" },
+      { type: "image" as const, src: "/images/long-exposures/le-website.png", caption: "Landing page" },
+    ],
+    links: [
+      { type: "website", url: "https://long-exposures.vercel.app/" } as ProjectLink,
+      { type: "github", url: "https://github.com/jameshou28/long-exposures" } as ProjectLink,
+    ],
+  },
+  {
     title: "VEX Robotics (4610Z)",
     problem: "",
     solution: "Designed, programmed, and built robots for the VEX Robotics Competition. Led the team to awards including:",
@@ -79,8 +98,8 @@ const PROJECTS = [
   {
     title: "QPin Connect",
     problem: "",
-    solution: "An iOS companion app for QPin. Uses BLE to connect with the ESP32 microcontroller and control what displays on the wearable pin.",
-    techStack: ["Swift", "BLE"],
+    solution: "An iOS and Android companion app for QPin. Uses BLE to connect with the ESP32 microcontroller and control what displays on the wearable pin.",
+    techStack: ["Swift", "SwiftUI", "BLE", "Kotlin", "Android", "Git"],
     category: "programming" as const,
     imagePath: "/images/QPinConnect/ex1.jpg",
     gallery: [
@@ -91,27 +110,27 @@ const PROJECTS = [
       { type: "custom", label: "App Store", url: "https://apps.apple.com/us/app/qpin-connect/id6749499794" } as ProjectLink,
     ], 
   },
-  { 
-    title: "QPin Website",
-    problem: "",
-    // solution: "Built website for QPin, a wearable digital pin for advocacy and self-expression.",
-    solution: "A marketing and product site for QPin. Built with Flask and ThreeJS to showcase the wearable pin and drive App Store downloads.",
-    techStack: ["HTML", "CSS", "JS", "Flask", "ThreeJS"],
-    category: "programming" as const, 
-    imagePath: "/images/qpinWeb/ss1.png",
-    gallery: [
-      { type: "image" as const, src: "/images/qpinWeb/ss1.png" },
-      { type: "image" as const, src: "/images/qpinWeb/ss2.png" },
-      { type: "image" as const, src: "/images/qpinWeb/ss3.png" },
-      { type: "image" as const, src: "/images/qpinWeb/ss4.png" },
-      { type: "image" as const, src: "/images/qpinWeb/ss5.png" },
-      { type: "image" as const, src: "/images/qpinWeb/ss6.png" },
-      { type: "image" as const, src: "/images/qpinWeb/ss7.png" },
-    ],
-    links: [
-      { type: "website", url: "https://wearqpin.com" } as ProjectLink,
-    ],
-  }
+  // { 
+  //   title: "QPin Website",
+  //   problem: "",
+  //   // solution: "Built website for QPin, a wearable digital pin for advocacy and self-expression.",
+  //   solution: "A marketing and product site for QPin. Built with Flask and ThreeJS to showcase the wearable pin and drive App Store downloads.",
+  //   techStack: ["HTML", "CSS", "JS", "Flask", "ThreeJS", "Git"],
+  //   category: "programming" as const, 
+  //   imagePath: "/images/qpinWeb/ss1.png",
+  //   gallery: [
+  //     { type: "image" as const, src: "/images/qpinWeb/ss1.png" },
+  //     { type: "image" as const, src: "/images/qpinWeb/ss2.png" },
+  //     { type: "image" as const, src: "/images/qpinWeb/ss3.png" },
+  //     { type: "image" as const, src: "/images/qpinWeb/ss4.png" },
+  //     { type: "image" as const, src: "/images/qpinWeb/ss5.png" },
+  //     { type: "image" as const, src: "/images/qpinWeb/ss6.png" },
+  //     { type: "image" as const, src: "/images/qpinWeb/ss7.png" },
+  //   ],
+  //   links: [
+  //     { type: "website", url: "https://wearqpin.com" } as ProjectLink,
+  //   ],
+  // }
 ];
 
 export default function Projects({ category }: { category: "engineering" | "programming" }) {
