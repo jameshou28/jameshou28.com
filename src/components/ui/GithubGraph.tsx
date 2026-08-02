@@ -13,7 +13,7 @@ const LABEL_RESERVED_PX = 36;
 const GITHUB_CONTRIBUTION_COLORS: string[] = [
   '#ebedf0',
   '#9be9a8',
-  '#40c463',
+  '#3daa5a',
   '#30a14e',
   '#216e39',
 ];
