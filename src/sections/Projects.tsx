@@ -95,21 +95,6 @@ const PROJECTS = [
       { type: "github", url: "https://github.com/jameshou28/WebAble" } as ProjectLink,
     ],
   }, 
-  {
-    title: "QPin Connect",
-    problem: "",
-    solution: "An iOS and Android companion app for QPin. Uses BLE to connect with the ESP32 microcontroller and control what displays on the wearable pin.",
-    techStack: ["Swift", "SwiftUI", "BLE", "Kotlin", "Android", "Git"],
-    category: "programming" as const,
-    imagePath: "/images/QPinConnect/ex1.jpg",
-    gallery: [
-      { type: "image" as const, src: "/images/QPinConnect/ex1.jpg" },
-      { type: "image" as const, src: "/images/QPinConnect/ex2.jpg" },
-    ],
-    links: [
-      { type: "custom", label: "App Store", url: "https://apps.apple.com/us/app/qpin-connect/id6749499794" } as ProjectLink,
-    ], 
-  },
   { 
     title: "TechShare Project Website",
     problem: "",
@@ -128,7 +113,22 @@ const PROJECTS = [
     links: [
       { type: "website", url: "https://techshareproject.org" } as ProjectLink,
     ],
-  }
+  },
+  {
+    title: "QPin Connect",
+    problem: "",
+    solution: "An iOS and Android companion app for QPin. Uses BLE to connect with the ESP32 microcontroller and control what displays on the wearable pin.",
+    techStack: ["Swift", "SwiftUI", "BLE", "Kotlin", "Android", "Git"],
+    category: "programming" as const,
+    imagePath: "/images/QPinConnect/ex1.jpg",
+    gallery: [
+      { type: "image" as const, src: "/images/QPinConnect/ex1.jpg" },
+      { type: "image" as const, src: "/images/QPinConnect/ex2.jpg" },
+    ],
+    links: [
+      { type: "custom", label: "App Store", url: "https://apps.apple.com/us/app/qpin-connect/id6749499794" } as ProjectLink,
+    ], 
+  },
   // { 
   //   title: "QPin Website",
   //   problem: "",
