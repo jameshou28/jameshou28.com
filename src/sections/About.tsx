@@ -238,7 +238,7 @@ export default function About() {
       <div className="mb-10 flex items-center gap-6">
         <span className="h-px flex-1 bg-[var(--border)]" />
         <p className="text-lg md:text-xl text-[var(--text-primary)] font-medium">
-            View full portfolios
+            View Portfolios
         </p>
         <span className="h-px flex-1 bg-[var(--border)]" />
       </div>
