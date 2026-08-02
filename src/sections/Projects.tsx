@@ -116,8 +116,9 @@ const PROJECTS = [
     solution: "Built website for the TechShare Project, a STEM Education non-profit that I lead. ",
     techStack: ["TypeScript", "Next.JS", "Vercel", "Git"],
     category: "programming" as const, 
-    imagePath: "/techshare/hero.png",
+    imagePath: "/images/techshare/hero.png",
     gallery: [
+      { type: "image" as const, src: "/images/techshare/hero.png" },
       { type: "image" as const, src: "/images/techshare/p1.png" },
       { type: "image" as const, src: "/images/techshare/p2.png" },
       { type: "image" as const, src: "/images/techshare/p3.png" },
