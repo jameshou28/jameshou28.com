@@ -110,6 +110,24 @@ const PROJECTS = [
       { type: "custom", label: "App Store", url: "https://apps.apple.com/us/app/qpin-connect/id6749499794" } as ProjectLink,
     ], 
   },
+  { 
+    title: "TechShare Project Website",
+    problem: "",
+    solution: "Built website for the TechShare Project, a STEM Education non-profit that I lead. ",
+    techStack: ["TypeScript", "Next.JS", "Vercel", "Git"],
+    category: "programming" as const, 
+    imagePath: "/techshare/hero.png",
+    gallery: [
+      { type: "image" as const, src: "/images/techshare/p1.png" },
+      { type: "image" as const, src: "/images/techshare/p2.png" },
+      { type: "image" as const, src: "/images/techshare/p3.png" },
+      { type: "image" as const, src: "/images/techshare/p4.png" },
+      { type: "image" as const, src: "/images/techshare/p5.png" },
+    ],
+    links: [
+      { type: "website", url: "https://techshareproject.org" } as ProjectLink,
+    ],
+  }
   // { 
   //   title: "QPin Website",
   //   problem: "",
