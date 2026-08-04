@@ -1,49 +1,46 @@
 "use client";
 
-import { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import gsap from "gsap";
+// import { useGSAP } from "@gsap/react";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
-  const containerRef = useRef<HTMLElement>(null);
+  // useGSAP(() => {
+  //   // Title and text
+  //   gsap.fromTo(".contact-header", 
+  //     { y: 30, opacity: 0 },
+  //     {
+  //       y: 0,
+  //       opacity: 1,
+  //       duration: 1,
+  //       stagger: 0.2,
+  //       ease: "power3.out",
+  //     }
+  //   );
 
-  useGSAP(() => {
-    // Title and text
-    gsap.fromTo(".contact-header", 
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out",
-      }
-    );
-
-    // Contact cards
-    gsap.fromTo(".contact-card", 
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "back.out(1.2)",
-        delay: 0.2,
-      }
-    );
-  }, { scope: containerRef });
+  //   // Contact cards
+  //   gsap.fromTo(".contact-card", 
+  //     { y: 50, opacity: 0 },
+  //     {
+  //       y: 0,
+  //       opacity: 1,
+  //       duration: 0.7,
+  //       stagger: 0.15,
+  //       ease: "back.out(1.2)",
+  //       delay: 0.2,
+  //     }
+  //   );
+  // }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="w-full max-w-6xl mx-auto px-6 py-32">
+    <section className="w-full max-w-6xl mx-auto px-6 py-32">
       <div className="text-center space-y-8 mb-16 max-w-4xl mx-auto">
-        <h2 className="contact-header opacity-0 text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
+        <h2 className="contact-header text-3xl md:text-5xl font-medium font-[family-name:var(--font-display)] text-[var(--text-primary)] leading-tight">
           Let's build something together.
         </h2>
-        <p className="contact-header opacity-0 text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
+        <p className="contact-header text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
           Whether you're interested in collaboration, have a project in mind, or just want to connect — I'd love to hear from you.
         </p>
       </div>
@@ -52,7 +49,7 @@ export default function Contact() {
         {/* Primary CTA */}
         <a
           href="mailto:james.william.hou@gmail.com"
-          className="contact-card opacity-0 group flex items-center justify-between gap-4 rounded-2xl sm:rounded-3xl bg-[var(--text-primary)] p-6 sm:p-8 transition-all duration-300 hover:opacity-90 cursor-pointer"
+          className="contact-card group flex items-center justify-between gap-4 rounded-2xl sm:rounded-3xl bg-[var(--text-primary)] p-6 sm:p-8 transition-all duration-300 hover:opacity-90 cursor-pointer"
         >
           {/* Mobile layout: matches GitHub/LinkedIn cards */}
           <div className="flex sm:hidden items-center gap-3 min-w-0">
@@ -92,7 +89,7 @@ export default function Contact() {
             href="https://github.com/jameshou28"
             target="_blank"
             rel="noopener noreferrer"
-            className="contact-card opacity-0 group flex items-center justify-between gap-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border)] p-6 transition-all duration-300 hover:border-[var(--text-primary)] cursor-pointer"
+            className="contact-card group flex items-center justify-between gap-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border)] p-6 transition-all duration-300 hover:border-[var(--text-primary)] cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--text-primary)]">
@@ -113,7 +110,7 @@ export default function Contact() {
             href="https://www.linkedin.com/in/jameshou28/"
             target="_blank"
             rel="noopener noreferrer"
-            className="contact-card opacity-0 group flex items-center justify-between gap-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border)] p-6 transition-all duration-300 hover:border-[var(--text-primary)] cursor-pointer"
+            className="contact-card group flex items-center justify-between gap-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border)] p-6 transition-all duration-300 hover:border-[var(--text-primary)] cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--text-primary)]">
