@@ -93,6 +93,7 @@ const PROJECTS = [
     ],
     links: [
       { type: "github", url: "https://github.com/jameshou28/WebAble" } as ProjectLink,
+      { type: "custom", label: "Chrome Webstore", url: "https://chromewebstore.google.com/detail/webable-accessibility-ass/kbclhcipnkiohhbjiagecmckemkpaech" } as ProjectLink,
     ],
   }, 
   { 
