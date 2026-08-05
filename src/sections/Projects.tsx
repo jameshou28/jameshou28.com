@@ -98,7 +98,7 @@ const PROJECTS = [
   { 
     title: "TechShare Project Website",
     problem: "",
-    solution: "Built website for the TechShare Project, a STEM Education non-profit that I lead. ",
+    solution: "I built the website for the TechShare Project, a STEM Education non-profit that I lead. ",
     techStack: ["TypeScript", "Next.JS", "Vercel", "Git"],
     category: "programming" as const, 
     imagePath: "/images/techshare/hero.png",
