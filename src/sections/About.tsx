@@ -58,30 +58,30 @@ export default function About() {
     });
 
     // Profile & Skills
-    gsap.from(".about-photo", {
-      scale: 0.95,
-      opacity: 0,
-      duration: 1.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".about-skills-container",
-        start: "top 80%",
-        once: true,
-      }
-    });
+    // gsap.from(".about-photo", {
+    //   scale: 0.95,
+    //   opacity: 0,
+    //   duration: 1.2,
+    //   ease: "power3.out",
+    //   scrollTrigger: {
+    //     trigger: ".about-skills-container",
+    //     start: "top 80%",
+    //     once: true,
+    //   }
+    // });
 
-    gsap.from(".about-skill", {
-      y: 20,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".about-skills-container",
-        start: "top 80%",
-        once: true,
-      }
-    });
+    // gsap.from(".about-skill", {
+    //   y: 20,
+    //   opacity: 0,
+    //   duration: 0.8,
+    //   stagger: 0.1,
+    //   ease: "power3.out",
+    //   scrollTrigger: {
+    //     trigger: ".about-skills-container",
+    //     start: "top 80%",
+    //     once: true,
+    //   }
+    // });
 
 
     gsap.timeline({
@@ -122,7 +122,8 @@ export default function About() {
           I'm a high school developer who builds across <span className="text-[var(--accent)] font-bold">software</span> and <span className="text-[var(--accent)] font-bold">hardware</span>.
         </h2>
          
-        <p className="about-text text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
+        {/* <p className="about-text text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed"> remove scroll trigger from this*/}
+        <p className="text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed">
           {/* I've built a variety of projects, including websites, mobile apps, Chrome extensions, and applied AI tools. Outside of projects, I compete in USACO Gold. I care about writing code that solves real problems.  */}
           I've built a variety of projects, including websites, mobile apps, and Chrome extensions. Outside of projects, I compete in USACO Gold. I care about writing code that solves real problems. 
         </p>
