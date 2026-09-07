@@ -126,6 +126,8 @@ export default function ProjectItem({
                 className="block mx-auto w-full h-auto max-h-[clamp(20rem,55vh,32rem)] object-contain"
                 style={{ width: "auto", maxWidth: "100%" }}
               />
+
+
             ) : (
               <div className="w-full h-full flex items-center justify-center">
                 <div className="text-center">
@@ -144,7 +146,7 @@ export default function ProjectItem({
 
           <button
             onClick={() => setIsGalleryOpen(true)}
-            className="mt-4 w-full py-3.5 rounded-xl border border-[var(--accent)] bg-transparent text-sm font-semibold text-[var(--accent)] hover:bg-[var(--accent)]/10 hover:-translate-y-0.5 transition-all"
+            className="mt-4 w-full py-3.5 rounded-xl bg-[var(--text-primary)] text-sm font-semibold text-[var(--bg-primary)] hover:bg-[#333] hover:-translate-y-0.5 transition-all"
           >
             View Gallery →
           </button>
@@ -169,6 +171,7 @@ export default function ProjectItem({
               <h3 className="text-sm uppercase tracking-wider text-[var(--accent)] font-semibold mb-3">Awards & Achievements</h3>
               <ul className="space-y-2">
                 {awards.map((award, idx) => (
+
                   <li key={idx} className="flex items-start gap-2 text-sm text-[var(--text-primary)]">
                     <span className="text-[var(--accent)] mt-1">•</span>
                     <span>{award}</span>
@@ -212,6 +215,7 @@ export default function ProjectItem({
                   <span>{link.label || (link.type === "github" ? "GitHub" : link.type === "website" ? "Website" : "Link")}</span>
                 </a>
               ))}
+
             </div>
           )}
         </div>
@@ -226,3 +230,4 @@ export default function ProjectItem({
     </div>
   );
 }
+

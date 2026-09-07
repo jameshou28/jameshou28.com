@@ -46,12 +46,10 @@ export default function Contact() {
       </div>
 
       <div className="max-w-2xl mx-auto space-y-4">
-        {/* Primary CTA */}
         <a
           href="mailto:james.william.hou@gmail.com"
           className="contact-card group flex items-center justify-between gap-4 rounded-2xl sm:rounded-3xl bg-[var(--text-primary)] p-6 sm:p-8 transition-all duration-300 hover:opacity-90 cursor-pointer"
         >
-          {/* Mobile layout: matches GitHub/LinkedIn cards */}
           <div className="flex sm:hidden items-center gap-3 min-w-0">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-[var(--bg-primary)]">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -63,7 +61,6 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Desktop layout */}
           <div className="hidden sm:flex items-center gap-4 min-w-0">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-[var(--bg-primary)]">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -82,8 +79,6 @@ export default function Contact() {
             <polyline points="7 7 17 7 17 17"/>
           </svg>
         </a>
-
-        {/* Secondary links */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <a
             href="https://github.com/jameshou28"
