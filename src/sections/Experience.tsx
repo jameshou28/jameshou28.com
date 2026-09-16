@@ -43,7 +43,6 @@ const EXPERIENCES: Experience[] = [
       "Lead team of seven in the technical development of a wearable digital pin.",
       "Designed a 3D-printed hardware case in Fusion360 and programmed the ESP32 microcontroller in Python.",
       "Shipped companion iOS and Android apps that work with BLE.",
-      "Built the product landing page.",
     ],
   },
   {
@@ -57,6 +56,17 @@ const EXPERIENCES: Experience[] = [
       "NJ State Champion (2024); NJ State Excellence Award and NJ State Finalist (2026), NJ Design Award (2024).",
       "Lead team interviews (viewed 80k+ times across all platforms).",
       "Founded my school's middle school robotics program. Designed the curriculum and delivered lesson plans to teach 40+ middle school students robotics, including engineering and software development.",
+    ],
+  },
+  {
+    role: "Organizer & Reviewer",
+    org: "Hack Club",
+    date: "Aug 2026 – Present",
+    category: "Leadership",
+    link: "https://hackclub.com/",
+    bullets: [
+      "Organizing Haven NYC (Nov. 14-15), a two day in-person game-jam and hackathon.",
+      "Evaluate software projects for programs with 1,000+ global participants. ",
     ],
   },
   {
