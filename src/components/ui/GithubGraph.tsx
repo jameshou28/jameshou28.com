@@ -3,12 +3,28 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
-const GitHubCalendar = dynamic(() => import('react-github-calendar').then((mod) => mod.GitHubCalendar), {
-  ssr: false,
-});
-
 const WEEKS_PER_YEAR = 53;
 const LABEL_RESERVED_PX = 36;
+
+// ponytail: react-github-calendar already pulses its own skeleton while fetching.
+// This one only covers the gap before that chunk finishes downloading.
+function CalendarSkeleton() {
+  return (
+    <div className="w-full animate-pulse">
+      <div className="grid grid-rows-7 grid-flow-col gap-[2px] sm:gap-[5px]">
+        {Array.from({ length: WEEKS_PER_YEAR * 7 }, (_, i) => (
+          <div key={i} className="aspect-square rounded-[2px] bg-[#ebedf0]" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const GitHubCalendar = dynamic(() => import('react-github-calendar').then((mod) => mod.GitHubCalendar), {
+  ssr: false,
+  loading: () => <CalendarSkeleton />,
+});
+
 
 const GITHUB_CONTRIBUTION_COLORS: string[] = [
   '#ebedf0',

@@ -6,6 +6,7 @@
 
 // gsap.registerPlugin(ScrollTrigger);
 
+
 export default function Contact() {
   // useGSAP(() => {
   //   // Title and text
@@ -80,6 +81,7 @@ export default function Contact() {
           </svg>
         </a>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
           <a
             href="https://github.com/jameshou28"
             target="_blank"
