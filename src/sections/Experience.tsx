@@ -22,6 +22,16 @@ const CATEGORY_COLORS: Record<Category, string> = {
 
 const EXPERIENCES: Experience[] = [
   {
+    role: "Software Engineering Intern",
+    org: "Thera (YC S22)",
+    date: "October 2026 – Present",
+    category: "Internship", 
+    link: "https://getthera.com/",
+    bullets: [
+      "Paid SWE Intern."
+    ],
+  },
+  {
     role: "President & CTO",
     org: "Techshare Project",
     date: "Aug 2025 – Present",
@@ -65,7 +75,7 @@ const EXPERIENCES: Experience[] = [
     category: "Leadership",
     link: "https://hackclub.com/",
     bullets: [
-      "Organizing Haven NYC (Nov. 14-15), a two day in-person game-jam and hackathon.",
+      "Organizing Haven NYC (Nov. 15), an in-person game-jam and hackathon.",
       "Evaluate software projects for programs with 1,000+ global participants. ",
     ],
   },
